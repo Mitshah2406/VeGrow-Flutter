@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vegrow/routes/router.dart';
-import 'package:vegrow/views/pages/introduction/splashScreenPage.dart';
+import 'package:vegrow/views/pages/Starter/splashScreenPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,7 +9,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,11 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashScreen(),
-      routes: {
-
-      },
-      // home: Text("Hello World"),
+      home: const SplashScreen(),
     );
   }
 }
