@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:vegrow/routes/router.dart';
 import 'package:vegrow/views/pages/introduction/splashScreenPage.dart';
-
+import 'package:vegrow/routes/router.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(const Home());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+  
+
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SplashScreen(),
-      routes: {
-
-      },
-      // home: Text("Hello World"),
+      initialRoute: "/",
+      getPages: AppRoutes.generateRoutes,
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      // ),
+      // home: SplashScreen(),
+     
     );
   }
 }
