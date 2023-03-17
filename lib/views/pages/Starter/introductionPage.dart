@@ -1,20 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
 
-class IntroScreenPage extends StatefulWidget {
-  IntroScreenPage({super.key});
-
-  @override
-  State<IntroScreenPage> createState() => _IntroScreenPageState();
-}
-
-class _IntroScreenPageState extends State<IntroScreenPage> {
-  // PageController _controller = PageController();
-  // bool lastPage = false;
+class IntroScreenPage extends StatelessWidget {
+  const IntroScreenPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +28,8 @@ class _IntroScreenPageState extends State<IntroScreenPage> {
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
       onDone: () {
-        Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) {
+        Navigator.pushReplacement(context,
+            CupertinoPageRoute(builder: (context) {
           return login();
         }));
       },
@@ -73,12 +67,13 @@ class _IntroScreenPageState extends State<IntroScreenPage> {
             title: "Page 1",
             body: "This is Op",
             footer: ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                style: ElevatedButton.styleFrom(),
                 onPressed: () {
-                  Navigator.pushReplacement(context,
-                      CupertinoPageRoute(builder: (context) {
-                    return login();
-                  }));
+                  // Navigator.pushReplacement(context,
+                  //     CupertinoPageRoute(builder: (context) {
+                  //   return login();
+                  // }));
+                  Get.toNamed('/login');
                 },
                 child: const Text(
                   "Get Started",
