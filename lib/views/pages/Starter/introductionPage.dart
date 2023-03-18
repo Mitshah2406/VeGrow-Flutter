@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:vegrow/consts/appConstant.dart';
-import 'package:vegrow/views/pages/Authentication/login.dart';
+import 'package:vegrow/views/pages/Authentication/welcome.dart';
 
 class IntroScreenPage extends StatelessWidget {
   const IntroScreenPage({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class IntroScreenPage extends StatelessWidget {
       onDone: () {
         Navigator.pushReplacement(context,
             CupertinoPageRoute(builder: (context) {
-          return login();
+          return Welcome();
         }));
       },
 
@@ -73,7 +73,7 @@ class IntroScreenPage extends StatelessWidget {
                   //     CupertinoPageRoute(builder: (context) {
                   //   return login();
                   // }));
-                  Get.toNamed('/login');
+                  Get.toNamed('/welcome');
                 },
                 child: const Text(
                   "Get Started",

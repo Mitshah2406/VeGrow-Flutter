@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class OtpScreen extends StatelessWidget {
+  const OtpScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,18 +28,16 @@ class Login extends StatelessWidget {
                   size: 32,
                 ),
               )),
-              SizedBox(
-                height: 10,
-              ),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             width: 200,
             height: 200,
             decoration: BoxDecoration(
-              color: Colors.deepPurple.shade50,
-              shape: BoxShape.circle
-            ),
+                color: Colors.deepPurple.shade50, shape: BoxShape.circle),
             child: Image.asset(
-              'assets/images/illustration-2.png',
+              'assets/images/illustration-3.png',
               width: 250,
             ),
           ),
@@ -47,7 +45,7 @@ class Login extends StatelessWidget {
             height: 20.0,
           ),
           Text(
-            "Registration/Login",
+            "Enter the OTP",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
           ),
           SizedBox(
@@ -59,7 +57,7 @@ class Login extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: Colors.black38),
-              textAlign: TextAlign.center,
+            textAlign: TextAlign.center,
           ),
           SizedBox(
             height: 38,
@@ -67,37 +65,34 @@ class Login extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12)
-            ),
+                color: Colors.white, borderRadius: BorderRadius.circular(12)),
             child: Column(
               children: [
-                TextFormField(
-                  keyboardType: TextInputType.number,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(18)
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(18)
-                    ),
-                    prefix: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text("+91", style: TextStyle(
-                        fontSize: 18, 
-                        fontWeight: FontWeight.bold
-                      ),),
-                    ),
-                    suffixIcon: Icon(
-                      Icons.check_circle,
-                      color: Colors.green,
-                      size: 32,
-                    )
-                  ),
-                ),
+                _textFieldOTP( true, false),
+                // TextFormField(
+                //   keyboardType: TextInputType.number,
+                //   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                //   decoration: InputDecoration(
+                //       enabledBorder: OutlineInputBorder(
+                //           borderSide: BorderSide(color: Colors.black12),
+                //           borderRadius: BorderRadius.circular(18)),
+                //       focusedBorder: OutlineInputBorder(
+                //           borderSide: BorderSide(color: Colors.black12),
+                //           borderRadius: BorderRadius.circular(18)),
+                //       prefix: Padding(
+                //         padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                //         child: Text(
+                //           "+91",
+                //           style: TextStyle(
+                //               fontSize: 18, fontWeight: FontWeight.bold),
+                //         ),
+                //       ),
+                //       suffixIcon: Icon(
+                //         Icons.check_circle,
+                //         color: Colors.green,
+                //         size: 32,
+                //       )),
+                // ),
                 SizedBox(
                   height: 22,
                 )
@@ -121,7 +116,7 @@ class Login extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
-                    "Register",
+                    "Send OTP",
                     style: TextStyle(fontSize: 16),
                   ),
                 )),
@@ -130,4 +125,26 @@ class Login extends StatelessWidget {
       )),
     );
   }
+    _textFieldOTP([ bool ?first, last]){
+      return Container(
+        height: 85,
+        child: AspectRatio(aspectRatio: 
+        1.9,
+        child: TextField(
+          autofocus: true,
+          onChanged: (value){},
+          showCursor: false,
+          readOnly: false,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          keyboardType: TextInputType.number,
+          maxLength: 1,
+          decoration: InputDecoration(
+            counter: Offstage(),
+            // enabledBorder: OutlineInputBorder(borderRadius: )
+
+          ),
+        ),),
+      );
+    }
 }
