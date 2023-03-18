@@ -38,8 +38,6 @@ dependencies:
   animated_text_kit: ^4.2.2
   shared_preferences: ^2.0.18
   introduction_screen: ^3.1.4
-  smooth_page_indicator: ^1.0.1
-  lottie: ^2.3.0
 
 dev_dependencies:
   flutter_test:

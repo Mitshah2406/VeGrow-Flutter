@@ -1,11 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vegrow/views/pages/Authentication/login.dart';
-import 'package:vegrow/views/pages/Starter/introductionPage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,13 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
       var pref = await SharedPreferences.getInstance();
       var data = pref.getBool('show');
       if(data == true){
-        Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
-          return login();
-        }));
+        Get.offNamed('/welcome');
       }else{
-        Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context){
-          return IntroScreenPage();
-        }));
+        Get.offNamed('/introduction');
       }
     });
   }

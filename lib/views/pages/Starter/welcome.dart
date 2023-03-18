@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vegrow/consts/appConstant.dart';
-import 'package:vegrow/views/widgets/myButton.dart';
-import 'package:vegrow/views/widgets/myTextField.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -11,14 +9,16 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       backgroundColor: AppConstant.bgColorAuth,
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
-        child: Column(children: [
+        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
           Image.asset(
-            'assets/images/illustration-1.png',
+            AppConstant.illustration1,
             width: 250,
           ),
           SizedBox(
@@ -41,7 +41,7 @@ class Welcome extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: (){
-                Get.toNamed('/login');
+                Get.offNamed('/login');
               },
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -53,7 +53,15 @@ class Welcome extends StatelessWidget {
                 child: Text("Get Started",
                 style: TextStyle(fontSize: 16),),
               )),
-          )
+          ),
+          // GestureDetector(
+          //   onTap: () async {
+          //     var pref = await SharedPreferences.getInstance();
+          //     pref.setBool('show', false);
+          //     print('Done');
+          //   },
+          //   child: const Text("Revert", style: TextStyle(fontSize: 20),),
+          // ),
         ]),
       )),
     );

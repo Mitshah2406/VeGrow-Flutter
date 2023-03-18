@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
 
@@ -39,7 +36,7 @@ class Login extends StatelessWidget {
               shape: BoxShape.circle
             ),
             child: Image.asset(
-              'assets/images/illustration-2.png',
+              AppConstant.illustration2,
               width: 250,
             ),
           ),

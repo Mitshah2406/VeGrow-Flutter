@@ -14,4 +14,7 @@ class AppConstant{
 
   // Images 
   static const String introPageImg = "assets/images/page1.png";
+  static const String illustration1 = "assets/images/illustration-1.png";
+  static const String illustration2 = "assets/images/illustration-2.png";
+  static const String illustration3 = "assets/images/illustration-3.png";
 }

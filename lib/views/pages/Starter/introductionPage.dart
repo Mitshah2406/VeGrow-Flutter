@@ -1,20 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-// import 'package:lottie/lottie.dart';
 import 'package:vegrow/consts/appConstant.dart';
-import 'package:vegrow/views/pages/Authentication/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class IntroScreenPage extends StatefulWidget {
+class IntroScreenPage extends StatelessWidget {
   const IntroScreenPage({super.key});
 
-  @override
-  State<IntroScreenPage> createState() => _IntroScreenPageState();
-}
-
-class _IntroScreenPageState extends State<IntroScreenPage> {
   @override
   Widget build(BuildContext context) {
     DotsDecorator dotsDecorator = DotsDecorator(
@@ -41,10 +33,7 @@ class _IntroScreenPageState extends State<IntroScreenPage> {
           ),
           onDone: () async {
             skipIntro();
-            Navigator.pushReplacement(context,
-                CupertinoPageRoute(builder: (context) {
-              return login();
-            }));
+            Get.offNamed('/login');
           },
 
         // For Next Button
@@ -106,9 +95,8 @@ class _IntroScreenPageState extends State<IntroScreenPage> {
                   width: 500,
                 )),
             PageViewModel(
-                title: "Page 1",
+                title: "Page 3",
                 decoration: PageDecoration(
-                    // contentMargin: EdgeInsets.all(10.0),
                     imageAlignment: Alignment.center,
                     imageFlex: 3,
                     imagePadding: const EdgeInsets.only(top: 200),
@@ -136,10 +124,7 @@ class _IntroScreenPageState extends State<IntroScreenPage> {
                       ),
                       onPressed: () {
                         skipIntro();
-                        Navigator.pushReplacement(context,
-                            CupertinoPageRoute(builder: (context) {
-                          return login();
-                        }));
+                        Get.offNamed('/login');
                       },
                       child: const Text(
                         "Get Started",
