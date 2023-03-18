@@ -8,6 +8,7 @@ class AppConstant{
   // Colors
   static final bgColor = Colors.grey[300];   
   static final textColor = Colors.grey[700];
+  static final bgColorAuth = Color(0xfff7f6fb);
 
 
 
