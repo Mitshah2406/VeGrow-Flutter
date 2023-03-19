@@ -179,7 +179,7 @@ class _RegisterState extends State<Register> {
                     bool result =    await AuthServices.registerUser(idController.inputData(),registerController.nameController.text, registerController.emailController.text, Get.parameters['number'], int.parse(registerController.tag.toString()));
 
                     if(result){
-                      Get.to("/home");
+                      Get.toNamed("/home");
                     }else{
                       //toast
                     }

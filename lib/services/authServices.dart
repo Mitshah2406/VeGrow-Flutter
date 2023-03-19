@@ -41,21 +41,30 @@ return true;
   }
 
 
-static Future<bool> checkIfUserExists(id)async{
+static Future<bool> checkIfUserExists(phone)async{
    var response = await http.post(
         Uri.parse(
-          "${AppConstant.Ip}/authentication/",
+          "${AppConstant.Ip}/authentication/phoneNumberCheck/",
         ),
         body: jsonEncode({
-          "id":id
+          "phone":phone
         }));
 
-         var recvdToken = jsonDecode(response.body)['token'];
-    Token token = Token(token: recvdToken);
+         var recvdToken = jsonDecode(response.body)['exist'];
 
-    var sessionManager = SessionManager();
-    await sessionManager.set("token", token);
-    dynamic data = await SessionManager().get("token");
-    return true;
+         if(recvdToken)
+         {
+          var response = await http.post(
+          Uri.parse(
+            "${AppConstant.Ip}/authentication/farmerLogin/",
+          ),
+          body: jsonEncode({"phone": phone}));
+         }
+    // Token token = Token(token: recvdToken);
+
+    // var sessionManager = SessionManager();
+    // await sessionManager.set("token", token);
+    // dynamic data = await SessionManager().get("token");
+    return recvdToken;
 }
 }

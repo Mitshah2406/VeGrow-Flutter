@@ -110,8 +110,12 @@ class _OtpScreenState extends State<OtpScreen> {
 
     // Sign the user in (or link) with the credential
     await auth.signInWithCredential(credential);
-   await AuthServices.checkIfUserExists(idController.inputData());
-                        Get.toNamed('/register/${Get.parameters["number"]}');
+  var result =  await AuthServices.checkIfUserExists(loginController.phoneController.text);
+  if(result==true){
+    Get.toNamed('/home');
+  }else{
+   Get.toNamed('/register/${Get.parameters["number"]}');
+  }
                       },
                       style: ButtonStyle(
                           foregroundColor:
