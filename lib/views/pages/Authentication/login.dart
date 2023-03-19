@@ -1,9 +1,21 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+
+  Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  TextEditingController phoneController = TextEditingController();
+
+  bool setVisible=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,16 +37,14 @@ class Login extends StatelessWidget {
                   size: 32,
                 ),
               )),
-              SizedBox(
-                height: 10,
-              ),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             width: 200,
             height: 200,
             decoration: BoxDecoration(
-              color: Colors.deepPurple.shade50,
-              shape: BoxShape.circle
-            ),
+                color: Colors.deepPurple.shade50, shape: BoxShape.circle),
             child: Image.asset(
               AppConstant.illustration2,
               width: 250,
@@ -56,7 +66,7 @@ class Login extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: Colors.black38),
-              textAlign: TextAlign.center,
+            textAlign: TextAlign.center,
           ),
           SizedBox(
             height: 38,
@@ -64,54 +74,75 @@ class Login extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12)
-            ),
+                color: Colors.white, borderRadius: BorderRadius.circular(12)),
             child: Column(
               children: [
                 TextFormField(
+                  // validator: ((value) {
+                  //   if
+                  // }),
+                  onChanged: (value) {
+                    if(value.length==10){
+                      setState(() {
+                      setVisible=true;
+                      });
+                      print(setVisible);
+                    }else{
+                      setState(() {
+                        setVisible = false;
+                      });
+                    }
+                  },
+                  controller: phoneController,
                   keyboardType: TextInputType.number,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(18)
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black12),
-                      borderRadius: BorderRadius.circular(18)
-                    ),
-                    prefix: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text("+91", style: TextStyle(
-                        fontSize: 18, 
-                        fontWeight: FontWeight.bold
-                      ),),
-                    ),
-                    suffixIcon: Icon(
-                      Icons.check_circle,
-                      color: Colors.green,
-                      size: 32,
-                    )
-                  ),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(18)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(18)),
+                      prefix: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "+91",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      suffixIcon: Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                        size: 32,
+                      )),
                 ),
-                SizedBox(
-                  height: 22,
-                )
               ],
             ),
           ),
+                SizedBox(
+                  height: 22,
+                ),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-                onPressed: () {
-                  Get.toNamed('/sendOtp');
-                },
+                onPressed: setVisible ? () async {
+            
+                  await FirebaseAuth.instance.verifyPhoneNumber(
+                    phoneNumber: '+91${phoneController.text}',
+                    verificationCompleted: (PhoneAuthCredential credential) {},
+                    verificationFailed: (FirebaseAuthException e) {},
+                    codeSent: (String verificationId, int? resendToken) {
+                      Get.toNamed('/sendOtp/${verificationId}/${phoneController.text}');
+                    },
+                    codeAutoRetrievalTimeout: (String verificationId) {},
+                  );
+                }: null,
                 style: ButtonStyle(
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.purple),
+                    backgroundColor: setVisible?
+                        MaterialStateProperty.all<Color>(Colors.purple): MaterialStateProperty.all<Color?>(Colors.purple[200]),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24)))),

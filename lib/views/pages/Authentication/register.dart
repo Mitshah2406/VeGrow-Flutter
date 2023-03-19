@@ -1,0 +1,192 @@
+import 'package:chips_choice_null_safety/chips_choice_null_safety.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+
+import '../../../consts/appConstant.dart';
+
+class Register extends StatefulWidget {
+  Register({Key? key}) : super(key: key);
+
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  var tag = 1;
+  List<String> tags = [];
+  List<String> options = ["Farmer", "Vendor"];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: AppConstant.bgColorAuth,
+      body: SafeArea(
+          child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
+        child: Column(children: [
+          // Align(
+          //     alignment: Alignment.topLeft,
+          //     child: GestureDetector(
+          //       onTap: () {
+          //         Get.back();
+          //       },
+          //       child: Icon(
+          //         Icons.arrow_back,
+          //         color: Colors.black54,
+          //         size: 32,
+          //       ),
+          //     )),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            width: 200,
+            height: 200,
+            decoration: BoxDecoration(
+                color: Colors.deepPurple.shade50, shape: BoxShape.circle),
+            child: Image.asset(
+              AppConstant.illustration2,
+              width: 250,
+            ),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          Text(
+            "Registration Form",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            "Enter Your Basic Details..",
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.black38),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 38,
+          ),
+          Container(
+            padding: EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(12)),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 0, 0, 10),
+                  child: Text(
+                    "Name: ",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(18)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(18)),
+                      hintText: "Enter Your Name",
+                      hintStyle: TextStyle(fontWeight: FontWeight.normal)),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 0, 0, 10),
+                  child: Text(
+                    "Email: ",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(18)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.black12),
+                          borderRadius: BorderRadius.circular(18)),
+                      hintText: "Enter Your Email",
+                      hintStyle: TextStyle(fontWeight: FontWeight.normal)),
+                ),
+             
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 0, 0, 10),
+                  child: Text(
+                    "Are You A ? ",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                ChipsChoice.single(
+                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    value: tag,
+                    onChanged: ((val) {
+                      setState(() {
+                        print(val);
+                        tag = int.parse(val.toString());
+                      });
+                    }),
+                    choiceItems: C2Choice.listFrom(
+                        source: options,
+                        value: (i, v) => i,
+                        label: (i, v) => v.toString()),
+                    choiceActiveStyle: C2ChoiceStyle(
+                      color: Colors.blue,
+                      borderColor: Colors.blue,
+                      borderRadius: BorderRadius.circular(5)
+                    ), choiceStyle: C2ChoiceStyle(color: Colors.blue, borderRadius: BorderRadius.all(Radius.circular(5))),),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      onPressed: () async {},
+                      style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: // setVisible?
+                              MaterialStateProperty.all<Color>(Colors
+                                  .purple), //: MaterialStateProperty.all<Color?>(Colors.purple[200]),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(24)))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "Next",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      )),
+                )
+              ],
+            ),
+          ),
+        ]),
+      )),
+    );
+  }
+}

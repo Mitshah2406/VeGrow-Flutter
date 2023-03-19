@@ -2,6 +2,7 @@
 import 'package:get/route_manager.dart';
 import 'package:vegrow/main.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
+import 'package:vegrow/views/pages/Authentication/register.dart';
 import 'package:vegrow/views/pages/Starter/introductionPage.dart';
 import 'package:vegrow/views/pages/Starter/welcome.dart';
 import 'package:vegrow/views/pages/Starter/splashScreenPage.dart';
@@ -16,7 +17,8 @@ class AppRoutes {
     GetPage(name: "/test", page: () => const Test()),
     GetPage(name: "/welcome", page: () =>  Welcome()),
     GetPage(name: "/login", page: () =>  Login()),
-    GetPage(name: "/sendOtp", page: () =>  OtpScreen()),
+    GetPage(name: "/sendOtp/:verificationId/:number", page: () =>  OtpScreen()),
+    GetPage(name: "/register/:number", page: () =>  Register()),
     // GetPage(name: "/recieveOtp", page: () =>  Otp()),
   ];
 }

@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:pinput/pinput.dart';
 import 'package:vegrow/consts/appConstant.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -13,7 +15,8 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   FocusNode noteFocus = FocusNode();
-
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  TextEditingController pinController = TextEditingController();
   // late BuildContext context;
   @override
   Widget build(BuildContext context) {
@@ -76,23 +79,25 @@ class _OtpScreenState extends State<OtpScreen> {
                 color: Colors.white, borderRadius: BorderRadius.circular(12)),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _textFieldOTP(first: true, last: false),
-                    _textFieldOTP(first: false, last: false),
-                    _textFieldOTP(first: false, last: false),
-                    _textFieldOTP(first: false, last: true),
-                  ],
-                ),
+               Pinput(
+      controller: pinController,
+      length: 6,
+      toolbarEnabled: false,
+      // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
+      // inputFormatters: [Formatter()],
+    ),
                 SizedBox(
                   height: 22,
                 ),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () {
-                        // Get.toNamed('/sendOtp');
+                      onPressed: () async {
+                          PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: Get.parameters['verificationId'].toString(), smsCode: pinController.text);
+
+    // Sign the user in (or link) with the credential
+    await auth.signInWithCredential(credential);
+                        Get.toNamed('/register/${Get.parameters["number"]}');
                       },
                       style: ButtonStyle(
                           foregroundColor:
@@ -129,46 +134,46 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 
-  Widget _textFieldOTP({bool ?first, last}) {
-    // final BuildContext context;
-    return Container(
-      height: 85,
-      child: AspectRatio(
-        aspectRatio: .7,
-        child: TextField(
-          // focusNode: noteFocus,
-          autofocus: true,
-          onChanged: (value) {
-            if (value.length == 1 && last == false) {
-              FocusScope.of(context).nextFocus();
-              // noteFocus.nextFocus();
-            }
-            if (value.length == 0 && first == false) {
-              FocusScope.of(context).previousFocus();
-              // noteFocus.previousFocus();
-            }
-          },
-          showCursor: false,
-          readOnly: false,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-          keyboardType: TextInputType.number,
-          maxLength: 1,
-          decoration: InputDecoration(
-            // contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            counter: Offstage(),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide(width: 1, color: Colors.black12),
-            ),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-                borderSide: BorderSide(width: 1, color: Colors.purple)),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _textFieldOTP({bool ?first, last}) {
+  //   // final BuildContext context;
+  //   return Container(
+  //     height: 85,
+  //     child: AspectRatio(
+  //       aspectRatio: .7,
+  //       child: TextField(
+  //         // focusNode: noteFocus,
+  //         autofocus: true,
+  //         onChanged: (value) {
+  //           if (value.length == 1 && last == false) {
+  //             FocusScope.of(context).nextFocus();
+  //             // noteFocus.nextFocus();
+  //           }
+  //           if (value.length == 0 && first == false) {
+  //             FocusScope.of(context).previousFocus();
+  //             // noteFocus.previousFocus();
+  //           }
+  //         },
+  //         showCursor: false,
+  //         readOnly: false,
+  //         textAlign: TextAlign.center,
+  //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+  //         keyboardType: TextInputType.number,
+  //         maxLength: 1,
+  //         decoration: InputDecoration(
+  //           // contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+  //           counter: Offstage(),
+  //           enabledBorder: OutlineInputBorder(
+  //             borderRadius: BorderRadius.circular(20),
+  //             borderSide: BorderSide(width: 1, color: Colors.black12),
+  //           ),
+  //           focusedBorder: OutlineInputBorder(
+  //               borderRadius: BorderRadius.circular(20),
+  //               borderSide: BorderSide(width: 1, color: Colors.purple)),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 // import 'package:flutter/material.dart';
 

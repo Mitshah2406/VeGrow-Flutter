@@ -116,7 +116,7 @@ class IntroScreenPage extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 25, right: 25),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
+                        // backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
