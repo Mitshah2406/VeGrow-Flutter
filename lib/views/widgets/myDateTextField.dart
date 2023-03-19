@@ -1,42 +1,44 @@
-import 'dart:ui';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
-class myTextField extends StatefulWidget {
-  final String hintText;
-  final String labelText;
+class myDateTextField extends StatefulWidget {
   final controller;
-  final bool obscureText;
-  TextInputType isNumber;
 
-  myTextField({
+  myDateTextField({
     required this.controller,
-    required this.hintText,
-    required this.labelText,
-    required this.obscureText,
-    required this.isNumber,
     super.key
   });
 
   @override
-  State<myTextField> createState() => _myTextFieldState();
+  State<myDateTextField> createState() => _myDateTextFieldState();
 }
 
-class _myTextFieldState extends State<myTextField> {
+class _myDateTextFieldState extends State<myDateTextField> {
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      // initialValue: widget.controller.text,
+      // initialValue: widget.controller.text,
       validator: (value){
         if(value == ""){
-          return "Enter Value";
+          return "Enter Expiry Date";
+        }
+      },
+      onTap: () async {
+        DateTime? pickedDate = await showDatePicker(context: context, 
+        initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2101));
+
+        if(pickedDate != null){
+          if(pickedDate.isAfter(DateTime.now())){
+            setState(() {
+              widget.controller.text = DateFormat('yyyy-MM-dd').format(pickedDate);
+            });
+          }
         }
       },
       controller: widget.controller,
-      obscureText: widget.obscureText,
-      keyboardType: widget.isNumber,
       decoration: InputDecoration(
-        hintText: widget.hintText,
         enabledBorder:
             OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade400),
@@ -54,10 +56,11 @@ class _myTextFieldState extends State<myTextField> {
               borderSide: BorderSide(color: Colors.red.shade400),
               borderRadius: BorderRadius.circular(5)
             ),
-        label: Text(widget.labelText),
+        labelText: "Enter your Expiry Date",
         labelStyle: const TextStyle(fontSize: 20),
         fillColor: Colors.grey.shade200,
         filled: true,
+        hintText: "Expiry Date",
         hintStyle: TextStyle(color: Colors.grey.shade500)
       ),
     );

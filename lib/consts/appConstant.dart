@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppConstant{
+  // API 
+  static final String IP = "http://192.168.0.106:4000";
+
   // Sizes
   static const double PADDING_SIZE = 16.0;
 
@@ -17,4 +20,5 @@ class AppConstant{
   static const String illustration1 = "assets/images/illustration-1.png";
   static const String illustration2 = "assets/images/illustration-2.png";
   static const String illustration3 = "assets/images/illustration-3.png";
+  static const String addProduct = "assets/images/farmer.png";
 }

@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vegrow/consts/appConstant.dart';
 
 class Welcome extends StatelessWidget {
-  const Welcome({Key? key}) : super(key: key);
+  Welcome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        actions: [
+         IconButton(
+          onPressed: (){
+            print(Get.isDarkMode);
+            Get.isDarkMode ? Get.changeTheme(ThemeData.light()) : Get.changeTheme(ThemeData.dark());
+          },
+          icon: const Icon(Icons.lightbulb)
+          )
+        ]
+      ),
       backgroundColor: AppConstant.bgColorAuth,
       body: SafeArea(
           child: Padding(
