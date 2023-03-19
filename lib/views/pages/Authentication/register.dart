@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:vegrow/controllers/auth/idController.dart';
+import 'package:vegrow/controllers/auth/registerController.dart';
+import 'package:vegrow/services/authServices.dart';
 
 import '../../../consts/appConstant.dart';
 
@@ -15,12 +18,16 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  var tag = 1;
+  // var tag = 1;
   List<String> tags = [];
+  final RegisterController registerController = Get.put(RegisterController());
+  final IdController idController = Get.find();
+  
   List<String> options = ["Farmer", "Vendor"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       resizeToAvoidBottomInset: false,
       backgroundColor: AppConstant.bgColorAuth,
       body: SafeArea(
@@ -28,6 +35,7 @@ class _RegisterState extends State<Register> {
         padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
         child: Column(children: [
           // Align(
+      
           //     alignment: Alignment.topLeft,
           //     child: GestureDetector(
           //       onTap: () {
@@ -93,6 +101,7 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
                 TextFormField(
+                  controller: registerController.nameController,
                   keyboardType: TextInputType.multiline,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   decoration: InputDecoration(
@@ -117,6 +126,7 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
                 TextFormField(
+                  controller: registerController.emailController,
                   keyboardType: TextInputType.multiline,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   decoration: InputDecoration(
@@ -129,7 +139,6 @@ class _RegisterState extends State<Register> {
                       hintText: "Enter Your Email",
                       hintStyle: TextStyle(fontWeight: FontWeight.normal)),
                 ),
-             
                 SizedBox(
                   height: 10,
                 ),
@@ -141,28 +150,40 @@ class _RegisterState extends State<Register> {
                     textAlign: TextAlign.start,
                   ),
                 ),
-                ChipsChoice.single(
-                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                    value: tag,
-                    onChanged: ((val) {
-                      setState(() {
-                        print(val);
-                        tag = int.parse(val.toString());
-                      });
-                    }),
-                    choiceItems: C2Choice.listFrom(
-                        source: options,
-                        value: (i, v) => i,
-                        label: (i, v) => v.toString()),
-                    choiceActiveStyle: C2ChoiceStyle(
-                      color: Colors.blue,
-                      borderColor: Colors.blue,
-                      borderRadius: BorderRadius.circular(5)
-                    ), choiceStyle: C2ChoiceStyle(color: Colors.blue, borderRadius: BorderRadius.all(Radius.circular(5))),),
+                Obx(() => ChipsChoice.single(
+                      padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                      value: registerController.tag.toInt(),
+                      onChanged: ((val) {
+                        setState(() {
+                          registerController.tag =
+                              RxInt(int.parse(val.toString()));
+                        });
+                      }),
+                      choiceItems: C2Choice.listFrom(
+                          source: options,
+                          value: (i, v) => i,
+                          label: (i, v) => v.toString()),
+                      choiceActiveStyle: C2ChoiceStyle(
+                          color: Colors.blue,
+                          borderColor: Colors.blue,
+                          borderRadius: BorderRadius.circular(5)),
+                      choiceStyle: C2ChoiceStyle(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                    )),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () async {},
+                      onPressed: () async {
+             
+                    bool result =    await AuthServices.registerUser(idController.inputData(),registerController.nameController.text, registerController.emailController.text, Get.parameters['number'], int.parse(registerController.tag.toString()));
+
+                    if(result){
+                      Get.to("/home");
+                    }else{
+                      //toast
+                    }
+                      },
                       style: ButtonStyle(
                           foregroundColor:
                               MaterialStateProperty.all<Color>(Colors.white),

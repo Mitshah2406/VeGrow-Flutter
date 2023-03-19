@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
+import 'package:vegrow/controllers/auth/loginController.dart';
 
 class Login extends StatefulWidget {
 
@@ -12,10 +13,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController phoneController = TextEditingController();
-
+  // TextEditingController phoneController = TextEditingController();
+  // static TextEditingController otpController = TextEditingController();
+  final LoginController loginController = Get.put(LoginController());
+  String otp ="";
   bool setVisible=false;
-
+//obx
+//obs
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +97,7 @@ class _LoginState extends State<Login> {
                       });
                     }
                   },
-                  controller: phoneController,
+                  controller: loginController.phoneController,
                   keyboardType: TextInputType.number,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   decoration: InputDecoration(
@@ -127,13 +131,16 @@ class _LoginState extends State<Login> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: setVisible ? () async {
-            
+            print(loginController.phoneController.text);
                   await FirebaseAuth.instance.verifyPhoneNumber(
-                    phoneNumber: '+91${phoneController.text}',
-                    verificationCompleted: (PhoneAuthCredential credential) {},
+                    phoneNumber: '+91${loginController.phoneController.text}',
+                    verificationCompleted: (PhoneAuthCredential credential) {
+                    //  otp = credential.smsCode.toString();
+                    loginController.otpController.text = (credential.smsCode.toString());
+                    },
                     verificationFailed: (FirebaseAuthException e) {},
                     codeSent: (String verificationId, int? resendToken) {
-                      Get.toNamed('/sendOtp/${verificationId}/${phoneController.text}');
+                      Get.toNamed('/sendOtp/${verificationId}');
                     },
                     codeAutoRetrievalTimeout: (String verificationId) {},
                   );

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -5,6 +7,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 import 'package:vegrow/consts/appConstant.dart';
+import 'package:vegrow/controllers/auth/idController.dart';
+import 'package:vegrow/controllers/auth/loginController.dart';
+import 'package:vegrow/services/authServices.dart';
+import 'package:vegrow/views/pages/Authentication/login.dart';
 
 class OtpScreen extends StatefulWidget {
    OtpScreen({Key? key}) : super(key: key);
@@ -14,12 +20,16 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  final LoginController loginController = Get.find();
+  final IdController idController = Get.find();
   FocusNode noteFocus = FocusNode();
   final FirebaseAuth auth = FirebaseAuth.instance;
   TextEditingController pinController = TextEditingController();
   // late BuildContext context;
   @override
   Widget build(BuildContext context) {
+    print("loginController.otpController.text");
+    print(loginController.otpController.text);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppConstant.bgColorAuth,
@@ -80,7 +90,10 @@ class _OtpScreenState extends State<OtpScreen> {
             child: Column(
               children: [
                Pinput(
-      controller: pinController,
+      controller: loginController.otpController,
+       androidSmsAutofillMethod: AndroidSmsAutofillMethod.none,
+                  // controller: pinController,
+                  
       length: 6,
       toolbarEnabled: false,
       // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
@@ -93,10 +106,11 @@ class _OtpScreenState extends State<OtpScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () async {
-                          PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: Get.parameters['verificationId'].toString(), smsCode: pinController.text);
+                          PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: Get.parameters['verificationId'].toString(), smsCode: loginController.otpController.text);
 
     // Sign the user in (or link) with the credential
     await auth.signInWithCredential(credential);
+   await AuthServices.checkIfUserExists(idController.inputData());
                         Get.toNamed('/register/${Get.parameters["number"]}');
                       },
                       style: ButtonStyle(
