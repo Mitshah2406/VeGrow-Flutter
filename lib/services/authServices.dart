@@ -12,14 +12,10 @@ import 'package:vegrow/models/auth/Vendor.dart';
 class AuthServices {
 
   static Future<bool> registerUser(id, name, email, number, role) async {
-
-  try{  String url = role == 0
-        ? "${AppConstant.IP}/authentication/farmerSignUp/"
-        : "${AppConstant.IP}/authentication/vendorSignUp/";
     try {
       String url = role == 0
-          ? "${AppConstant.Ip}/authentication/farmerSignUp/"
-          : "${AppConstant.Ip}/authentication/vendorSignUp/";
+          ? "${AppConstant.IP}/authentication/farmerSignUp/"
+          : "${AppConstant.IP}/authentication/vendorSignUp/";
 
       var response = await http.post(
           Uri.parse(
@@ -29,10 +25,17 @@ class AuthServices {
             "id": id,
             "fName": name,
             "lName": name,
-            "phone": "+919653288604",
+            "phone": "+91" + number,
             "email": email,
           }));
-
+          var temp = jsonEncode({
+            "id": id,
+            "fName": name,
+            "lName": name,
+            "phone":'+91'+ number,
+            "email": email,
+          });
+          print(temp);
       var recvdToken = jsonDecode(response.body)['token'];
       Token token = Token(token: recvdToken);
 
@@ -86,8 +89,14 @@ class AuthServices {
     await SessionManager().destroy();
   }
 
-  // static Future<String> getCurrentSession() async{
-  //   // User u = User.fromJson(await SessionManager().get("user"));
-  //   // return data;
-  // }
+  static Future<bool> getSession() async{
+   bool session =  await SessionManager().containsKey("user");
+   bool token =  await SessionManager().containsKey("token");
+
+   if(session || token){
+    return true;
+   }else{
+    return false;
+   }
+  }
 }

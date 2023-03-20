@@ -106,9 +106,9 @@ class _OtpScreenState extends State<OtpScreen> {
                           var result = await AuthServices.checkIfUserExists(
                               loginController.phoneController.text);
                           if (result == true) {
-                            Get.offNamed('/home');
+                            Get.offNamed('/dashboard');
                           } else {
-                            Get.offNamed('/register/${Get.parameters["number"]}');
+                            Get.offNamed('/register/${loginController.phoneController.text}');
                           }
                         },
                         style: ButtonStyle(

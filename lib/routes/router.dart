@@ -18,13 +18,13 @@ import '../views/pages/Authentication/otpScreen.dart';
 
 class AppRoutes {
   static List<GetPage> generateRoutes = [
-    GetPage(name: "/", page: () => DashboardPage()),
+    GetPage(name: "/", page: () => SplashScreen()),
     GetPage(name: "/introduction", page: () => const IntroScreenPage()),
     GetPage(name: "/welcome", page: () =>  Welcome()),
     GetPage(name: "/login", page: () =>  Login()),
     GetPage(name: "/sendOtp/:verificationId", page: () =>  OtpScreen()),
     GetPage(name: "/register/:number", page: () =>  Register()),
-
+    GetPage(name: "/logout", page: () =>  Welcome()),
     
     // Atharva
     GetPage(name: "/dashboard", page: () => DashboardPage()),

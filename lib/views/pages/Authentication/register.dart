@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/controllers/auth/idController.dart';
+import 'package:vegrow/controllers/auth/loginController.dart';
 import 'package:vegrow/controllers/auth/registerController.dart';
 import 'package:vegrow/services/authServices.dart';
 
@@ -21,7 +22,9 @@ class _RegisterState extends State<Register> {
   // var tag = 1;
   List<String> tags = [];
   final RegisterController registerController = Get.put(RegisterController());
+  // final LoginController loginController = Get.put(LoginController());
   final IdController idController = Get.find();
+  // final LoginController loginController = Get.find(); 
   
   List<String> options = ["Farmer", "Vendor"];
   @override
@@ -164,7 +167,7 @@ class _RegisterState extends State<Register> {
                           value: (i, v) => i,
                           label: (i, v) => v.toString()),
                       choiceActiveStyle: C2ChoiceStyle(
-                          color: Colors.blue,
+                          color: Color.fromARGB(255, 155, 184, 209),
                           borderColor: Colors.blue,
                           borderRadius: BorderRadius.circular(5)),
                       choiceStyle: C2ChoiceStyle(
@@ -179,7 +182,7 @@ class _RegisterState extends State<Register> {
                     bool result =    await AuthServices.registerUser(idController.inputData(),registerController.nameController.text, registerController.emailController.text, Get.parameters['number'], int.parse(registerController.tag.toString()));
 
                     if(result){
-                      Get.offNamed("/home");
+                      Get.offNamed("/dashboard");
                     }else{
                       //toast
                     }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vegrow/services/authServices.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,7 +24,14 @@ class _SplashScreenState extends State<SplashScreen> {
     var timer = Timer(const Duration(seconds: 3), () async {
       var pref = await SharedPreferences.getInstance();
       var data = pref.getBool('show');
-      if(data == true){
+      print(data);
+
+      // Session Data
+      var sessionData = await AuthServices.getSession();
+
+      if(sessionData){
+        Get.offNamed('/dashboard');
+      }else if(data == true){
         Get.offNamed('/welcome');
       }else{
         Get.offNamed('/introduction');
