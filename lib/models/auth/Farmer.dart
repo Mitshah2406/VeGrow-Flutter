@@ -1,48 +1,44 @@
 class Farmer {
-	String? farmer;
-	String? fName;
-	String? lName;
-	String? email;
-	String? phone;
-	Location? location;
-	String? token;
+  bool? exist;
+  String? token;
+  String? role;
+  String? farmer;
+  String? fName;
+  String? lName;
+  String? email;
+  String? phone;
 
-	Farmer({this.farmer, this.fName, this.lName, this.email, this.phone, this.location, this.token});
+  Farmer(
+      {this.exist,
+      this.token,
+      this.role,
+      this.farmer,
+      this.fName,
+      this.lName,
+      this.email,
+      this.phone});
 
-	Farmer.fromJson(Map<String, dynamic> json) {
-		farmer = json['farmer'];
-		fName = json['fName'];
-		lName = json['lName'];
-		email = json['email'];
-		phone = json['phone'];
-		location = json['location'] != null ? new Location.fromJson(json['location']) : null;
-		token = json['token'];
-	}
+  Farmer.fromJson(Map<String, dynamic> json) {
+    exist = json['exist'];
+    token = json['token'];
+    role = json['role'];
+    farmer = json['farmer'];
+    fName = json['fName'];
+    lName = json['lName'];
+    email = json['email'];
+    phone = json['phone'];
+  }
 
-	Map<String, dynamic> toJson() {
-		final Map<String, dynamic> data = new Map<String, dynamic>();
-		data['farmer'] = this.farmer;
-		data['fName'] = this.fName;
-		data['lName'] = this.lName;
-		data['email'] = this.email;
-		data['phone'] = this.phone;
-		if (this.location != null) {
-      data['location'] = this.location!.toJson();
-    }
-		data['token'] = this.token;
-		return data;
-	}
-}
-
-class Location {
-
-
-
-	Location.fromJson(Map<String, dynamic> json) {
-	}
-
-	Map<String, dynamic> toJson() {
-		final Map<String, dynamic> data = new Map<String, dynamic>();
-		return data;
-	}
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['exist'] = this.exist;
+    data['token'] = this.token;
+    data['role'] = this.role;
+    data['farmer'] = this.farmer;
+    data['fName'] = this.fName;
+    data['lName'] = this.lName;
+    data['email'] = this.email;
+    data['phone'] = this.phone;
+    return data;
+  }
 }

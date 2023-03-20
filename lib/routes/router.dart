@@ -21,6 +21,7 @@ class AppRoutes {
     GetPage(name: "/sendOtp/:verificationId", page: () =>  OtpScreen()),
     GetPage(name: "/register/:number", page: () =>  Register()),
     GetPage(name: "/home", page: () =>  HomeTest()),
+    GetPage(name: "/logout", page: () =>  Welcome()),
     // GetPage(name: "/recieveOtp", page: () =>  Otp()),
   ];
 }

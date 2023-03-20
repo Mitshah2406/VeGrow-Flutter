@@ -13,7 +13,7 @@ import 'package:vegrow/services/authServices.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
 
 class OtpScreen extends StatefulWidget {
-   OtpScreen({Key? key}) : super(key: key);
+  OtpScreen({Key? key}) : super(key: key);
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -33,122 +33,124 @@ class _OtpScreenState extends State<OtpScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppConstant.bgColorAuth,
-      body: SafeArea(
-          child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-        child: Column(children: [
-          Align(
-              alignment: Alignment.topLeft,
-              child: GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.black54,
-                  size: 32,
-                ),
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-                color: Colors.deepPurple.shade50, shape: BoxShape.circle),
-            child: Image.asset(
-              'assets/images/illustration-3.png',
-              width: 250,
+      body: SingleChildScrollView(
+        child: SafeArea(
+            child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+          child: Column(children: [
+              SizedBox(
+              height: 10,
             ),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Text(
-            "Enter the OTP",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Enter OTP",
-            style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.black38),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 38,
-          ),
-          Container(
-            padding: EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(12)),
-            child: Column(
-              children: [
-               Pinput(
-      controller: loginController.otpController,
-       androidSmsAutofillMethod: AndroidSmsAutofillMethod.none,
-                  // controller: pinController,
-                  
-      length: 6,
-      toolbarEnabled: false,
-      // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
-      // inputFormatters: [Formatter()],
-    ),
-                SizedBox(
-                  height: 22,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () async {
-                          PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: Get.parameters['verificationId'].toString(), smsCode: loginController.otpController.text);
-
-    // Sign the user in (or link) with the credential
-    await auth.signInWithCredential(credential);
-  var result =  await AuthServices.checkIfUserExists(loginController.phoneController.text);
-  if(result==true){
-    Get.toNamed('/home');
-  }else{
-   Get.toNamed('/register/${Get.parameters["number"]}');
-  }
-                      },
-                      style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.purple),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(24)))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          "Verify",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      )),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text("Didnt Revieve The Code? ", style: TextStyle(fontWeight:FontWeight.bold, fontSize: 16, color: Colors.black26)),
-                SizedBox(height: 15,),
-                Text("Resend Code", style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.purple))
-              ],
+            Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                  color: Colors.deepPurple.shade50, shape: BoxShape.circle),
+              child: Image.asset(
+                'assets/images/illustration-3.png',
+                width: 250,
+              ),
             ),
-          ),
-        ]),
-      )),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              "Enter the OTP",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Enter OTP",
+              style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black38),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 38,
+            ),
+            Container(
+              padding: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
+              child: Column(
+                children: [
+                  Pinput(
+                    controller: loginController.otpController,
+                    androidSmsAutofillMethod: AndroidSmsAutofillMethod.none,
+                    // controller: pinController,
+      
+                    length: 6,
+                    toolbarEnabled: false,
+                    // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
+                    // inputFormatters: [Formatter()],
+                  ),
+                  SizedBox(
+                    height: 22,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          PhoneAuthCredential credential =
+                              PhoneAuthProvider.credential(
+                                  verificationId:
+                                      Get.parameters['verificationId'].toString(),
+                                  smsCode: loginController.otpController.text);
+      
+                          // Sign the user in (or link) with the credential
+                          await auth.signInWithCredential(credential);
+                          var result = await AuthServices.checkIfUserExists(
+                              loginController.phoneController.text);
+                          if (result == true) {
+                            Get.offNamed('/home');
+                          } else {
+                            Get.offNamed('/register/${Get.parameters["number"]}');
+                          }
+                        },
+                        style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor:
+                                MaterialStateProperty.all<Color>(Colors.purple),
+                            shape:
+                                MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(24)))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            "Verify",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text("Didnt Revieve The Code? ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black26)),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text("Resend Code",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.purple))
+                ],
+              ),
+            ),
+          ]),
+        )),
+      ),
     );
   }
 
