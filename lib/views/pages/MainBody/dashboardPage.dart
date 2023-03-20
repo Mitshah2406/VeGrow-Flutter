@@ -7,7 +7,7 @@ import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/cartPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/categoriesPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/likePage.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/listProducePage.dart';
 
 class DashboardPage extends StatefulWidget {
   DashboardPage({super.key});
@@ -20,7 +20,7 @@ class _DashboardPageState extends State<DashboardPage> {
   int index1 = 0;
   List tabs = [
     HomePage(),
-    LikePage(),
+    ListProducePage(),
     CategoriesPage(),
     CartPage(),
     AccountPage()
@@ -34,8 +34,8 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           child: GNav(
-            iconSize: 28,
-            textSize: 26,
+            iconSize: 32,
+            textSize: 28,
             backgroundColor: Colors.white,
             color: Colors.black,
             activeColor: Colors.white,
@@ -43,29 +43,50 @@ class _DashboardPageState extends State<DashboardPage> {
             tabBackgroundColor: Colors.green.shade500,
             padding: const EdgeInsets.all(16),
             onTabChange: (index) => {
-              index1 = index,
-              setState(()=>{})
+              setState(()=>{
+                index1 = index,
+              })
             },
             tabs: const [
               GButton(
                 icon: Icons.home,
                 text: "Home",
+                textStyle: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white
+                ),
               ),
               GButton(
-                icon: Icons.favorite_border,
-                text: "Likes",
+                icon: Icons.list_alt,
+                text: "List Produce",
+                textStyle: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white
+                ),
               ),
               GButton(
                 icon: Icons.search,
                 text: "Categories",
+                textStyle: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white
+                ),
               ),
               GButton(
                 icon: Icons.settings,
                 text: "Cart",
+                textStyle: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white
+                ),
               ),
               GButton(
                 icon: Icons.account_circle,
                 text: "Account",
+                textStyle: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white
+                ),
               ),
             ]
           ),

@@ -9,17 +9,17 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-         IconButton(
-          onPressed: (){
-            print(Get.isDarkMode);
-            Get.isDarkMode ? Get.changeTheme(ThemeData.light()) : Get.changeTheme(ThemeData.dark());
-          },
-          icon: const Icon(Icons.lightbulb)
-          )
-        ]
-      ),
+      // appBar: AppBar(
+      //   actions: [
+      //    IconButton(
+      //     onPressed: (){
+      //       print(Get.isDarkMode);
+      //       Get.isDarkMode ? Get.changeTheme(ThemeData.light()) : Get.changeTheme(ThemeData.dark());
+      //     },
+      //     icon: const Icon(Icons.lightbulb)
+      //     )
+      //   ]
+      // ),
       backgroundColor: AppConstant.bgColorAuth,
       body: SafeArea(
           child: Padding(

@@ -11,8 +11,8 @@ class AuthServices {
   static Future<bool> registerUser(id, name, email, number, role) async {
 
   try{  String url = role == 0
-        ? "${AppConstant.Ip}/authentication/farmerSignUp/"
-        : "${AppConstant.Ip}/authentication/vendorSignUp/";
+        ? "${AppConstant.IP}/authentication/farmerSignUp/"
+        : "${AppConstant.IP}/authentication/vendorSignUp/";
 
     var response = await http.post(
         Uri.parse(
@@ -44,7 +44,7 @@ return true;
 static Future<bool> checkIfUserExists(phone)async{
    var response = await http.post(
         Uri.parse(
-          "${AppConstant.Ip}/authentication/phoneNumberCheck/",
+          "${AppConstant.IP}/authentication/phoneNumberCheck/",
         ),
         body: jsonEncode({
           "phone":phone
@@ -56,7 +56,7 @@ static Future<bool> checkIfUserExists(phone)async{
          {
           var response = await http.post(
           Uri.parse(
-            "${AppConstant.Ip}/authentication/farmerLogin/",
+            "${AppConstant.IP}/authentication/farmerLogin/",
           ),
           body: jsonEncode({"phone": phone}));
          }
