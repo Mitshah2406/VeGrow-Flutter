@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppConstant{
-  // API 
-  static final String IP = "http://192.168.0.106:4000";
+  // Ip
+  static final String IP = "http://192.168.0.106:9090";
 
   // Sizes
   static const double PADDING_SIZE = 16.0;

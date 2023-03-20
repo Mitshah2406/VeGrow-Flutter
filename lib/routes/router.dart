@@ -30,6 +30,7 @@ class AppRoutes {
     GetPage(name: "/dashboard", page: () => DashboardPage()),
     GetPage(name: "/home", page: () => HomePage()),
     GetPage(name: "/likes", page: () => ListProducePage()),
+    GetPage(name: "/logout", page: () =>  Welcome()),
     GetPage(name: "/categories", page: () => CategoriesPage()),
     GetPage(name: "/cart", page: () => CartPage()),
     GetPage(name: "/account", page: () => AccountPage()),
