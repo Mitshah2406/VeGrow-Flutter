@@ -6,10 +6,11 @@ import 'package:http/http.dart' as http;
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/models/Session/Token.dart';
 import 'package:vegrow/models/auth/Farmer.dart';
+import 'package:vegrow/models/auth/MyUser.dart';
 import 'package:vegrow/models/auth/Vendor.dart';
 
 class AuthServices {
-  
+
   static Future<bool> registerUser(id, name, email, number, role) async {
     try {
       String url = role == 0
@@ -54,33 +55,20 @@ class AuthServices {
     if (recvdToken == false) {
       return false;
     } else {
-      if (decodedResponse['role'].toString().toLowerCase() == 'farmer') {
-        Farmer farmer = Farmer(
+
+        MyUser farmer = MyUser(
             exist: decodedResponse['exist'],
             token: decodedResponse['token'],
             role: decodedResponse['role'],
-            farmer: decodedResponse['farmer'],
+            id: decodedResponse['id'],
             fName: decodedResponse['fName'],
             lName: decodedResponse['lName'],
             email: decodedResponse['email'],
             phone: decodedResponse['phone']);
-        await SessionManager().set('farmer', farmer);
-        Farmer u = Farmer.fromJson(await SessionManager().get("farmer"));
+        await SessionManager().set('user', farmer);
+        MyUser u = MyUser.fromJson(await SessionManager().get("user"));
         return true;
-      } else {
-         Vendor farmer = Vendor(
-            exist: decodedResponse['exist'],
-            token: decodedResponse['token'],
-            role: decodedResponse['role'],
-            vendor: decodedResponse['vendor'],
-            fName: decodedResponse['fName'],
-            lName: decodedResponse['lName'],
-            email: decodedResponse['email'],
-            phone: decodedResponse['phone']);
-        await SessionManager().set('vendor', farmer);
-        Vendor u = Vendor.fromJson(await SessionManager().get("vendor"));
-        return true;
-      }
+
     }
     // Token token = Token(token: recvdToken);
 
@@ -93,4 +81,9 @@ class AuthServices {
   static void deleteSession() async {
     await SessionManager().destroy();
   }
+
+  // static Future<String> getCurrentSession() async{
+  //   // User u = User.fromJson(await SessionManager().get("user"));
+  //   // return data;
+  // }
 }
