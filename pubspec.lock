@@ -356,7 +356,11 @@ packages:
     dependency: "direct main"
     description:
       name: introduction_screen
+<<<<<<< HEAD
       sha256: "0767902260d69655b4d4bd9a88619cac06728eaf13c346cf7132cfb0809debf6"
+=======
+      sha256: "73965475d6b271846f81c5fce5b459546a4ea36c285408691522437fd6bbeb69"
+>>>>>>> e3ecbcb9fba39255ac9cedaf58f1c94b31e56b85
       url: "https://pub.dev"
     source: hosted
     version: "3.1.7"
@@ -460,7 +464,11 @@ packages:
     dependency: "direct main"
     description:
       name: pinput
+<<<<<<< HEAD
       sha256: "1773743c188cdd2f8d0398ea708ec72645bb41ac9311755c4f7bb03a4184bdcf"
+=======
+      sha256: e502557efe6957145b49dd9b4f48eec230a19a8ed0c4d5014a83cf800638869e
+>>>>>>> e3ecbcb9fba39255ac9cedaf58f1c94b31e56b85
       url: "https://pub.dev"
     source: hosted
     version: "2.2.31"
@@ -655,4 +663,8 @@ packages:
     version: "1.0.0"
 sdks:
   dart: ">=2.18.0 <3.0.0"
+<<<<<<< HEAD
   flutter: ">=3.7.0"
+=======
+  flutter: ">=3.0.0"
+>>>>>>> e3ecbcb9fba39255ac9cedaf58f1c94b31e56b85
