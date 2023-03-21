@@ -95,6 +95,7 @@
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:vegrow/controllers/productController.dart';
@@ -127,12 +128,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
   }
 
   int currentStep = 0;
+  String btnText = "Next";
   continueStep() async {
     if (currentStep < 2) {
       setState(() {
         currentStep = currentStep + 1;
       });
     }else{
+
       if (formKey.currentState!.validate()) {
         var result = await product.addProduct(
             productNameController.text,
@@ -146,6 +149,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
         }
       } else {
         print("Failed");
+        Fluttertoast.showToast(
+            msg: "Fill All Fields Properly",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
     }
   }
@@ -156,6 +167,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         currentStep = currentStep - 1;
       });
     }
+
   }
 
   stepTapped(int value) {
@@ -182,7 +194,24 @@ class _CategoriesPageState extends State<CategoriesPage> {
             onStepContinue: continueStep,
             onStepCancel: cancelStep,
             onStepTapped: stepTapped,
-            controlsBuilder: controlsBuilder,
+            controlsBuilder: (context, _){
+              
+              return Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: _.onStepContinue,
+                    child: currentStep==2? Text("List Produce"): Text('Next'),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  OutlinedButton(
+                    onPressed: _.onStepCancel,
+                    child: Text("Back"),
+                  )
+                ],
+              );
+            },
             steps: [
               Step(
                   title: Text("List Produce"),
@@ -320,21 +349,5 @@ class _CategoriesPageState extends State<CategoriesPage> {
   }
 }
 
-Widget controlsBuilder(context, details) {
-  return Row(
-    children: [
-      ElevatedButton(
-        onPressed: details.onStepContinue,
-        child: Text("Next"),
-        
-      ),
-      SizedBox(
-        width: 10,
-      ),
-      OutlinedButton(
-        onPressed: details.onStepCancel,
-        child: Text("Back"),
-      )
-    ],
-  );
-}
+
+

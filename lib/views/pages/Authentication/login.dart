@@ -45,14 +45,12 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 10,
             ),
-            Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade50, shape: BoxShape.circle),
+          ClipOval(
               child: Image.asset(
                 AppConstant.illustration2,
-                width: 250,
+                fit: BoxFit.fill,
+                width:250,
+                height: 235,
               ),
             ),
             SizedBox(
@@ -146,14 +144,10 @@ class _LoginState extends State<Login> {
                       codeAutoRetrievalTimeout: (String verificationId) {},
                     );
                   }: null,
-                  style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                      backgroundColor: setVisible?
-                          MaterialStateProperty.all<Color>(Colors.purple): MaterialStateProperty.all<Color?>(Colors.purple[200]),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24)))),
+                      style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50)),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(

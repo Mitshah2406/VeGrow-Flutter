@@ -23,23 +23,22 @@ class productServices{
 
   static Future<int?> addProduct(productName, productDesc, productQuantity, productUnit, productExpiryDate) async {
     try {
-     dynamic data = await SessionManager().get("token");
-      print(data);
-      var response = await http.MultipartRequest("POST",
+     dynamic data = await SessionManager().get("user");
+      print(data['token']);
+      var req = await http.MultipartRequest("POST",
         Uri.parse("${AppConstant.IP}/authentication/addProductToInventory/")); 
-        response.fields['productId'] = '1';
-       response.fields['productName'] = (productName.toString()).toLowerCase();
-       response.fields['productDescription'] = productDesc;
-       response.fields['productImages'] = '';
-       response.fields['productQuantity'] = productQuantity;
-       response.fields['productUnit'] = productUnit;
-       response.fields['productExpiryDate'] = productExpiryDate;
-       response.fields['farmerId'] = '4dtHv9IK7ca08SPR343PLll4Rxd2';
-      //  request.headers.addAll({
-      //   'Authorization':
-      //       'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg2OTI0NzQ4LCJpYXQiOjE2NzkxNDg3NDgsImp0aSI6IjUzODVlZTk2MmQzNzRiMWNiOWE3ZjkzY2FhOWE0Y2IwIiwidXNlcl9pZCI6IjIifQ.sw3wzf4f4mjhN7DzWgvzfIEScPH0z7IJ6aWnMwJ7ZXc'
-      // });
- var res =await response.send();
+        req.fields['productId'] = '1';
+       req.fields['productName'] = (productName.toString()).toLowerCase();
+       req.fields['productDescription'] = productDesc;
+       req.fields['productImages'] = '';
+       req.fields['productQuantity'] = jsonEncode({"unit": productUnit, "value": productQuantity});
+       req.fields['productExpiryDate'] = productExpiryDate;
+       req.fields['farmerId'] = '5xkcKyHDFdSVXJhdBUi18XyLLF52';
+       req.headers.addAll({
+        'Authorization':
+            'Bearer ${data["token"]}'
+      });
+ var res =await req.send();
       //  fields: jsonEncode({
       //     "productName": productName,
       //     "productDescription": productDesc,

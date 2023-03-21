@@ -9,17 +9,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   actions: [
-      //    IconButton(
-      //     onPressed: (){
-      //       print(Get.isDarkMode);
-      //       Get.isDarkMode ? Get.changeTheme(ThemeData.light()) : Get.changeTheme(ThemeData.dark());
-      //     },
-      //     icon: const Icon(Icons.lightbulb)
-      //     )
-      //   ]
-      // ),
+
       backgroundColor: AppConstant.bgColorAuth,
       body: SafeArea(
           child: Padding(
@@ -27,12 +17,15 @@ class Welcome extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          Image.asset(
-            AppConstant.illustration1,
-            width: 250,
-          ),
+         ClipOval(
+    child: Image.asset(
+        AppConstant.illustration1,
+        fit: BoxFit.cover,
+        width: 250,
+    ),
+),
           SizedBox(
-            height: 20.0,
+            height: 30.0,
           ),
           Text(
             "Let's Get Started..",
@@ -53,12 +46,13 @@ class Welcome extends StatelessWidget {
               onPressed: (){
                 Get.offNamed('/login');
               },
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.purple),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)))
-              ),
+            style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50)),
+                ),
+              
               child: Padding(
+
                 padding: const EdgeInsets.all(16.0),
                 child: Text("Get Started",
                 style: TextStyle(fontSize: 16),),

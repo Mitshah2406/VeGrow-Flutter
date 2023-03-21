@@ -112,28 +112,7 @@ class IntroScreenPage extends StatelessWidget {
                   AppConstant.introPageImg,
                   height: 500,
                 ),
-                footer: Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        // backgroundColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        padding: const EdgeInsets.all(20),
-                      ),
-                      onPressed: () {
-                        skipIntro();
-                        Get.offNamed('/login');
-                      },
-                      child: const Text(
-                        "Get Started",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      )),
-                )),
+               ),
           ],
       )
     );

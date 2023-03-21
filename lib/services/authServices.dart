@@ -74,6 +74,7 @@ class AuthServices {
             phone: decodedResponse['phone']);
         await SessionManager().set('user', farmer);
         MyUser u = MyUser.fromJson(await SessionManager().get("user"));
+        
         return true;
 
     }
