@@ -9,8 +9,8 @@ class ProductController extends GetxController{
 
   @override
   void onInit() {
-    fetchProduct();
     super.onInit();
+    // fetchProduct();
   }
 
   void fetchProduct() async {
@@ -18,6 +18,7 @@ class ProductController extends GetxController{
       isloading(true);
       var products = await productServices.getAllProducts();
       print(products);
+      print("products");
       if(products != null){
         productList.value = products;
       }  

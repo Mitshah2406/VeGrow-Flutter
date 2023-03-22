@@ -4,17 +4,33 @@ import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/models/Product.dart';
+import 'package:vegrow/services/authServices.dart';
 
 class productServices{
 
   static Future<List<Product>?> getAllProducts() async {
+
     try{
-      var response = await http.get(Uri.parse("${AppConstant.IP}/fetchProduct"));
-      print(response.body);
+      var sessionData = await AuthServices.getCurrentSession();
+      var farmerId = sessionData['id'];
+      Product product;
+      print(farmerId);
+      print(sessionData['token']);
+      var response = await http.post(
+        Uri.parse("${AppConstant.IP}/authentication/getMyListedProductList/"),
+        headers: <String, String>{
+          'Authorization':'Bearer ${sessionData["token"]}'
+        },
+        body: jsonEncode({
+          "farmerId": farmerId
+        })
+         );
+      print("response.body");
       
-      print(response.body);
-      return productFromJson(response.body);
-      // return productFromJson(response.body);
+      print(jsonDecode(response.body));
+      // product = Product.fromJson(jsonDecode(response.body));
+      // return product;
+      return productFromJson(jsonDecode(response.body));
     } catch(e){
       // return null;
     }
@@ -31,9 +47,12 @@ class productServices{
        req.fields['productName'] = (productName.toString()).toLowerCase();
        req.fields['productDescription'] = productDesc;
        req.fields['productImages'] = '';
-       req.fields['productQuantity'] = jsonEncode({"unit": productUnit, "value": productQuantity});
+       req.fields['productQuantity'] = productQuantity;
+       req.fields['productUnit'] = productUnit;
        req.fields['productExpiryDate'] = productExpiryDate;
-       req.fields['farmerId'] = '5xkcKyHDFdSVXJhdBUi18XyLLF52';
+       req.fields['initialBidPrice'] = '30';
+       req.fields['farmerId'] = data['id'];
+       //IqEQcNwvCWUaKHSgkNlBflYbMyN2
        req.headers.addAll({
         'Authorization':
             'Bearer ${data["token"]}'
@@ -50,7 +69,7 @@ class productServices{
       //   } )
       
 
-      
+      // print()
       // print(response.body);
       // print(response.body.runtimeType);
       print(res.statusCode);

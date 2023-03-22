@@ -28,22 +28,40 @@ class AuthServices {
             "phone": "+91" + number,
             "email": email,
           }));
-          var temp = jsonEncode({
-            "id": id,
-            "fName": name,
-            "lName": name,
-            "phone":'+91'+ number,
-            "email": email,
-          });
-          print(temp);
-      var recvdToken = jsonDecode(response.body)['token'];
-      Token token = Token(token: recvdToken);
+      //     var temp = jsonEncode({
+      //       "id": id,
+      //       "fName": name,
+      //       "lName": name,
+      //       "phone":'+91'+ number,
+      //       "email": email,
+      //     });
+      //     print(temp);
+      // var recvdToken = jsonDecode(response.body)['token'];
+      // Token token = Token(token: recvdToken);
 
-      var sessionManager = SessionManager();
-      await sessionManager.set("token", token);
-      dynamic data = await SessionManager().get("token");
-      print(data);
-      return true;
+      // var sessionManager = SessionManager();
+      // await sessionManager.set("token", token);
+      // dynamic data = await SessionManager().get("token");
+      // print(data);
+      // return true;
+          var recvdToken = jsonDecode(response.body)['exist'];
+      var decodedResponse = jsonDecode(response.body);
+      if (recvdToken == false) {
+        return false;
+      } else {
+        MyUser farmer = MyUser(
+            token: decodedResponse['token'],
+            role: decodedResponse['role'],
+            id: decodedResponse['id'],
+            fName: decodedResponse['fName'],
+            lName: decodedResponse['lName'],
+            email: decodedResponse['email'],
+            phone: decodedResponse['phone']);
+        await SessionManager().set('user', farmer);
+        MyUser u = MyUser.fromJson(await SessionManager().get("user"));
+        print(getCurrentSession());
+        return true;
+      }
     } catch (e) {
       return false;
     }
@@ -99,5 +117,12 @@ class AuthServices {
    }else{
     return false;
    }
+  }
+
+  static Future<dynamic> getCurrentSession() async{
+    dynamic data = await SessionManager().get("user");
+    // print(data['token']);
+    print(data);
+    return data;
   }
 }
