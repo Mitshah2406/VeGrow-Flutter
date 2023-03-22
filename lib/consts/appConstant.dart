@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppConstant{
+  static var farmerData = null;
+
   // Ip
   static final String IP = "http://192.168.0.106:9090";
 

@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
+import 'package:vegrow/consts/appConstant.dart';
+import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/controllers/themesController.dart';
 import 'package:vegrow/themes/themes.dart';
@@ -14,13 +19,11 @@ class HomePage extends StatefulWidget{
 }
 
 class _HomePageState extends State<HomePage> {
-  final ProductController products = Get.put(ProductController());
+  // final ProductController products = Get.put(ProductController());
+  final HomeController homeController = Get.put(HomeController());
   final ThemeController theme = Get.find();
+  // var farmerData = "";
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
   String greetFarmer(){
     final hour = TimeOfDay.now().hour;
@@ -36,10 +39,8 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    // print(products.productList.length);
-    // print(products.productList);
-
-    return Scaffold(
+    return Obx((){
+      return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.green.shade500,
@@ -111,9 +112,11 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 5,
                     ),
-                    const Text(
-                      'Farmer',
-                      style: TextStyle(
+                    Text(
+                      homeController.farmerList[0]['fName'],
+                      // AppConstant.farmerData['fName'],
+                      // farmerData['fName'],
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 40,
                           fontWeight: FontWeight.bold),
@@ -270,6 +273,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+    }
     );
 
     // return Scaffold(

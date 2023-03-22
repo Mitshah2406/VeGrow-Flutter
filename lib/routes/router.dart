@@ -6,7 +6,6 @@ import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/singleProducePage.d
 import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/cartPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/categoriesPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/home/addProductPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/locationPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/listProducePage.dart';
@@ -37,7 +36,7 @@ class AppRoutes {
 
     GetPage(name: "/location", page: () => LocationPage(), transition: Transition.leftToRightWithFade, transitionDuration: const Duration(milliseconds: 500)),
     
-    GetPage(name: "/addProduct", page: () => addProductPage(), transition: Transition.downToUp, transitionDuration: const Duration(milliseconds: 300)),
+    // GetPage(name: "/addProduct", page: () => addProductPage(), transition: Transition.downToUp, transitionDuration: const Duration(milliseconds: 300)),
 
     GetPage(name: "/singleProducePage", page: () => SingleProducePage())
   ];

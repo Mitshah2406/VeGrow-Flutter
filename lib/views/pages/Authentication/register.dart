@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:vegrow/controllers/auth/idController.dart';
 import 'package:vegrow/controllers/auth/loginController.dart';
 import 'package:vegrow/controllers/auth/registerController.dart';
+import 'package:vegrow/controllers/locationController.dart';
 import 'package:vegrow/services/authServices.dart';
 
 import '../../../consts/appConstant.dart';
@@ -22,15 +23,15 @@ class _RegisterState extends State<Register> {
   // var tag = 1;
   List<String> tags = [];
   final RegisterController registerController = Get.put(RegisterController());
+  final LocationController locationController = Get.put(LocationController());
   // final LoginController loginController = Get.put(LoginController());
   final IdController idController = Get.find();
-  // final LoginController loginController = Get.find(); 
-  
+  // final LoginController loginController = Get.find();
+
   List<String> options = ["Farmer", "Vendor"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       resizeToAvoidBottomInset: false,
       backgroundColor: AppConstant.bgColorAuth,
       body: SafeArea(
@@ -38,7 +39,7 @@ class _RegisterState extends State<Register> {
         padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
         child: Column(children: [
           // Align(
-      
+
           //     alignment: Alignment.topLeft,
           //     child: GestureDetector(
           //       onTap: () {
@@ -178,14 +179,19 @@ class _RegisterState extends State<Register> {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () async {
-             
-                    bool result =    await AuthServices.registerUser(idController.inputData(),registerController.nameController.text, registerController.emailController.text, Get.parameters['number'], int.parse(registerController.tag.toString()));
+                        bool result = await AuthServices.registerUser(
+                            idController.inputData(),
+                            registerController.nameController.text,
+                            registerController.emailController.text,
+                            Get.parameters['number'],
+                            int.parse(registerController.tag.toString()));
 
-                    if(result){
-                      Get.offNamed("/dashboard");
-                    }else{
-                      //toast
-                    }
+                        if (result) {
+                          Get.offNamed("/dashboard");
+                              
+                        } else {
+                          //toast
+                        }
                       },
                       style: ButtonStyle(
                           foregroundColor:

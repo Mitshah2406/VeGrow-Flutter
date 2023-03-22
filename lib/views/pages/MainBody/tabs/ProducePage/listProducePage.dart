@@ -64,8 +64,8 @@ class ListProducePage extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 40.0, top: 10),
+          const Padding(
+            padding: EdgeInsets.only(left: 40.0, top: 10),
             child: Text(
               "All your produce are listed here",
               style: TextStyle(

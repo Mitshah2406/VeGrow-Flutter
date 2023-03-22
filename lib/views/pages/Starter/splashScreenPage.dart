@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: TextLiquidFill(
                   boxBackgroundColor: Colors.black,
                   text: "VeGrow",
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                       fontFamily: 'Specimen',
                       fontSize: 70,
                       fontWeight: FontWeight.bold,

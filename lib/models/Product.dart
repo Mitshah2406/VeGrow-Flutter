@@ -1,49 +1,235 @@
-// To parse this JSON data, do
-//
-//     final product = productFromJson(jsonString);
+// // To parse this JSON data, do
+// //
+// //     final product = productFromJson(jsonString);
 
-import 'dart:convert';
+// import 'dart:convert';
 
-List<Product> productFromJson(String str) => List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
+// // List<Product> productFromJson(String str) => List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
 
-String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+// // String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Product {
-    Product({
-        required this.productName,
-        required this.productDescription,
-        required this.productImages,
-        required this.productQuantity,
-        required this.productUnit,
-        required this.productExpiryDate,
-        required this.productListedDate,
-    });
+// // class Product {
+// //     Product({
+// //         required this.productName,
+// //         required this.productDescription,
+// //         required this.productImages,
+// //         required this.productQuantity,
+// //         required this.productUnit,
+// //         required this.productExpiryDate,
+// //         required this.productListedDate,
+// //     });
 
-    String productName;
-    String productDescription;
-    List<dynamic> productImages;
-    int productQuantity;
-    String productUnit;
-    DateTime productExpiryDate;
-    DateTime productListedDate;
+// //     String productName;
+// //     String productDescription;
+// //     List<dynamic> productImages;
+// //     int productQuantity;
+// //     String productUnit;
+// //     DateTime productExpiryDate;
+// //     DateTime productListedDate;
 
-    factory Product.fromJson(Map<String, dynamic> json) => Product(
-        productName: json["productName"],
-        productDescription: json["productDescription"],
-        productImages: List<dynamic>.from(json["productImages"].map((x) => x)),
-        productQuantity: json["productQuantity"],
-        productUnit: json["productUnit"],
-        productExpiryDate: DateTime.parse(json["productExpiryDate"]),
-        productListedDate: DateTime.parse(json["productListedDate"]),
-    );
+// //     factory Product.fromJson(Map<String, dynamic> json) => Product(
+// //         productName: json["productName"],
+// //         productDescription: json["productDescription"],
+// //         productImages: List<dynamic>.from(json["productImages"].map((x) => x)),
+// //         productQuantity: json["productQuantity"],
+// //         productUnit: json["productUnit"],
+// //         productExpiryDate: DateTime.parse(json["productExpiryDate"]),
+// //         productListedDate: DateTime.parse(json["productListedDate"]),
+// //     );
 
-    Map<String, dynamic> toJson() => {
-        "productName": productName,
-        "productDescription": productDescription,
-        "productImages": List<dynamic>.from(productImages.map((x) => x)),
-        "productQuantity": productQuantity,
-        "productUnit": productUnit,
-        "productExpiryDate": "${productExpiryDate.year.toString().padLeft(4, '0')}-${productExpiryDate.month.toString().padLeft(2, '0')}-${productExpiryDate.day.toString().padLeft(2, '0')}",
-        "productListedDate": productListedDate.toIso8601String(),
-    };
-}
+// //     Map<String, dynamic> toJson() => {
+// //         "productName": productName,
+// //         "productDescription": productDescription,
+// //         "productImages": List<dynamic>.from(productImages.map((x) => x)),
+// //         "productQuantity": productQuantity,
+// //         "productUnit": productUnit,
+// //         "productExpiryDate": "${productExpiryDate.year.toString().padLeft(4, '0')}-${productExpiryDate.month.toString().padLeft(2, '0')}-${productExpiryDate.day.toString().padLeft(2, '0')}",
+// //         "productListedDate": productListedDate.toIso8601String(),
+// //     };
+// // }
+
+
+// // import 'dart:convert';
+
+// // List<Product> productFromJson(String str) => List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
+
+// // String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+// // class Product {
+// //     Product({
+// //         required this.id,
+// //         required this.brand,
+// //         required this.name,
+// //         required this.price,
+// //         // required this.title,
+// //         this.priceSign,
+// //         this.currency,
+// //         required this.imageLink,
+// //         required this.productLink,
+// //         required this.websiteLink,
+// //         required this.description,
+// //         this.rating,
+// //         this.category,
+// //         required this.productType,
+// //         required this.tagList,
+// //         required this.createdAt,
+// //         required this.updatedAt,
+// //         required this.productApiUrl,
+// //         required this.apiFeaturedImage,
+// //         required this.productColors,
+// //     });
+
+// //     int id;
+// //     Brand brand;
+// //     String name;
+// //     String price;
+// //     dynamic priceSign;
+// //     dynamic currency;
+// //     String imageLink;
+// //     String productLink;
+// //     String websiteLink;
+// //     String description;
+// //     double? rating;
+// //     String? category;
+// //     String productType;
+// //     List<dynamic> tagList;
+// //     DateTime createdAt;
+// //     DateTime updatedAt;
+// //     String productApiUrl;
+// //     String apiFeaturedImage;
+// //     List<ProductColor> productColors;
+
+// //     factory Product.fromJson(Map<String, dynamic> json) => Product(
+// //         id: json["id"],
+// //         brand: brandValues.map[json["brand"]]!,
+// //         name: json["name"],
+// //         price: json["price"],
+// //         priceSign: json["price_sign"],
+// //         currency: json["currency"],
+// //         imageLink: json["image_link"],
+// //         productLink: json["product_link"],
+// //         websiteLink: json["website_link"],
+// //         description: json["description"],
+// //         rating: json["rating"]?.toDouble(),
+// //         category: json["category"],
+// //         productType: json["product_type"],
+// //         tagList: List<dynamic>.from(json["tag_list"].map((x) => x)),
+// //         createdAt: DateTime.parse(json["created_at"]),
+// //         updatedAt: DateTime.parse(json["updated_at"]),
+// //         productApiUrl: json["product_api_url"],
+// //         apiFeaturedImage: json["api_featured_image"],
+// //         productColors: List<ProductColor>.from(json["product_colors"].map((x) => ProductColor.fromJson(x))),
+// //     );
+
+// //     Map<String, dynamic> toJson() => {
+// //         "id": id,
+// //         "brand": brandValues.reverse[brand],
+// //         "name": name,
+// //         "price": price,
+// //         "price_sign": priceSign,
+// //         "currency": currency,
+// //         "image_link": imageLink,
+// //         "product_link": productLink,
+// //         "website_link": websiteLink,
+// //         "description": description,
+// //         "rating": rating,
+// //         "category": category,
+// //         "product_type": productType,
+// //         "tag_list": List<dynamic>.from(tagList.map((x) => x)),
+// //         "created_at": createdAt.toIso8601String(),
+// //         "updated_at": updatedAt.toIso8601String(),
+// //         "product_api_url": productApiUrl,
+// //         "api_featured_image": apiFeaturedImage,
+// //         "product_colors": List<dynamic>.from(productColors.map((x) => x.toJson())),
+// //     };
+// // }
+
+// // enum Brand { MAYBELLINE }
+
+// // final brandValues = EnumValues({
+// //     "maybelline": Brand.MAYBELLINE
+// // });
+
+// // class ProductColor {
+// //     ProductColor({
+// //         required this.hexValue,
+// //         this.colourName,
+// //     });
+
+// //     String hexValue;
+// //     String? colourName;
+
+// //     factory ProductColor.fromJson(Map<String, dynamic> json) => ProductColor(
+// //         hexValue: json["hex_value"],
+// //         colourName: json["colour_name"],
+// //     );
+
+// //     Map<String, dynamic> toJson() => {
+// //         "hex_value": hexValue,
+// //         "colour_name": colourName,
+// //     };
+// // }
+
+// // class EnumValues<T> {
+// //     Map<String, T> map;
+// //     late Map<T, String> reverseMap;
+
+// //     EnumValues(this.map);
+
+// //     Map<T, String> get reverse {
+// //         reverseMap = map.map((k, v) => MapEntry(v, k));
+// //         return reverseMap;
+// //     }
+// // }
+
+// // To parse this JSON data, do
+// //
+// //     final product = productFromJson(jsonString);
+
+// import 'dart:convert';
+
+// List<Product> productFromJson(String str) => List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
+
+// String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+// class Product {
+//     Product({
+//         required this.id,
+//         required this.title,
+//         required this.createdDate,
+//     });
+
+//     String id;
+//     String title;
+//     DateTime createdDate;
+
+//     factory Product.fromJson(Map<String, dynamic> json) => Product(
+//         id: json["_id"],
+//         title: json["title"]!,
+//         createdDate: DateTime.parse(json["createdDate"]),
+//     );
+
+//     Map<String, dynamic> toJson() => {
+//         "_id": id,
+//         "title": title,
+//         "createdDate": createdDate.toIso8601String(),
+//     };
+// }
+
+// enum Title { TITLE_1 }
+
+// final titleValues = EnumValues({
+//     "Title 1": Title.TITLE_1
+// });
+
+// class EnumValues<T> {
+//     Map<String, T> map;
+//     late Map<T, String> reverseMap;
+
+//     EnumValues(this.map);
+
+//     Map<T, String> get reverse {
+//         reverseMap = map.map((k, v) => MapEntry(v, k));
+//         return reverseMap;
+//     }
+// }
