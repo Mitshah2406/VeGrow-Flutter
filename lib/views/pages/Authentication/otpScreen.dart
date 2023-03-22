@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 import 'package:vegrow/consts/appConstant.dart';
@@ -46,10 +47,9 @@ class _OtpScreenState extends State<OtpScreen> {
               height: 200,
               decoration: BoxDecoration(
                   color: Colors.deepPurple.shade50, shape: BoxShape.circle),
-              child: Image.asset(
-                'assets/images/illustration-3.png',
-                width: 250,
-              ),
+              child: SvgPicture.asset(
+                  AppConstant.illustration3
+              )
             ),
             SizedBox(
               height: 20.0,
@@ -79,6 +79,9 @@ class _OtpScreenState extends State<OtpScreen> {
               child: Column(
                 children: [
                   Pinput(
+                    // defaultPinTheme: PinTheme(
+                    //   textStyle: TextStyle(fontSize: 18)
+                    // ),
                     controller: loginController.otpController,
                     androidSmsAutofillMethod: AndroidSmsAutofillMethod.none,
                     // controller: pinController,
@@ -111,16 +114,10 @@ class _OtpScreenState extends State<OtpScreen> {
                             Get.offNamed('/register/${loginController.phoneController.text}');
                           }
                         },
-                        style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.purple),
-                            shape:
-                                MaterialStateProperty.all<RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(24)))),
+                           style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
@@ -143,8 +140,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   Text("Resend Code",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.purple))
+                          fontSize: 16 , color: Colors.green))
                 ],
               ),
             ),

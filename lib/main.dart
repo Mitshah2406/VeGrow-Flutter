@@ -21,6 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final IdController idController = Get.put(IdController());
+     
   runApp(Home());
 }
 
@@ -32,9 +33,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+        theme: ThemeData(primarySwatch: Colors.green),
       debugShowCheckedModeBanner: false,
       themeMode: themeC.theme,
-      theme: Themes.lightTheme,
+      // theme: Themes.lightTheme,
       darkTheme: Themes.darkTheme,
       title: 'Flutter Demo',
       initialRoute: "/",

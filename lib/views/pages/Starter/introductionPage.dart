@@ -90,53 +90,28 @@ class IntroScreenPage extends StatelessWidget {
                   color: Colors.grey.shade500,
                   fontSize: 20,
                 )),
-            body: "Write down the Description You needed",
-            image: Image.asset(
-              AppConstant.introPageImg,
-              height: 500,
-              width: 500,
-            )),
+        ),
         PageViewModel(
-            title: "Page 3",
-            decoration: PageDecoration(
-                imageAlignment: Alignment.center,
-                imageFlex: 3,
-                imagePadding: const EdgeInsets.only(top: 200),
-                titleTextStyle:
-                    const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                bodyTextStyle: TextStyle(
-                  decorationStyle: TextDecorationStyle.dotted,
-                  color: Colors.grey.shade500,
-                  fontSize: 20,
-                )),
-            body: "Write down the Description You needed",
-            image: Image.asset(
-              AppConstant.introPageImg,
-              height: 500,
-            ),
-            footer: Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25),
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    // backgroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: const EdgeInsets.all(20),
-                  ),
-                  onPressed: () {
-                    skipIntro();
-                    Get.offNamed('/login');
-                  },
-                  child: const Text(
-                    "Get Started",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )),
-            )),
-      ],
-    )));
+          title: "Page 3",
+          decoration: PageDecoration(
+              imageAlignment: Alignment.center,
+              imageFlex: 3,
+              imagePadding: const EdgeInsets.only(top: 200),
+              titleTextStyle:
+                  const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              bodyTextStyle: TextStyle(
+                decorationStyle: TextDecorationStyle.dotted,
+                color: Colors.grey.shade500,
+                fontSize: 20,
+              )),
+          body: "Write down the Description You needed",
+          image: Image.asset(
+            AppConstant.introPageImg,
+            height: 500,
+          ),
+        ),
+        ],
+      )
+    ));
   }
 }

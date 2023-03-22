@@ -29,30 +29,21 @@ class AuthServices {
             "phone": "+91" + number,
             "email": email,
           }));
-      var temp = jsonEncode({
-        "id": id,
-        "fName": name,
-        "lName": name,
-        "phone": '+91' + number,
-        "email": email,
-      });
-      print(temp);
+          var temp = jsonEncode({
+            "id": id,
+            "fName": name,
+            "lName": name,
+            "phone":'+91'+ number,
+            "email": email,
+          });
+          print(temp);
       var recvdToken = jsonDecode(response.body)['token'];
-      var recvdId = jsonDecode(response.body)['id'];
       Token token = Token(token: recvdToken);
 
       var sessionManager = SessionManager();
       await sessionManager.set("token", token);
-      await sessionManager.set('farmerId', id);
       dynamic data = await SessionManager().get("token");
-      dynamic data1 = await SessionManager().get("farmerId");
       print(data);
-      print(data1);
-
-      var res = await LocationController.promptLocation();
-      print("Data comess sexy");
-      print(res);
-
       return true;
     } catch (e) {
       return false;
@@ -109,6 +100,13 @@ class AuthServices {
     } else {
       return false;
     }
+  }
+
+  static Future<dynamic> getCurrentSession() async{
+    dynamic data = await SessionManager().get("user");
+    // print(data['token']);
+    print(data);
+    return data;
   }
 
    static Future<String> getSessionData() async {
