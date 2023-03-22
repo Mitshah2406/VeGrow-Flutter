@@ -6,7 +6,7 @@ import 'package:vegrow/themes/themes.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/FarmerProduceTile.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/listTile.dart';
 
-class HomePage extends StatefulWidget{
+class HomePage extends StatefulWidget {
   HomePage({super.key});
 
   @override
@@ -22,18 +22,19 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  String greetFarmer(){
+  String greetFarmer() {
     final hour = TimeOfDay.now().hour;
 
-    if(hour <= 12){
+    if (hour <= 12) {
       return "Morning";
-    }else if(hour <= 17){
+    } else if (hour <= 17) {
       return "Afternoon";
-    }else if(hour > 17 && hour < 19){
+    } else if (hour > 17 && hour < 19) {
       return "Evening";
     }
     return "Night";
   }
+
   @override
   Widget build(BuildContext context) {
     // print(products.productList.length);
@@ -42,51 +43,50 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.green.shade500,
+       backgroundColor: Theme.of(context).primaryColor,
         brightness: Brightness.light,
         elevation: 0,
         leadingWidth: 200,
-        leading: Container( 
+        leading: Container(
           child: Row(
-             children: [
+            children: [
               Row(
                 children: [
-                  const SizedBox(width: 15,),
+                  const SizedBox(
+                    width: 15,
+                  ),
                   const Icon(Icons.location_on_outlined, size: 35),
-                  const SizedBox(width: 5,),
+                  const SizedBox(
+                    width: 5,
+                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text("Pincode", style: TextStyle(
-                        fontSize: 16
-                      )),
-                      Text("000000", style: TextStyle(
-                        fontSize: 16
-                      ))
+                      Text("Pincode", style: TextStyle(fontSize: 16)),
+                      Text("000000", style: TextStyle(fontSize: 16))
                     ],
                   ),
-                  const SizedBox(width: 5,),
-                  IconButton(
-                    onPressed: (){
-                      Get.toNamed('/location');
-                    }, 
-                    icon: const Icon(Icons.expand_more)
+                  const SizedBox(
+                    width: 5,
                   ),
+                  IconButton(
+                      onPressed: () {
+                        Get.toNamed('/location');
+                      },
+                      icon: const Icon(Icons.expand_more)),
                 ],
               )
             ],
           ),
         ),
         actions: [
-        //   // Text("Add Product"),
+          //   // Text("Add Product"),
           IconButton(
-            onPressed: (){
-              Get.toNamed('/addProduct');
-            },
-            iconSize: 30,
-            icon: const Icon(Icons.add)
-          ),
-          
+              onPressed: () {
+                Get.toNamed('/addProduct');
+              },
+              iconSize: 30,
+              icon: const Icon(Icons.add)),
         ],
       ),
       body: SafeArea(
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    color: Colors.green.shade500,
+                    color: Theme.of(context).primaryColor, 
                     borderRadius:
                         BorderRadius.vertical(bottom: Radius.circular(30))),
                 padding: EdgeInsets.all(20.0),
@@ -106,7 +106,10 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       "Good " + greetFarmer() + ",",
-                      style: const TextStyle(color: Colors.black87, fontSize: 25, fontWeight: FontWeight.w700),
+                      style: const TextStyle(
+                          
+                          fontSize: 25,
+                          fontWeight: FontWeight.w700),
                     ),
                     const SizedBox(
                       height: 5,
@@ -149,13 +152,9 @@ class _HomePageState extends State<HomePage> {
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 25.0),
-                child: Text(
-                  'Text',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 26
-                  )
-                ),
+                child: Text('Text',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
               ),
               const SizedBox(
                 height: 20,
@@ -165,12 +164,14 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   height: 140,
                   child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (context, index){
-                      return const FarmerProduceTile(imagePath: "assets/images/farmer.png", produceTitle: "Farmer One", produceDescription: "This is Awesome");
-                    }
-                  ),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return const FarmerProduceTile(
+                            imagePath: "assets/images/farmer.png",
+                            produceTitle: "Farmer One",
+                            produceDescription: "This is Awesome");
+                      }),
                 ),
               ),
               const SizedBox(
@@ -178,25 +179,21 @@ class _HomePageState extends State<HomePage> {
               ),
               const Padding(
                 padding: EdgeInsets.only(left: 25.0),
-                child: Text(
-                  'Recently Added',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 26
-                  )
-                ),
+                child: Text('Recently Added',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Container(
                   height: 140,
                   child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: 5,
-                    itemBuilder: (context, index){
-                      return const listTile();
-                    }
-                  ),
+                      scrollDirection: Axis.vertical,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        return const listTile();
+                      }),
                 ),
               ),
 
@@ -279,15 +276,15 @@ class _HomePageState extends State<HomePage> {
     //     backgroundColor: Colors.green.shade500,
     //     elevation: 0,
     //     leadingWidth: 200,
-    //     leading: Container( 
+    //     leading: Container(
     //       child: Row(
     //          children: [
     //           Row(
     //             children: [
     //               const Icon(Icons.location_on_outlined, size: 35),
-          
+
     //               const SizedBox(width: 5,),
-                    
+
     //               Column(
     //                 mainAxisAlignment: MainAxisAlignment.center,
     //                 children: const [
@@ -299,13 +296,13 @@ class _HomePageState extends State<HomePage> {
     //                   ))
     //                 ],
     //               ),
-              
+
     //               const SizedBox(width: 5,),
-              
+
     //               IconButton(
     //                 onPressed: (){
     //                   Get.toNamed('/location');
-    //                 }, 
+    //                 },
     //                 icon: const Icon(Icons.expand_more)
     //               ),
 
@@ -331,7 +328,7 @@ class _HomePageState extends State<HomePage> {
     //         iconSize: 30,
     //         icon: const Icon(Icons.add)
     //       ),
-          
+
     //     ],
     //   ),
     //   body: Column(
@@ -345,7 +342,7 @@ class _HomePageState extends State<HomePage> {
     //       //       theme.changeTheme(Themes.darkTheme);
     //       //       theme.saveTheme(true);
     //       //     }
-    //       //   }, 
+    //       //   },
     //       //   child: const Text("Change Theme")
     //       // ),
     //       Expanded(
