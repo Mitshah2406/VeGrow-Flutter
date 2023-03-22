@@ -33,8 +33,8 @@ class _buttonRowState extends State<buttonRow> {
               SizedBox(
                 height: 5,
               ),
-              Text("Vendor"),
-              Text("Rating")
+              Text("Vendor".tr),
+              Text("Rating".tr)
             ],
           ),
         ),
@@ -61,8 +61,8 @@ class _buttonRowState extends State<buttonRow> {
               SizedBox(
                 height: 3,
               ),
-              Text("Transactions"),
-              Text("completed")
+              Text("Transactions".tr),
+              Text("completed".tr)
             ],
           ),
         ),
@@ -89,8 +89,8 @@ class _buttonRowState extends State<buttonRow> {
               SizedBox(
                 height: 3,
               ),
-              Text("Vendors"),
-              Text("Connected")
+              Text("Vendors".tr),
+              Text("Connected".tr)
             ],
           ),
         ),

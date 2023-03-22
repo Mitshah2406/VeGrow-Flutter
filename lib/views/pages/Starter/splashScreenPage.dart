@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/services/authServices.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,17 +24,19 @@ class _SplashScreenState extends State<SplashScreen> {
   void showIntro() {
     var timer = Timer(const Duration(seconds: 3), () async {
       var pref = await SharedPreferences.getInstance();
+      AppConstant.prefs = pref;
       var data = pref.getBool('show');
+      pref.setString('language', "en");
       print(data);
 
       // Session Data
       var sessionData = await AuthServices.getSession();
 
-      if(sessionData){
+      if (sessionData) {
         Get.offNamed('/dashboard');
-      }else if(data == true){
+      } else if (data == true) {
         Get.offNamed('/welcome');
-      }else{
+      } else {
         Get.offNamed('/introduction');
       }
     });
@@ -52,9 +55,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   boxBackgroundColor: Colors.black,
                   text: "VeGrow",
                   textStyle: TextStyle(
-                      fontFamily: 'Specimen',
-                      fontSize: 70,
-                      fontWeight: FontWeight.bold,
+                    fontFamily: 'Specimen',
+                    fontSize: 70,
+                    fontWeight: FontWeight.bold,
                   ),
                   waveColor: Colors.white,
                   waveDuration: const Duration(seconds: 2),
