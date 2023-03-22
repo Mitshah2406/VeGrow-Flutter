@@ -10,6 +10,7 @@ import 'package:vegrow/models/Session/Token.dart';
 import 'package:vegrow/models/auth/Farmer.dart';
 import 'package:vegrow/models/auth/MyUser.dart';
 import 'package:vegrow/models/auth/Vendor.dart';
+import 'package:vegrow/services/locationServices.dart';
 
 class AuthServices {
   static Future<bool> registerUser(id, name, email, number, role) async {
@@ -44,6 +45,10 @@ class AuthServices {
       await sessionManager.set("token", token);
       dynamic data = await SessionManager().get("token");
       print(data);
+
+      var result = await LocationController.promptLocation();
+      print(result);
+      
       return true;
     } catch (e) {
       return false;

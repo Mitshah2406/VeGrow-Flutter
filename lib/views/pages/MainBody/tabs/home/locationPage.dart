@@ -84,7 +84,7 @@ class _LocationPageState extends State<LocationPage> {
                   ),
                   TextButton(
                     onPressed: () async {
-                        var response = await locationController.determinePosition(null, null);
+                        var response = await locationController.determinePosition();
                         print(response);
                         if (response == "done") {
                           showDialog(

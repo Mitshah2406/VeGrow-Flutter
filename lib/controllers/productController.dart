@@ -46,13 +46,13 @@ class ProductController extends GetxController{
   }
 
 
-//   Future<int?> addProduct(productName, productDesc, productQuantity, productUnit, productExpiryDate) async {
-//     var data = await productServices.addProduct(productName, productDesc, productQuantity, productUnit, productExpiryDate);
+  Future<int?> addProduct(productName, productDesc, productQuantity, productUnit, productExpiryDate) async {
+    var data = await productServices.addProduct(productName, productDesc, productQuantity, productUnit, productExpiryDate);
 
-//     print("Dataaaaaaaa");
-//     print(data);
-//     // print(jsonEncode(data));
+    print("Dataaaaaaaa");
+    print(data);
+    // print(jsonEncode(data));
 
-//     return data;
-//   }
+    return data;
+  }
 }

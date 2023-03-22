@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage> {
   // final ProductController products = Get.put(ProductController());
-  final HomeController homeController = Get.put(HomeController());
+  // final HomeController homeController = Get.put(HomeController());
   final ThemeController theme = Get.find();
   // var farmerData = "";
 
@@ -113,7 +113,8 @@ class _HomePageState extends State<HomePage> {
                       height: 5,
                     ),
                     Text(
-                      homeController.farmerList[0]['fName'],
+                      "Hello",
+                      // homeController.farmerList[0]['fName'],
                       // AppConstant.farmerData['fName'],
                       // farmerData['fName'],
                       style: const TextStyle(
