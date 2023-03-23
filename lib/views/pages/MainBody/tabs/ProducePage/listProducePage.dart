@@ -19,12 +19,13 @@ class _ListProducePageState extends State<ListProducePage> {
     super.initState();
     productController.fetchProduct();
   }
-    List products = [
    
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("My listed produce"),
+      ),
  body: ListView(
         children: <Widget>[
           Container(
@@ -33,12 +34,11 @@ class _ListProducePageState extends State<ListProducePage> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                'Featured item',
-                'Most recent',
-                'Item 1',
-                'Item 2',
-                'Item 3',
-                'Etc...'
+                'All',
+                'Pending',
+                'Bidded',
+                'Confirmed',
+                'Satisfied',
               ]
                   .map((e) => Container(
                         margin: EdgeInsets.symmetric(
@@ -56,59 +56,71 @@ class _ListProducePageState extends State<ListProducePage> {
             ),
           ),
           Column(
-              children: products
+              children: productController.productList
                   .map(
-                    (e) => Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(13),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey.shade200,
-                              blurRadius: 10,
-                              spreadRadius: 3,
-                              offset: Offset(3, 4))
-                        ],
-                      ),
-                      child: ListTile(
-                        leading: Image.network(
-                          e.image,
-                          fit: BoxFit.cover,
-                          width: 90,
-                          height: 100,
-                        ),
-                        title: Text(
-                          e.name,
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        subtitle: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text("\$ " + e.price.toString()),
-                            SizedBox(height: 10),
-                            Container(
-                              height: 40,
-                              child: Stack(
-                                children: <Widget>[
-                                  Positioned(
-                                      left: 20,
-                                      bottom: 0,
-                                      child: CircleAvatar(
-                                          backgroundColor: Colors.green,
-                                          child: Image.network(
-                                              'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRxHTyqjCdnZsEM-EkMvn3FDBkDADcaEZ3GN1YEdWFToAJm83nX&usqp=CAU'))),
-                                  Positioned(
-                                    left: 0,
-                                    bottom: 0,
-                                    child: CircleAvatar(child: Text('a')),
-                                  )
-                                ],
-                              ),
-                            )
+                    (e) => GestureDetector(
+                      onTap: ()=>{
+                        Get.toNamed('/singleProducePage/', arguments: {
+                          "id": e.inventoryId,
+                        })
+                      },
+                      child: Container(
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(13),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.shade200,
+                                blurRadius: 10,
+                                spreadRadius: 3,
+                                offset: Offset(3, 4))
                           ],
+                        ),
+                        child: Hero(
+                          tag:productController.productList.map((element) => element.productId),
+                          child: ListTile(
+                            leading: ClipOval(
+                              child: Image.network(
+                                'https://static.vecteezy.com/system/resources/thumbnails/001/992/951/small/fresh-onion-healthy-vegetable-icon-free-vector.jpg',
+                                fit: BoxFit.cover,
+                                width: 70,
+                                height: 70,
+                              ),
+                            ),
+                            title: Text(
+                              e.productName.toString(),
+                              style: TextStyle(fontSize: 25),
+                            ),
+                            subtitle: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text("\$ " + e.productDescription.toString()),
+                                SizedBox(height: 10),
+                                Container(
+                                  height: 40,
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Positioned(
+                                          left: 20,
+                                          bottom: 0,
+                                          child: CircleAvatar(
+                                              backgroundColor: Colors.green,
+                                              child: Image.network(
+                                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRxHTyqjCdnZsEM-EkMvn3FDBkDADcaEZ3GN1YEdWFToAJm83nX&usqp=CAU'))),
+                                      Positioned(
+                                        left: 0,
+                                        bottom: 0,
+                                        child: CircleAvatar(child: Text('a')),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),

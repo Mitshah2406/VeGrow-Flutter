@@ -4,46 +4,70 @@
 
 import 'dart:convert';
 
-List<Product> productFromJson(String str) => List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
+List<Product> productFromJson(String str) =>
+    List<Product>.from(json.decode(str).map((x) => Product.fromJson(x)));
 
-String productToJson(List<Product> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String productToJson(List<Product> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Product {
-    Product({
-        required this.productName,
-        required this.productDescription,
-        required this.productImages,
-        required this.productQuantity,
-        required this.productUnit,
-        required this.productExpiryDate,
-        required this.productListedDate,
-    });
+  Product({
+    this.inventoryId,
+    this.productName,
+    this.productDescription,
+    this.productListedDate,
+    this.productExpiryDate,
+    this.productImages,
+    this.productUnit,
+    this.productQuantity,
+    this.initialBidPrice,
+    this.productId,
+    this.farmerId,
+  });
 
-    String productName;
-    String productDescription;
-    List<dynamic> productImages;
-    int productQuantity;
-    String productUnit;
-    DateTime productExpiryDate;
-    DateTime productListedDate;
+  String? inventoryId;
+  String? productName;
+  String? productDescription;
+  DateTime? productListedDate;
+  DateTime? productExpiryDate;
+  String? productImages;
+  String? productUnit;
+  String? productQuantity;
+  String? initialBidPrice;
+  int? productId;
+  String? farmerId;
 
-    factory Product.fromJson(Map<String, dynamic> json) => Product(
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        inventoryId: json["inventoryId"],
         productName: json["productName"],
         productDescription: json["productDescription"],
-        productImages: List<dynamic>.from(json["productImages"].map((x) => x)),
-        productQuantity: json["productQuantity"],
+        productListedDate: json["productListedDate"] == null
+            ? null
+            : DateTime.parse(json["productListedDate"]),
+        productExpiryDate: json["productExpiryDate"] == null
+            ? null
+            : DateTime.parse(json["productExpiryDate"]),
+        productImages: json["productImages"],
         productUnit: json["productUnit"],
-        productExpiryDate: DateTime.parse(json["productExpiryDate"]),
-        productListedDate: DateTime.parse(json["productListedDate"]),
-    );
+        productQuantity: json["productQuantity"],
+        initialBidPrice: json["initialBidPrice"],
+        productId: json["productId"],
+        farmerId: json["farmerId"],
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
+        "inventoryId": inventoryId,
         "productName": productName,
         "productDescription": productDescription,
-        "productImages": List<dynamic>.from(productImages.map((x) => x)),
-        "productQuantity": productQuantity,
+        "productListedDate":
+            "${productListedDate!.year.toString().padLeft(4, '0')}-${productListedDate!.month.toString().padLeft(2, '0')}-${productListedDate!.day.toString().padLeft(2, '0')}",
+        "productExpiryDate":
+            "${productExpiryDate!.year.toString().padLeft(4, '0')}-${productExpiryDate!.month.toString().padLeft(2, '0')}-${productExpiryDate!.day.toString().padLeft(2, '0')}",
+        "productImages": productImages,
         "productUnit": productUnit,
-        "productExpiryDate": "${productExpiryDate.year.toString().padLeft(4, '0')}-${productExpiryDate.month.toString().padLeft(2, '0')}-${productExpiryDate.day.toString().padLeft(2, '0')}",
-        "productListedDate": productListedDate.toIso8601String(),
-    };
+        "productQuantity": productQuantity,
+        "initialBidPrice": initialBidPrice,
+        "productId": productId,
+        "farmerId": farmerId,
+      };
 }

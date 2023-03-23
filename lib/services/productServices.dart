@@ -30,7 +30,8 @@ class productServices{
       print(jsonDecode(response.body));
       // product = Product.fromJson(jsonDecode(response.body));
       // return product;
-      return productFromJson(jsonDecode(response.body));
+      return productFromJson(response.body);
+      // return Product.fromJson(jsonDecode(response.body));
     } catch(e){
       // return null;
     }
@@ -43,7 +44,7 @@ class productServices{
       print(data['token']);
       var req = await http.MultipartRequest("POST",
         Uri.parse("${AppConstant.IP}/authentication/addProductToInventory/")); 
-        req.fields['productId'] = '1';
+        req.fields['productId'] = '206';
        req.fields['productName'] = (productName.toString()).toLowerCase();
        req.fields['productDescription'] = productDesc;
        req.fields['productImages'] = '';
