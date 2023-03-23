@@ -16,7 +16,6 @@ class LocationServices{
         body: jsonEncode(
           {
           "id": farmerId,
-          // "Authorization": "Bearer ${token}",
           "location": {
             "lat": lat,
             "long": long,
@@ -30,7 +29,7 @@ class LocationServices{
       print("In siervices");
       print(token);
     
-      return jsonDecode(response.body);
+      return "Done";
     } catch (e) {
       return e.toString();
     }

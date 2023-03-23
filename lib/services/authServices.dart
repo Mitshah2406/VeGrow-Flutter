@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vegrow/consts/appConstant.dart';
@@ -30,26 +31,28 @@ class AuthServices {
             "phone": "+91" + number,
             "email": email,
           }));
-          var temp = jsonEncode({
-            "id": id,
-            "fName": name,
-            "lName": name,
-            "phone":'+91'+ number,
-            "email": email,
-          });
-          print(temp);
-      var recvdToken = jsonDecode(response.body)['token'];
-      Token token = Token(token: recvdToken);
 
-      var sessionManager = SessionManager();
-      await sessionManager.set("token", token);
-      dynamic data = await SessionManager().get("token");
-      print(data);
-
-      var result = await LocationController.promptLocation();
-      print(result);
-      
-      return true;
+      var recvdToken = jsonDecode(response.body)['exist'];
+      var decodedResponse = jsonDecode(response.body);
+      if (recvdToken == false) {
+        return false;
+      } else {
+        MyUser farmer = MyUser(
+            token: decodedResponse['token'],
+            role: decodedResponse['role'],
+            id: decodedResponse['id'],
+            fName: decodedResponse['fName'],
+            lName: decodedResponse['lName'],
+            email: decodedResponse['email'],
+            phone: decodedResponse['phone']
+          );
+        await SessionManager().set('user', farmer);
+        MyUser u = MyUser.fromJson(await SessionManager().get("user"));
+        print(getCurrentSession());
+        var result = await LocationController.promptLocation();
+        print(result);
+        return true;
+      }
     } catch (e) {
       return false;
     }
@@ -91,6 +94,7 @@ class AuthServices {
 
   static void deleteSession() async {
     await SessionManager().destroy();
+    Get.toNamed('/logout');
     var prefs = await SharedPreferences.getInstance();
     print(prefs.getBool('show'));
     prefs.setBool('show', true);
@@ -107,17 +111,17 @@ class AuthServices {
     }
   }
 
-  static Future<dynamic> getCurrentSession() async{
+  static Future<dynamic> getCurrentSession() async {
     dynamic data = await SessionManager().get("user");
     // print(data['token']);
     print(data);
     return data;
   }
 
-   static Future<String> getSessionData() async {
-    bool session = await SessionManager().get('user');
-    // bool token = await SessionManager().containsKey("token");
+  //  static Future<String> getSessionData() async {
+  //   bool session = await SessionManager().get('user');
+  //   // bool token = await SessionManager().containsKey("token");
 
-    return session.toString();
-  }
+  //   return session.toString();
+  // }
 }

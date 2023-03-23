@@ -18,15 +18,17 @@ class HomeController extends GetxController{
     try {
       isLoading(true);
       var userData = await SessionManager().get('user');
-      var farmers = await HomeServices.getFarmerData(userData['id'], userData['token']);
-      print("NULLLLLLLLLLLLLLLLLLLLL");
-      print(farmers);
-      print(farmers.runtimeType);
-      if(farmers != null){      
-        farmerList.add(farmers);
-      }  
-    } finally{
+      Future.delayed(const Duration(seconds: 1), () async {
+        var farmers = await HomeServices.getFarmerData(userData['id'], userData['token']);
+        print("NULLLLLLLLLLLLLLLLLLLLL");
+        print(farmers);
+        print(farmers.runtimeType);
+        if(farmers != null){      
+          farmerList.add(farmers);
+        }  
       isLoading(false);
+      });
+    } finally{
     }    
   }
 }

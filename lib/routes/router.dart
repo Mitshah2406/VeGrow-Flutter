@@ -19,11 +19,11 @@ class AppRoutes {
   static List<GetPage> generateRoutes = [
     GetPage(name: "/", page: () => SplashScreen()),
     GetPage(name: "/introduction", page: () => const IntroScreenPage()),
-    GetPage(name: "/welcome", page: () =>  Welcome()),
+    GetPage(name: "/welcome", page: () =>  Welcome(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
     GetPage(name: "/login", page: () =>  Login()),
     GetPage(name: "/sendOtp/:verificationId", page: () =>  OtpScreen()),
     GetPage(name: "/register/:number", page: () =>  Register()),
-    GetPage(name: "/logout", page: () =>  Welcome()),
+    GetPage(name: "/logout", page: () =>  Welcome(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
     
     // Atharva
     GetPage(name: "/dashboard", page: () => DashboardPage()),

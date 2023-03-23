@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:vegrow/controllers/locationController.dart';
 
 class LocationPage extends StatefulWidget {
@@ -15,9 +18,47 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
   final LocationController locationController = Get.put(LocationController());
 
-  late double currentPositionlat;
-  late double currentPositionlong;
-  late double lastPosition;
+
+  Future<String?> getLocationManually() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    permission = await Geolocator.requestPermission();
+    if(permission == LocationPermission.denied){
+       Fluttertoast.showToast(
+          msg: "Please Enabled your location from the device",
+          fontSize: 18,
+          textColor: Colors.white,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red
+        );
+    }else{
+      PermissionStatus status = await Permission.location.request();
+      if(status.isGranted){
+        print("My user Data in resgister");
+        var myUser = await SessionManager().get('user');
+        print(myUser);
+        var l = await LocationController().determinePosition();
+        if(l == "Done"){
+          Fluttertoast.showToast(
+            msg: "Your location has been detected",
+            fontSize: 18,
+            textColor: Colors.white,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.green
+          );
+        }else{
+          Fluttertoast.showToast(
+            msg: "Your location detected",
+            fontSize: 18,
+            textColor: Colors.red,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.red
+          );
+        }
+      }else if(status.isPermanentlyDenied){
+        openAppSettings();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,58 +115,33 @@ class _LocationPageState extends State<LocationPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  // Container(
+                  //   child: Obx((){
+                  //   if(locationController.isloading.value){
+                  //     return const Center(
+                  //       child: CircularProgressIndicator(),
+                  //     );
+                  //   }else{
+                  //     return const Center(
+                  //       child: Text("Location Fetched"),
+                  //     );
+                  //   }
+                  // }),
+                  // ),
                   const Icon(
                     Icons.near_me,
-                    color: Color.fromARGB(255, 192, 165, 197),
+                    color: Colors.purple,
                     size: 25,
                   ),
                   const SizedBox(
                     width: 20,
                   ),
                   TextButton(
-                    onPressed: () async {
-                        var response = await locationController.determinePosition();
-                        print(response);
-                        if (response == "done") {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const AlertDialog(
-                                  backgroundColor: Colors.green,
-                                  titleTextStyle: TextStyle(color: Colors.white),
-                                  contentTextStyle:
-                                      TextStyle(color: Colors.white),
-                                  title: Text("Location!!!"),
-                                  content: Text("Location has been detected"),
-                                );
-                              });
-                        } else if (response == "User denied permissions to access the device's location.") {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const AlertDialog(
-                                  backgroundColor: Colors.red,
-                                  titleTextStyle: TextStyle(color: Colors.white),
-                                  contentTextStyle:
-                                      TextStyle(color: Colors.white),
-                                  content:
-                                      Text("Location Services are diasbled!\nPlease enabled to fetch them."),
-                                );
-                              });
-                        }else {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const AlertDialog(
-                                  backgroundColor: Colors.red,
-                                  titleTextStyle: TextStyle(color: Colors.white),
-                                  contentTextStyle:
-                                      TextStyle(color: Colors.white),
-                                  title: Text("Location!!!"),
-                                  content: Text("Technical Error"),
-                                );
-                              });
-                        }
+                    onPressed: () {
+                      var result = getLocationManually();
+                      print(result);
+
+                      
                     },
                     child: const Text(
                       "Use current location",

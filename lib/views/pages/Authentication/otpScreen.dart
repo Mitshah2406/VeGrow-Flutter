@@ -12,6 +12,7 @@ import 'package:vegrow/controllers/auth/idController.dart';
 import 'package:vegrow/controllers/auth/loginController.dart';
 import 'package:vegrow/services/authServices.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
+import 'package:vegrow/views/pages/Starter/popPage.dart';
 
 class OtpScreen extends StatefulWidget {
   OtpScreen({Key? key}) : super(key: key);
@@ -31,7 +32,8 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     print("loginController.otpController.text");
     print(loginController.otpController.text);
-    return Scaffold(
+    return popPage(
+      page: Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppConstant.bgColorAuth,
       body: SingleChildScrollView(
@@ -147,6 +149,7 @@ class _OtpScreenState extends State<OtpScreen> {
           ]),
         )),
       ),
+    )
     );
   }
 
