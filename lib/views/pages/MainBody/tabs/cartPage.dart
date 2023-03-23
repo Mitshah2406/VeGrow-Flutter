@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
+import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/themes/themes.dart';
 import '../../../widgets/buttonRow.dart';
 import '../../../widgets/profilePageOptions.dart';
@@ -46,7 +47,7 @@ class _CartPageState extends State<CartPage> {
                     icon: Icon(Icons.menu),
                     onPressed: () {},
                   ),
-                  title: Text("Profile"),
+                  title: Text("Profile".tr),
                   centerTitle: true,
                 ),
                 ClipPath(
@@ -87,7 +88,7 @@ class _CartPageState extends State<CartPage> {
                 child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "farmer@gmail.com",
+                      "farmer@124",
                       style: TextStyle(color: Colors.blueGrey, fontSize: 15),
                     ))),
             Positioned.fill(
@@ -97,7 +98,7 @@ class _CartPageState extends State<CartPage> {
                   child: buttonRow(),
                 )),
             Positioned.fill(
-                bottom: 10 ,
+                bottom: 10,
                 child: Align(
                   alignment: Alignment.center,
                   child: optionsCard(),
