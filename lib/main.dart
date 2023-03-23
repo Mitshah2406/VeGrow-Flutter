@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/controllers/productController.dart';
+import 'package:vegrow/consts/localeString.dart';
 // import 'package:get/get_navigation/src/root/get_material_app.dart';
 // import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/controllers/themesController.dart';
@@ -34,6 +35,8 @@ class Home extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.green),
       debugShowCheckedModeBanner: false,
       themeMode: themeC.theme,
+      translations: LocalString(),
+      locale: Locale("en", "US"),
       // theme: Themes.lightTheme,
       darkTheme: ThemeManager.darkTheme,
       title: 'Flutter Demo',

@@ -6,7 +6,6 @@ import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/singleProducePage.d
 import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/cartPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/categoriesPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/home/addProductPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/locationPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/listProducePage.dart';
@@ -20,11 +19,11 @@ class AppRoutes {
   static List<GetPage> generateRoutes = [
     GetPage(name: "/", page: () => SplashScreen()),
     GetPage(name: "/introduction", page: () => const IntroScreenPage()),
-    GetPage(name: "/welcome", page: () =>  Welcome()),
+    GetPage(name: "/welcome", page: () =>  Welcome(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
     GetPage(name: "/login", page: () =>  Login()),
     GetPage(name: "/sendOtp/:verificationId", page: () =>  OtpScreen()),
     GetPage(name: "/register/:number", page: () =>  Register()),
-    GetPage(name: "/logout", page: () =>  Welcome()),
+    GetPage(name: "/logout", page: () =>  Welcome(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
     
     // Atharva
     GetPage(name: "/dashboard", page: () => DashboardPage()),

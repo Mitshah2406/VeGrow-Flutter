@@ -8,6 +8,24 @@ class ProductController extends GetxController {
   var productList = <Product>[].obs;
   var product = Product().obs;
 
+//   @override
+//   void onInit() {
+//     fetchProduct();
+//     super.onInit();
+//   }
+
+//   void fetchProduct() async {
+//     try {
+//       isloading(true);
+//       var products = await productServices.getAllProducts();
+//       print(products);
+//       if(products != null){
+//         productList.value = products;
+//       }  
+//     } finally{
+//       isloading(false);
+//     }    
+//   }
   @override
   void onInit() {
     super.onInit();
