@@ -2,6 +2,8 @@ import 'package:get/route_manager.dart';
 import 'package:vegrow/main.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
 import 'package:vegrow/views/pages/MainBody/dashboardPage.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/Orders/orderPage.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/Orders/singleOrderPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/singleProducePage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/cartPage.dart';
@@ -38,6 +40,9 @@ class AppRoutes {
     
     // GetPage(name: "/addProduct", page: () => addProductPage(), transition: Transition.downToUp, transitionDuration: const Duration(milliseconds: 300)),
 
-    GetPage(name: "/singleProducePage", page: () => SingleProducePage())
+    GetPage(name: "/singleProducePage", page: () => SingleProducePage()),
+    GetPage(name: "/orderPage", page: () => const OrderPage(), transition: Transition.rightToLeftWithFade, transitionDuration: const Duration(milliseconds: 500)),
+    GetPage(name: "/singleOrder", page: () => const SingleOrderPage(), transition: Transition.rightToLeftWithFade, transitionDuration: const Duration(milliseconds: 400))
+
   ];
 }

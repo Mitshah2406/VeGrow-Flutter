@@ -12,7 +12,7 @@ class ListProducePage extends StatefulWidget {
 }
 
 class _ListProducePageState extends State<ListProducePage> {
-  final ProductController productController = Get.find();
+  final ProductController productController = Get.put(ProductController());
   @override
   void initState() {
     // TODO: implement initState

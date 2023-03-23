@@ -8,7 +8,9 @@ import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/homeController.dart';
+import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/main.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/Orders/orderPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/cartPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/categoriesPage.dart';
@@ -26,12 +28,13 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  // final HomeController homeController = Get.put(HomeController());
+  final ProductController productController = Get.put(ProductController());
   int index1 = 0;
   List tabs = [
     HomePage(),
     ListProducePage(),
     CategoriesPage(),
+    OrderPage(),
     AccountPage()
   ];
   
@@ -157,7 +160,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 })
               },
               currentIndex: index1,
-              items: [
+              items: const [
                 BottomNavigationBarItem(
                     label: "Home", icon: Icon(Icons.home), tooltip: "Home"),
                 BottomNavigationBarItem(
@@ -168,6 +171,11 @@ class _DashboardPageState extends State<DashboardPage> {
                     label: "Add Produce",
                     icon: Icon(Icons.add),
                     tooltip: "Add Produce"
+                ),
+                BottomNavigationBarItem(
+                    label: "View Order",
+                    icon: Icon(Icons.shopping_cart_checkout_rounded),
+                    tooltip: "View Order"
                 ),
                 BottomNavigationBarItem(
                     label: "Account",

@@ -1,16 +1,21 @@
 import 'dart:convert';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/controllers/themesController.dart';
 import 'package:vegrow/themes/themes.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/Orders/orderPage.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/singleProducePage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/FarmerProduceTile.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/listTile.dart';
+import 'package:vegrow/views/widgets/myCard.dart';
+import 'package:vegrow/views/widgets/myList.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -20,11 +25,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // final ProductController products = Get.put(ProductController());
   final HomeController homeController = Get.put(HomeController());
   final ThemeController theme = Get.find();
-  // var farmerData = "";
 
+  // ScrollController
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timestamp) {
+      if (scrollController.hasClients) {
+        double minScrollEvent = scrollController.position.minScrollExtent;
+        double maxScrollEvent = scrollController.position.maxScrollExtent;
+        animateToMaxMin(maxScrollEvent, minScrollEvent, maxScrollEvent, 10,
+            scrollController);
+      }
+    });
+  }
+
+  animateToMaxMin(double max, double min, double direction, int seconds,
+      ScrollController scrollController) {
+    if (scrollController.hasClients) {
+      scrollController
+          .animateTo(direction,
+              duration: Duration(seconds: seconds), curve: Curves.linear)
+          .then((value) {
+        direction = direction == max ? min : max;
+        animateToMaxMin(max, min, direction, seconds, scrollController);
+      });
+    }
+  }
 
   String greetFarmer() {
     final hour = TimeOfDay.now().hour;
@@ -41,16 +72,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx((){
-      if(homeController.isLoading.value){
-        return Center(
+    return Obx(() {
+      if (homeController.isLoading.value) {
+        return const Center(
           child: CircularProgressIndicator(),
         );
-      }else{
+      } else {
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.grey.shade100,
           appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).primaryColor,
             brightness: Brightness.light,
             elevation: 0,
             leadingWidth: 200,
@@ -70,15 +101,21 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            homeController.farmerList[0]['location'] != {} ? 
-                            homeController.farmerList[0]['location']['sublocality'].toString() : "PinCode",
-                            style: const TextStyle(fontSize: 16)
-                          ),
+                              homeController.farmerList[0]
+                                      .containsKey('location')
+                                  ? homeController.farmerList[0]['location']
+                                          ['sublocality']
+                                      .toString()
+                                  : "PinCode",
+                              style: const TextStyle(fontSize: 16)),
                           Text(
-                            homeController.farmerList[0]['location'] != {} ? 
-                            homeController.farmerList[0]['location']['pinCode'].toString() : "000000",
-                            style: const TextStyle(fontSize: 16)
-                          )
+                              homeController.farmerList[0]
+                                      .containsKey('location')
+                                  ? homeController.farmerList[0]['location']
+                                          ['pinCode']
+                                      .toString()
+                                  : "000000",
+                              style: const TextStyle(fontSize: 16))
                         ],
                       ),
                       const SizedBox(
@@ -96,57 +133,64 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           body: SafeArea(
-          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor, 
+                      color: Theme.of(context).primaryColor,
                       borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(30))),
-                  padding: EdgeInsets.all(20.0),
+                          BorderRadius.vertical(bottom: Radius.circular(40))),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Good " + greetFarmer() + ",",
+                        "Good ${greetFarmer()}, ",
                         style: const TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold
-                        ),
+                            color: Colors.white,
+                            fontSize: 20,
+                            // fontSize: 25,
+                            fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       Text(
-                        homeController.farmerList[0]['fName'],
-                        style: const TextStyle(
+                        "${homeController.farmerList[0]['fName'].toString().capitalize}",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        "Write the description",
+                        style: TextStyle(
                             color: Colors.white,
                             fontSize: 40,
                             fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 5,
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: Color.fromRGBO(244, 243, 243, 1),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              prefixIcon: Icon(
-                                Icons.search,
-                                color: Colors.black87,
-                              ),
-                              hintText: "Search for the produce",
-                              hintStyle:
-                                  TextStyle(color: Colors.grey, fontSize: 15)),
-                        ),
-                      ),
+                      // Container(
+                      //   padding: const EdgeInsets.all(5),
+                      //   decoration: BoxDecoration(
+                      //       color: Color.fromRGBO(244, 243, 243, 1),
+                      //       borderRadius: BorderRadius.circular(15)),
+                      //   child: const TextField(
+                      //     decoration: InputDecoration(
+                      //         border: InputBorder.none,
+                      //         prefixIcon: Icon(
+                      //           Icons.search,
+                      //           color: Colors.black87,
+                      //         ),
+                      //         hintText: "Search for the produce",
+                      //         hintStyle:
+                      //             TextStyle(color: Colors.grey, fontSize: 15)),
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -158,54 +202,79 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 25.0),
-                  child: Text('Text',
+                  child: Text('Some Data to be loaded',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Container(
-                    height: 140,
-                    child: ListView.builder(
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                //   child: Container(
+                //     height: 140,
+                //     child: ListView.builder(
+                //         scrollDirection: Axis.horizontal,
+                //         itemCount: 5,
+                //         itemBuilder: (context, index) {
+                //           return const FarmerProduceTile(
+                //               imagePath: "assets/images/farmer.png",
+                //               produceTitle: "Farmer One",
+                //               produceDescription: "This is Awesome");
+                //         }),
+                //   ),
+                // ),
+                Container(
+                    height: 200,
+                    // child: CustomScrollView(
+                    //   scrollDirection: Axis.horizontal,
+                    //   controller: scrollController,
+                    //   slivers: [
+                    //     Text("Hello")
+                    //   ],
+                    // )
+                    child: PageView.builder(
+                        // controller: scrollController,
                         scrollDirection: Axis.horizontal,
                         itemCount: 5,
                         itemBuilder: (context, index) {
-                          return const FarmerProduceTile(
-                              imagePath: "assets/images/farmer.png",
-                              produceTitle: "Farmer One",
-                              produceDescription: "This is Awesome");
-                        }),
-                  ),
-                ),
+                          return myCard();
+                        })),
+
                 const SizedBox(
                   height: 20,
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 25.0),
-                  child: Text('Recently Added',
+                  child: Text('Your Pending Produce Bids',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Container(
-                    height: 140,
+
+               
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                     child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return const listTile();
-                        }),
+                      itemCount: 10,
+                      itemBuilder: (context, index){
+                        return Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          child: myList(
+                                  onPressed: (){
+                                    Navigator.push(context, CupertinoPageRoute(builder: (context){
+                                      return SingleProducePage();
+                                    }));  
+                                  },
+                                ),
+                        );
+                      }
+                    )
                   ),
-                ),
+                )
               ],
             ),
           ),
-        ),
         );
       }
     });
