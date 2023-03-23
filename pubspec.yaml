@@ -56,6 +56,9 @@ dependencies:
   flutter_wizard: ^2.0.5
   flutter_svg: ^2.0.4
   fluttertoast: ^8.2.1
+  proste_bezier_curve: ^2.0.2
+  circular_profile_avatar: ^2.0.5
+  flutter_slidable: ^2.0.0
   flutter_slidable: ^2.0.0
   proste_bezier_curve: ^2.0.2
   circular_profile_avatar: ^2.0.5
