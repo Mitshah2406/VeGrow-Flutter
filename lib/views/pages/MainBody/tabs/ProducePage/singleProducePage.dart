@@ -19,7 +19,7 @@ class _SingleProducePageState extends State<SingleProducePage> {
   dynamic data = Get.arguments;
 
   call() {
-    productController.getProductByInventoryId(data['id']);
+   productController.getProductByInventoryId(data['id']);
   }
 
   @override

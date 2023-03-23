@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/controllers/auth/loginController.dart';
+import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/models/auth/Farmer.dart';
 import 'package:vegrow/services/authServices.dart';
 
@@ -17,6 +18,7 @@ class _AccountPageState extends State<AccountPage> {
   @override
   void dispose() {
     Get.delete<LoginController>();
+    Get.delete<ProductController>();
     super.dispose();
   }
 
@@ -30,8 +32,8 @@ class _AccountPageState extends State<AccountPage> {
                     //  await SessionManager().get("farmer");
                   // print(u);
                  AuthServices.deleteSession();
-            FirebaseAuth.instance.currentUser?.delete();
-                  await FirebaseAuth.instance.signOut();
+            // FirebaseAuth.instance.currentUser?.delete();
+                  // await FirebaseAuth.instance.signOut();
                     Get.offNamed('/logout');
                   
                 },

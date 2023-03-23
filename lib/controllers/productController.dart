@@ -29,10 +29,10 @@ class ProductController extends GetxController {
     }
   }
 
-  Future<int?> addProduct(productName, productDesc, productQuantity,
+  Future<int?> addProduct(productName,id,productDesc, productQuantity, initialBidPrice,
       productUnit, productExpiryDate) async {
-    var data = await productServices.addProduct(productName, productDesc,
-        productQuantity, productUnit, productExpiryDate);
+    var data = await productServices.addProduct(productName,id, productDesc,
+        productQuantity,initialBidPrice, productUnit, productExpiryDate);
 
     print("Dataaaaaaaa");
     print(data);
@@ -46,6 +46,7 @@ class ProductController extends GetxController {
         productList.firstWhere((obj) => obj.inventoryId == inventoryId,
         //  orElse: () => null
          );
+print("result");
 print(result);
 product.value = result;
     // var data = productList.map((element) =>

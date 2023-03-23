@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ProductController products = Get.put(ProductController());
+
   final ThemeController theme = Get.find();
 
   @override

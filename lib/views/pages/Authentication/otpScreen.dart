@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 import 'package:vegrow/consts/appConstant.dart';
@@ -103,8 +104,9 @@ class _OtpScreenState extends State<OtpScreen> {
                                   verificationId:
                                       Get.parameters['verificationId'].toString(),
                                   smsCode: loginController.otpController.text);
-      
-                          // Sign the user in (or link) with the credential
+                                  print(loginController.otpController.text);
+                                  print(credential.token);
+
                           await auth.signInWithCredential(credential);
                           var result = await AuthServices.checkIfUserExists(
                               loginController.phoneController.text);
@@ -113,6 +115,17 @@ class _OtpScreenState extends State<OtpScreen> {
                           } else {
                             Get.offNamed('/register/${loginController.phoneController.text}');
                           }
+                          // } else {
+                          //  Fluttertoast.showToast(
+                          //       msg: "Invalid Hai Bsdk",
+                          //       toastLength: Toast.LENGTH_SHORT,
+                          //       gravity: ToastGravity.CENTER,
+                          //       timeInSecForIosWeb: 1,
+                          //       backgroundColor: Colors.red,
+                          //       textColor: Colors.white,
+                          //       fontSize: 16.0);
+                          // }
+                          // Sign the user in (or link) with the credential
                         },
                            style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
