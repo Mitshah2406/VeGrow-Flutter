@@ -22,7 +22,7 @@ class _tabPage4State extends State<tabPage4> {
             AuthServices.deleteSession();
             Get.offNamed("/logout");
           },
-          child: Text("Logout")
+          child: const Text("Logout")
         ),
         bottomNavigationBar: Container(
           child: Container(
