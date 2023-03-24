@@ -45,6 +45,7 @@ class _LocationPageState extends State<LocationPage> {
             gravity: ToastGravity.BOTTOM,
             backgroundColor: Colors.green
           );
+          Get.toNamed('/dashboard');
         }else{
           Fluttertoast.showToast(
             msg: "Your location detected",

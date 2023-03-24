@@ -16,8 +16,8 @@ import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/main.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/Orders/orderPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/cartPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/categoriesPage.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/addProducePage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/listProducePage.dart';
 import 'package:bottom_navigation_bar/bottom_navigation_bar.dart';
@@ -37,7 +37,7 @@ class _DashboardPageState extends State<DashboardPage> {
   List tabs = [
     HomePage(),
     ListProducePage(),
-    CategoriesPage(),
+    AddProducePage(),
     OrderPage(),
     AccountPage()
   ];

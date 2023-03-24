@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/controllers/productController.dart';
@@ -29,33 +28,33 @@ class _HomePageState extends State<HomePage> {
   final ThemeController theme = Get.find();
 
   // ScrollController
-  ScrollController scrollController = ScrollController();
+  // ScrollController scrollController = ScrollController();
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timestamp) {
-      if (scrollController.hasClients) {
-        double minScrollEvent = scrollController.position.minScrollExtent;
-        double maxScrollEvent = scrollController.position.maxScrollExtent;
-        animateToMaxMin(maxScrollEvent, minScrollEvent, maxScrollEvent, 10,
-            scrollController);
-      }
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((timestamp) {
+  //     if (scrollController.hasClients) {
+  //       double minScrollEvent = scrollController.position.minScrollExtent;
+  //       double maxScrollEvent = scrollController.position.maxScrollExtent;
+  //       animateToMaxMin(maxScrollEvent, minScrollEvent, maxScrollEvent, 10,
+  //           scrollController);
+  //     }
+  //   });
+  // }
 
-  animateToMaxMin(double max, double min, double direction, int seconds,
-      ScrollController scrollController) {
-    if (scrollController.hasClients) {
-      scrollController
-          .animateTo(direction,
-              duration: Duration(seconds: seconds), curve: Curves.linear)
-          .then((value) {
-        direction = direction == max ? min : max;
-        animateToMaxMin(max, min, direction, seconds, scrollController);
-      });
-    }
-  }
+  // animateToMaxMin(double max, double min, double direction, int seconds,
+  //     ScrollController scrollController) {
+  //   if (scrollController.hasClients) {
+  //     scrollController
+  //         .animateTo(direction,
+  //             duration: Duration(seconds: seconds), curve: Curves.linear)
+  //         .then((value) {
+  //       direction = direction == max ? min : max;
+  //       animateToMaxMin(max, min, direction, seconds, scrollController);
+  //     });
+  //   }
+  // }
 
   String greetFarmer() {
     final hour = TimeOfDay.now().hour;
@@ -106,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                                   ? homeController.farmerList[0]['location']
                                           ['sublocality']
                                       .toString()
-                                  : "PinCode",
+                                  : "Add location",
                               style: const TextStyle(fontSize: 16)),
                           Text(
                               homeController.farmerList[0]

@@ -19,8 +19,9 @@ class HomeServices{
           "id": farmerId
         })
       );
+      print(response.body);
       var decoded = jsonDecode(response.body);
-      print(decoded['location']['lat']);
+      // print(decoded['location']['lat']);
       print("Hellllllllooooooooo");
 
       return decoded;

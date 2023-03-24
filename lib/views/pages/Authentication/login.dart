@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/auth/loginController.dart';
+import 'package:vegrow/controllers/locationController.dart';
 import 'package:vegrow/views/pages/Starter/popPage.dart';
 
 class Login extends StatefulWidget {
@@ -125,7 +126,7 @@ class _LoginState extends State<Login> {
                 ],
               ),
             ),
-                  SizedBox(
+                  const SizedBox(
                     height: 22,
                   ),
             SizedBox(
@@ -144,6 +145,7 @@ class _LoginState extends State<Login> {
                         Get.offNamed('/sendOtp/${verificationId}');
                       },
                       codeAutoRetrievalTimeout: (String verificationId) {},
+
                     );
                   }: null,
                       style: ElevatedButton.styleFrom(

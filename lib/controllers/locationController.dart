@@ -64,13 +64,20 @@ class LocationController extends GetxController {
       }else{
         PermissionStatus status = await Permission.location.request();
         if(status.isGranted){
-            print("My user Data in resgister");
             var myUser = await SessionManager().get('user');
             print(myUser);
             await LocationController().determinePosition();
           return "Access";
         }else if(status.isPermanentlyDenied){
-          openAppSettings();
+          var check =  openAppSettings();
+          AuthServices.deleteSession();
+          print("Checking");
+          print(check);
+          Get.toNamed('/logout');
+          // if(check == true){
+          //   AuthServices.deleteSession();
+          //   Get.toNamed('/logout');
+          // }
         }
       }
        

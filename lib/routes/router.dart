@@ -6,8 +6,8 @@ import 'package:vegrow/views/pages/MainBody/tabs/Orders/orderPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/Orders/singleOrderPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/singleProducePage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/cartPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/categoriesPage.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/addProducePage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/locationPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/listProducePage.dart';
@@ -32,8 +32,8 @@ class AppRoutes {
     GetPage(name: "/home", page: () => HomePage()),
     GetPage(name: "/likes", page: () => ListProducePage()),
     GetPage(name: "/logout", page: () =>  Welcome()),
-    GetPage(name: "/categories", page: () => CategoriesPage()),
-    GetPage(name: "/cart", page: () => CartPage()),
+    GetPage(name: "/categories", page: () => AddProducePage()),
+    // GetPage(name: "/cart", page: () => CartPage()),
     GetPage(name: "/account", page: () => AccountPage()),
 
     GetPage(name: "/location", page: () => LocationPage(), transition: Transition.leftToRightWithFade, transitionDuration: const Duration(milliseconds: 500)),

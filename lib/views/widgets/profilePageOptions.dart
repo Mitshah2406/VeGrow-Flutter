@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
+import 'package:vegrow/services/authServices.dart';
 
 import 'langDropdownMenu.dart';
 
@@ -111,6 +112,29 @@ class _optionsCardState extends State<optionsCard> {
           indent: 10,
           endIndent: 10,
         ),
+        ListTile(
+            onTap: (){
+               AuthServices.deleteSession();
+            },
+            leading: Icon(
+              CupertinoIcons.trash,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text(
+              "Logout".tr,
+              style:
+                  const TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+            ),
+            // subtitle: Text("Logout"),
+            // trailing: langDropdownMenu()
+            // trailing: IconButton(
+            //   icon: const Icon(Icons.keyboard_arrow_right),
+            //   onPressed: () {
+            //     AuthServices.deleteSession();
+            //     Get.toNamed('/logout');
+            //   },
+            // ),
+            ),
       ]),
     );
   }

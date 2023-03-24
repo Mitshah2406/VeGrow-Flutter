@@ -94,10 +94,10 @@ class AuthServices {
 
   static void deleteSession() async {
     await SessionManager().destroy();
-    Get.toNamed('/logout');
     var prefs = await SharedPreferences.getInstance();
     print(prefs.getBool('show'));
     prefs.setBool('show', true);
+    Get.toNamed('/logout');
   }
 
   static Future<bool> getSession() async {

@@ -79,6 +79,7 @@ class IntroScreenPage extends StatelessWidget {
             )),
         PageViewModel(
             title: "Page 2",
+            body: "",
             decoration: PageDecoration(
                 imageAlignment: Alignment.center,
                 imagePadding: const EdgeInsets.only(top: 200),

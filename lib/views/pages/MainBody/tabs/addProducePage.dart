@@ -1,98 +1,3 @@
-// import 'package:animated_custom_dropdown/custom_dropdown.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:vegrow/views/widgets/addProductTextField.dart';
-
-// class CategoriesPage extends StatefulWidget {
-//   @override
-//   CategoriesPageState createState() => CategoriesPageState();
-// }
-
-// class CategoriesPageState extends State<CategoriesPage> {
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           actions: [],
-//           title: Text("List Your Product"),
-//         ),
-//         body: SafeArea(
-//           child: Padding(
-//               padding: const EdgeInsets.all(16.0),
-//               child: Form(
-//                   key: _formKey,
-//                   child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         CustomDropdown.searchRequest(
-//                           futureRequest: getFakeRequestData,
-//                           hintText: 'Search For Product To Add',
-//                           controller: productNameController,
-//                         ),
-//                         SizedBox(height: 16.0),
-//                         AddProductTxtField(
-//                             // myIcon: ,
-//                             myIcon: Icons.description_outlined,
-//                             type: TextInputType.multiline,
-//                             action: TextInputAction.newline,
-//                             min: 2,
-//                             max: 5,
-//                             padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 5.0),
-//                             myController: _productDesController,
-//                             fieldName: "Product Description",
-//                             prefixIconColor: Colors.green.shade300),
-
-//                         SizedBox(height: 16.0),
-//
-
-//                         SizedBox(height: 16.0),
-//                         TextFormField(
-//                           decoration:
-//                               InputDecoration(labelText: 'Product Quantity'),
-//                           // keyboardType: TextInputType.multiline,
-//                           onChanged: (value) {
-//                             setState(() {
-//                               // _productQuantity = int.tryParse(value) ?? 0;
-//                             });
-//                           },
-//                           validator: (value) {
-//                             if (value!.isEmpty) {
-//                               return 'Please enter a product quantity';
-//                             }
-//                             if (int.tryParse(value) == null) {
-//                               return 'Please enter a valid product quantity';
-//                             }
-//                             return null;
-//                           },
-//                         ),
-//                         SizedBox(height: 16.0),
-//                         DropdownButtonFormField(
-//                           // value: _productUnit,
-//                           decoration:
-//                               InputDecoration(labelText: 'Product Unit'),
-//                           items: _productUnits
-//                               .map((productUnit) => DropdownMenuItem(
-//                                     value: productUnit,
-//                                     child: Text(productUnit),
-//                                   ))
-//                               .toList(),
-//                           onChanged: (value) {
-//                             setState(() {
-//                               // _productUnit = value.toString();
-//                             });
-//                           },
-//                           validator: (value) {
-//                             if (value == null) {
-//                               return 'Please select a product unit';
-//                             }
-//                           },
-//                         )
-//                       ]))),
-//         ));
-//   }
-// }
-
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -104,14 +9,14 @@ import 'package:vegrow/models/Inventory.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
 import 'package:vegrow/views/widgets/addProductTextField.dart';
 
-class CategoriesPage extends StatefulWidget {
-  const CategoriesPage({Key? key}) : super(key: key);
+class AddProducePage extends StatefulWidget {
+  const AddProducePage({Key? key}) : super(key: key);
 
   @override
-  State<CategoriesPage> createState() => _CategoriesPageState();
+  State<AddProducePage> createState() => _AddProducePageState();
 }
 
-class _CategoriesPageState extends State<CategoriesPage> {
+class _AddProducePageState extends State<AddProducePage> {
   final ProductController product = Get.find();
   final InventoryController inventoryController = Get.put(InventoryController());
   TextEditingController _productDesController = TextEditingController();

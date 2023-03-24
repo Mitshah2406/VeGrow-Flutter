@@ -1,9 +1,11 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -11,6 +13,7 @@ import 'package:pinput/pinput.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/auth/idController.dart';
 import 'package:vegrow/controllers/auth/loginController.dart';
+import 'package:vegrow/controllers/locationController.dart';
 import 'package:vegrow/services/authServices.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
 import 'package:vegrow/views/pages/Starter/popPage.dart';
@@ -112,9 +115,35 @@ class _OtpScreenState extends State<OtpScreen> {
                           await auth.signInWithCredential(credential);
                           var result = await AuthServices.checkIfUserExists(
                               loginController.phoneController.text);
-                          if (result == true) {
+
+                          // if (result == true) {
+                          //     var response = await LocationController.promptLocation();
+                          //     print("Resultttt");
+
+                          //     print(response);
+                          //     if(response == "Denied"){
+                          //       Fluttertoast.showToast(
+                          //         msg: "You must enabled your permission to enjoy our app ✌️",
+                          //         textColor: Colors.white,
+                          //         backgroundColor: Colors.red,
+                          //         gravity: ToastGravity.BOTTOM,
+                          //       );
+                          //       Future.delayed(const Duration(seconds: 2),() async {
+                          //         AuthServices.deleteSession();
+                          //         Get.toNamed('/logout');
+                          //         print(await SessionManager().get('user'));
+                          //       });
+                          //     }else{
+                          //       print("Called");
+                          //       print(await SessionManager().get('user'));
+
+                          //       Get.offNamed('/dashboard');
+                          //     }
+                          // } 
+                          if(result){
                             Get.offNamed('/dashboard');
-                          } else {
+                          }
+                          else {
                             Get.offNamed('/register/${loginController.phoneController.text}');
                           }
                           // } else {
