@@ -10,7 +10,7 @@ class myList extends StatefulWidget {
 }
 
 class _myListState extends State<myList> {
-  Function()? onPressed;  
+  Function()? onPressed;
   _myListState({required this.onPressed});
 
   @override
@@ -18,13 +18,9 @@ class _myListState extends State<myList> {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.green,
-          width: 1.5
-        ),
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16)
-      ),
+          border: Border.all(color: Colors.green, width: 1.5),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16)),
       child: Column(
         children: [
           Row(
@@ -37,8 +33,7 @@ class _myListState extends State<myList> {
                     height: 100,
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey.shade400                        ),
+                        border: Border.all(color: Colors.grey.shade400),
                         color: Colors.grey.shade100,
                         borderRadius: BorderRadius.circular(12)),
                     child: Image.asset("assets/images/illustration-1.png"),
@@ -50,7 +45,7 @@ class _myListState extends State<myList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Data",
+                        "D0ata",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 24),
                       ),
@@ -62,10 +57,9 @@ class _myListState extends State<myList> {
                   ),
                 ],
               ),
-                  IconButton(
-                    onPressed: onPressed,
-                    icon: const Icon(Icons.arrow_forward_ios)
-                  )
+              IconButton(
+                  onPressed: onPressed,
+                  icon: const Icon(Icons.arrow_forward_ios))
             ],
           )
         ],
