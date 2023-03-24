@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/state_manager.dart';
 import 'package:vegrow/services/homeServices.dart';
 // import 'package:get/get.dart';
@@ -7,37 +9,40 @@ import 'package:vegrow/models/Product.dart';
 class ProductController extends GetxController {
   var isloading = true.obs;
   var productList = <Product>[].obs;
+
+  late List<Product> AllList;
   var product = Product().obs;
 
   @override
   void onInit() {
     fetchtopFiveProducts();
+
     super.onInit();
     // fetchProduct();
   }
 
-  void fetchProduct() async {
+  void fetchProduct({data}) async {
     try {
+      productList.value = [];
       isloading(true);
-      Future.delayed(Duration(seconds: 1), () async{
-
-      var products = await productServices.getAllProducts();
-      print("products");
-      print(products);
-      if (products != null) {
-        productList.value = products;
-        print(productList);
-      }
+      print(isloading);
+      Future.delayed(Duration(seconds: 1), () async {
+        var products = await productServices.getAllProducts(data: data);
+        print("products");
+        print(products);
+        if (products != null) {
+          productList.value = products;
+          isloading(false);
+          print(productList);
+        }
       });
-    } finally {
-      isloading(false);
-    }
+    } finally {}
   }
 
-  Future<int?> addProduct(productName,id,productDesc, productQuantity, initialBidPrice,
-      productUnit, productExpiryDate) async {
-    var data = await productServices.addProduct(productName,id, productDesc,
-        productQuantity,initialBidPrice, productUnit, productExpiryDate);
+  Future<int?> addProduct(productName, id, productDesc, productQuantity,
+      initialBidPrice, productUnit, productExpiryDate) async {
+    var data = await productServices.addProduct(productName, id, productDesc,
+        productQuantity, initialBidPrice, productUnit, productExpiryDate);
 
     print("Dataaaaaaaa");
     print(data);
@@ -47,13 +52,13 @@ class ProductController extends GetxController {
   }
 
   void getProductByInventoryId(inventoryId) async {
-    Product result =
-        productList.firstWhere((obj) => obj.inventoryId == inventoryId,
-        //  orElse: () => null
-         );
-        print("result");
-        print(result);
-        product.value = result;
+    Product result = productList.firstWhere(
+      (obj) => obj.inventoryId == inventoryId,
+      //  orElse: () => null
+    );
+    print("result");
+    print(result);
+    product.value = result;
     // var data = productList.map((element) =>
     // {
     //     (element.inventoryId == inventoryId)?element:''
