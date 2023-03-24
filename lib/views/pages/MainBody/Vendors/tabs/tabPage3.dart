@@ -20,7 +20,7 @@ class _tabPage3State extends State<tabPage3> {
           padding: EdgeInsets.only(
             left: AppConstant.kDefaultPadding * 2,
             right: AppConstant.kDefaultPadding * 2,
-            bottom: AppConstant.kDefaultPadding,
+            // bottom: AppConstant.kDefaultPadding,
           ),
           height: 80,
           decoration: BoxDecoration(

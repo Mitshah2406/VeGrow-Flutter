@@ -22,18 +22,22 @@ class Body extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: 5,
           itemBuilder: (context, index) {
-            return RecomendPlantCard(
-              productImage: AppConstant.illustration2,
-              productName: "Onion",
-              productDescription: "This is Awesome",
-              productQuantity: "20",
-              onTap: () {
-                Get.toNamed('/singleProductView');
-              },
+            return SingleChildScrollView(
+              child: RecomendPlantCard(
+                productImage: AppConstant.illustration2,
+                productName: "Onion",
+                productDescription: "This is Awesome",
+                productQuantity: "20",
+                onTap: () {
+                  Get.toNamed('/singleProductView');
+                },
+              ),
             );
           })
         ),
-        TitleWithMoreBtn(title: "Featured Plants", onPressed: () {}),
+        TitleWithMoreBtn(title: "Featured Plants", onPressed: () {
+          // Get.toNamed('/singleProductView');
+        }),
         FeaturedPlants(),
         SizedBox(height: AppConstant.kDefaultPadding),
       ],
@@ -54,7 +58,9 @@ class FeaturedPlants extends StatelessWidget {
         children: <Widget>[
           FeaturePlantCard(
             image: "assets/images/bottom_img_1.png",
-            onTap: () {},
+            onTap: () {
+              Get.toNamed('/singleProductView');
+            },
           ),
           FeaturePlantCard(
             image: "assets/images/bottom_img_2.png",
@@ -87,7 +93,7 @@ class FeaturePlantCard extends StatelessWidget {
           bottom: AppConstant.kDefaultPadding / 2,
         ),
         width: size.width * 0.8,
-        height: 185,
+        height: 165,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(
@@ -150,20 +156,20 @@ class HeaderWithSearchBox extends StatelessWidget {
             child: Container(
               alignment: Alignment.center,
               margin:
-                  EdgeInsets.symmetric(horizontal: AppConstant.kDefaultPadding),
+                  EdgeInsets.symmetric(horizontal: AppConstant.kDefaultPadding, vertical: 0),
               padding:
                   EdgeInsets.symmetric(horizontal: AppConstant.kDefaultPadding),
               height: 54,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 10),
-                    blurRadius: 50,
-                    color: AppConstant.kPrimaryColor.withOpacity(0.23),
-                  ),
-                ],
+                // boxShadow: [
+                //   BoxShadow(
+                //     offset: Offset(0, 10),
+                //     blurRadius: 50,
+                //     color: AppConstant.kPrimaryColor.withOpacity(0.23),
+                //   ),
+                // ],
               ),
               child: Row(
                 children: <Widget>[

@@ -29,7 +29,7 @@ class _tabPage4State extends State<tabPage4> {
             padding: EdgeInsets.only(
               left: AppConstant.kDefaultPadding * 2,
               right: AppConstant.kDefaultPadding * 2,
-              bottom: AppConstant.kDefaultPadding,
+              // bottom: AppConstant.kDefaultPadding,
             ),
             height: 80,
             decoration: BoxDecoration(

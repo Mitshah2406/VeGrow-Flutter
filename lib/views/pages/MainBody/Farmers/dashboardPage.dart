@@ -15,6 +15,7 @@ import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/main.dart';
 import 'package:vegrow/views/pages/MainBody/Farmers/tabs/Orders/orderPage.dart';
 import 'package:vegrow/views/pages/MainBody/Farmers/tabs/accountPage.dart';
+import 'package:vegrow/views/pages/MainBody/Farmers/tabs/addProducePage.dart';
 import 'package:vegrow/views/pages/MainBody/Farmers/tabs/home/homePage.dart';
 import 'package:vegrow/views/pages/MainBody/Farmers/tabs/ProducePage/listProducePage.dart';
 import 'package:bottom_navigation_bar/bottom_navigation_bar.dart';
@@ -39,7 +40,7 @@ class _farmerDashboardPageState extends State<farmerDashboardPage> {
   List<Widget> tabs = [
     HomePage(),
     ListProducePage(),
-    OrderPage(),
+    AddProducePage(),
     AccountPage()
   ];
 
@@ -66,7 +67,7 @@ class _farmerDashboardPageState extends State<farmerDashboardPage> {
     Navigator(
       key: _navigatorKeys[2],
       onGenerateRoute: (settings) =>
-          MaterialPageRoute(builder: (context) =>OrderPage()),
+          MaterialPageRoute(builder: (context) => AddProducePage()),
     ),
     Navigator(
       key: _navigatorKeys[3],
