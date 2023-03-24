@@ -24,8 +24,7 @@ class IntroScreenPage extends StatelessWidget {
       // print(pref.getBool('show'));
     }
 
-    return popPage(
-        page: Scaffold(
+    return  Scaffold(
             body: IntroductionScreen(
       // For Done Button
       showDoneButton: true,
@@ -112,6 +111,6 @@ class IntroScreenPage extends StatelessWidget {
         ),
         ],
       )
-    ));
+    );
   }
 }

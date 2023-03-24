@@ -59,9 +59,6 @@ dependencies:
   proste_bezier_curve: ^2.0.2
   circular_profile_avatar: ^2.0.5
   flutter_slidable: ^2.0.0
-  flutter_slidable: ^2.0.0
-  proste_bezier_curve: ^2.0.2
-  circular_profile_avatar: ^2.0.5
   percent_indicator: ^4.2.3
   translator: ^0.1.7
 

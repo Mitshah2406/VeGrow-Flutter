@@ -117,17 +117,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           } else {
                             Get.offNamed('/register/${loginController.phoneController.text}');
                           }
-                          // } else {
-                          //  Fluttertoast.showToast(
-                          //       msg: "Invalid Hai Bsdk",
-                          //       toastLength: Toast.LENGTH_SHORT,
-                          //       gravity: ToastGravity.CENTER,
-                          //       timeInSecForIosWeb: 1,
-                          //       backgroundColor: Colors.red,
-                          //       textColor: Colors.white,
-                          //       fontSize: 16.0);
-                          // }
-                          // Sign the user in (or link) with the credential
+               
                         },
                            style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(

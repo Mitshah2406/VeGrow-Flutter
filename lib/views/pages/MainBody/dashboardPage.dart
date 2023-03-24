@@ -30,122 +30,95 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  
-  int index1 = 0;
-  List tabs = [
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+final ProductController productController = Get.put(ProductController());
+
+  }
+  int _currentIndex = 0;
+  int _previousIndex = 0;
+  List<Widget> tabs = [
     HomePage(),
     ListProducePage(),
     CategoriesPage(),
     AccountPage()
   ];
-  
-  
+
+  final List<GlobalKey<NavigatorState>> _navigatorKeys = [
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    // return WillPopScope(
-    //   child: Scaffold(
-    //   body: tabs[index1],
-    //   bottomNavigationBar: Container(
-    //     color: Colors.white,
-    //     child: Padding(
-    //       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-    //       child: GNav(
-    //         iconSize: 32,
-    //         textSize: 28,
-    //         backgroundColor: Colors.white,
-    //         color: Colors.black,
-    //         activeColor: Colors.white,
-    //         gap: 8,
-    //         tabBackgroundColor: Colors.green.shade500,
-    //         padding: const EdgeInsets.all(16),
-    //         onTabChange: (index) => {
-    //           setState(()=>{
-    //             index1 = index,
-    //           })
-    //         },
-    //         tabs: const [
-    //           GButton(
-    //             icon: Icons.home,
-    //             text: "Home",
-    //             textStyle: TextStyle(
-    //               fontSize: 16,
-    //               color: Colors.white
-    //             ),
-    //           ),
-    //           GButton(
-    //             icon: Icons.list_alt,
-    //             text: "List Produce",
-    //             textStyle: TextStyle(
-    //               fontSize: 16,
-    //               color: Colors.white
-    //             ),
-    //           ),
-    //           GButton(
-    //             icon: Icons.search,
-    //             text: "Categories",
-    //             textStyle: TextStyle(
-    //               fontSize: 16,
-    //               color: Colors.white
-    //             ),
-    //           ),
-    //           GButton(
-    //             icon: Icons.settings,
-    //             text: "Cart",
-    //             textStyle: TextStyle(
-    //               fontSize: 16,
-    //               color: Colors.white
-    //             ),
-    //           ),
-    //           GButton(
-    //             icon: Icons.account_circle,
-    //             text: "Account",
-    //             textStyle: TextStyle(
-    //               fontSize: 16,
-    //               color: Colors.white
-    //             ),
-    //           ),
-    //         ]
-    //       ),
-    //     ),
-    //   ),
-    // ),
-    //   onWillPop: () async {
-    //     final value = await  showDialog<bool>(
-    //       context: context,
-    //       builder: (context){
-    //         return AlertDialog(
-    //           title: Text("Really??"),
-    //           content: Text("Do you want to exit?"),
-    //           actions: [
-    //             ElevatedButton(onPressed: (){
-    //               Navigator.of(context).pop(false);
-    //             }, child: Text("No")),
-    //             ElevatedButton(onPressed: (){
-    //               Navigator.of(context).pop(false);
-    //             }, child: Text("Exit"))
-    //           ],
-    //         );
-    //       }
-    //     );
-    //     if(value!=null){
-    //       return Future.value(value);
-    //     }else{
-    //       return Future.value(false);
-    //     }
-    //   }
-    //  );
-    return popPage(
-        page: Scaffold(
-          body: PageTransitionSwitcher(
-            duration: const Duration(seconds: 1),
-            transitionBuilder: (child, primaryAnimation, secondaryAnimation){
-              return FadeThroughTransition(
-                animation: primaryAnimation,
-                secondaryAnimation: secondaryAnimation,
-                child: child,
-              );
-            },
-            child: tabs[index1],
+  final List<Widget> _pages = [
+    Navigator(
+      key: _navigatorKeys[0],
+      onGenerateRoute: (settings) =>
+          MaterialPageRoute(builder: (context) => HomePage()),
+    ),
+    Navigator(
+      key: _navigatorKeys[1],
+      onGenerateRoute: (settings) =>
+          MaterialPageRoute(builder: (context) => ListProducePage()),
+    ),
+    Navigator(
+      key: _navigatorKeys[2],
+      onGenerateRoute: (settings) =>
+          MaterialPageRoute(builder: (context) =>CategoriesPage()),
+    ),
+    Navigator(
+      key: _navigatorKeys[3],
+      onGenerateRoute: (settings) =>
+          MaterialPageRoute(builder: (context) =>AccountPage()),
+    ),
+  ];
+
+  
+
+    return WillPopScope(
+          onWillPop: () async {
+          final currentState = _navigatorKeys[_currentIndex].currentState;
+          final canPop = currentState?.canPop() ?? false;
+
+          if (canPop) {
+            // if there are pages on the stack, pop them
+            currentState?.pop();
+            return false;
+          } else {
+            // if not on the first page of the current tab,
+            // then select the previous tab and show its last page
+            if (_currentIndex != 0) {
+              setState(() {
+                _previousIndex = _currentIndex;
+                _currentIndex = 0;
+              });
+              return false;
+            } else {
+              // if on the first page of the first tab, exit the app
+              return true;
+            }
+          }
+        },
+        child: Scaffold(
+          // body: PageTransitionSwitcher(
+          //   duration: const Duration(seconds: 1),
+          //   transitionBuilder: (child, primaryAnimation, secondaryAnimation){
+          //     return FadeThroughTransition(
+          //       animation: primaryAnimation,
+          //       secondaryAnimation: secondaryAnimation,
+          //       child: child,
+          //     );
+          //   },
+          //   child: tabs[_currentIndex],
+          // ),
+          body: IndexedStack(
+            index: _currentIndex,
+            children: _pages,
           ),
           bottomNavigationBar: Container(
             color: Colors.white,
@@ -157,10 +130,10 @@ class _DashboardPageState extends State<DashboardPage> {
               backgroundColor: Colors.white,
               onTap: (index) => {
                 setState(() => {
-                    index1 = index,
+                    _currentIndex = index,
                 })
               },
-              currentIndex: index1,
+              currentIndex: _currentIndex,
               items: [
                 BottomNavigationBarItem(
                     label: "Home", icon: Icon(Icons.home), tooltip: "Home"),

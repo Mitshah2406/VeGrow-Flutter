@@ -11,6 +11,7 @@ import 'package:vegrow/controllers/themesController.dart';
 import 'package:vegrow/themes/themes.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/FarmerProduceTile.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/listTile.dart';
+import 'package:vegrow/views/pages/Starter/popPage.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -47,165 +48,167 @@ class _HomePageState extends State<HomePage> {
           child: CircularProgressIndicator(),
         );
       }else{
-        return Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
-            brightness: Brightness.light,
-            elevation: 0,
-            leadingWidth: 200,
-            leading: Container(
-              child: Row(
+        return popPage(
+          page: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+            backgroundColor: Theme.of(context).primaryColor,
+              brightness: Brightness.light,
+              elevation: 0,
+              leadingWidth: 200,
+              leading: Container(
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        const Icon(Icons.location_on_outlined, size: 35),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              homeController.farmerList[0]['location'] != {} ? 
+                              homeController.farmerList[0]['location']['sublocality'].toString() : "PinCode",
+                              style: const TextStyle(fontSize: 16)
+                            ),
+                            Text(
+                              homeController.farmerList[0]['location'] != {} ? 
+                              homeController.farmerList[0]['location']['pinCode'].toString() : "000000",
+                              style: const TextStyle(fontSize: 16)
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        IconButton(
+                            onPressed: () {
+                              Get.toNamed('/location');
+                            },
+                            icon: const Icon(Icons.expand_more)),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+            body: SafeArea(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      const Icon(Icons.location_on_outlined, size: 35),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            homeController.farmerList[0]['location'] != {} ? 
-                            homeController.farmerList[0]['location']['sublocality'].toString() : "PinCode",
-                            style: const TextStyle(fontSize: 16)
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor, 
+                        borderRadius:
+                            BorderRadius.vertical(bottom: Radius.circular(30))),
+                    padding: EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Good " + greetFarmer() + ",",
+                          style: const TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold
                           ),
-                          Text(
-                            homeController.farmerList[0]['location'] != {} ? 
-                            homeController.farmerList[0]['location']['pinCode'].toString() : "000000",
-                            style: const TextStyle(fontSize: 16)
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            Get.toNamed('/location');
-                          },
-                          icon: const Icon(Icons.expand_more)),
-                    ],
-                  )
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          homeController.farmerList[0]['fName'],
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              color: Color.fromRGBO(244, 243, 243, 1),
+                              borderRadius: BorderRadius.circular(15)),
+                          child: const TextField(
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  color: Colors.black87,
+                                ),
+                                hintText: "Search for the produce",
+                                hintStyle:
+                                    TextStyle(color: Colors.grey, fontSize: 15)),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 25.0),
+                    child: Text('Text',
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: Container(
+                      height: 140,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return const FarmerProduceTile(
+                                imagePath: "assets/images/farmer.png",
+                                produceTitle: "Farmer One",
+                                produceDescription: "This is Awesome");
+                          }),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 25.0),
+                    child: Text('Recently Added',
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: Container(
+                      height: 140,
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return const listTile();
+                          }),
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor, 
-                      borderRadius:
-                          BorderRadius.vertical(bottom: Radius.circular(30))),
-                  padding: EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Good " + greetFarmer() + ",",
-                        style: const TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        homeController.farmerList[0]['fName'],
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: Color.fromRGBO(244, 243, 243, 1),
-                            borderRadius: BorderRadius.circular(15)),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              prefixIcon: Icon(
-                                Icons.search,
-                                color: Colors.black87,
-                              ),
-                              hintText: "Search for the produce",
-                              hintStyle:
-                                  TextStyle(color: Colors.grey, fontSize: 15)),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 25.0),
-                  child: Text('Text',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Container(
-                    height: 140,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return const FarmerProduceTile(
-                              imagePath: "assets/images/farmer.png",
-                              produceTitle: "Farmer One",
-                              produceDescription: "This is Awesome");
-                        }),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 25.0),
-                  child: Text('Recently Added',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Container(
-                    height: 140,
-                    child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return const listTile();
-                        }),
-                  ),
-                ),
-              ],
-            ),
           ),
-        ),
         );
       }
     });

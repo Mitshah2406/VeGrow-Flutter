@@ -112,7 +112,7 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  final ProductController product = Get.find();
+  final ProductController product = Get.put(ProductController());
   final InventoryController inventoryController = Get.put(InventoryController());
   TextEditingController _productDesController = TextEditingController();
   TextEditingController intialBidPriceController = TextEditingController();

@@ -32,9 +32,7 @@ class _AccountPageState extends State<AccountPage> {
                     //  await SessionManager().get("farmer");
                   // print(u);
                  AuthServices.deleteSession();
-            // FirebaseAuth.instance.currentUser?.delete();
-                  // await FirebaseAuth.instance.signOut();
-                    Get.offNamed('/logout');
+            
                   
                 },
                 child: Text("Logout")),
