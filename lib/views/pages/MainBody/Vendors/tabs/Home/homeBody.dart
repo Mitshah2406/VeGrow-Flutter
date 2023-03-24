@@ -3,15 +3,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/homeController.dart';
+import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/Home/singleProductView.dart';
 
 class Body extends StatelessWidget {
   HomeController homeController = Get.find();
+  ProductController productController = Get.put(ProductController());
+
   @override
   Widget build(BuildContext context) {
-    // It will provie us total height  and width of our screen
+    print(productController.productList.length);
     Size size = MediaQuery.of(context).size;
-    // it enable scrolling on small device
+
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -282,8 +286,8 @@ class RecomendPlantCard extends StatelessWidget {
         top: AppConstant.kDefaultPadding / 2,
         bottom: AppConstant.kDefaultPadding * 2.5,
       ),
-      width: size.width * 0.4,
-      height: 200,
+      width: size.width * 0.6,
+      // height: 200,
       child: Column(
         children: [
           Image.asset(productImage),
@@ -312,7 +316,11 @@ class RecomendPlantCard extends StatelessWidget {
                       children: [
                         TextSpan(
                             text: "${productName}\n".toUpperCase(),
-                            style: Theme.of(context).textTheme.button),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black
+                            ),
+                        ),
                         TextSpan(
                           text: "${productDescription}".toUpperCase(),
                           style: TextStyle(
