@@ -95,9 +95,9 @@ class AuthServices {
   static void deleteSession() async {
     await SessionManager().destroy();
     var prefs = await SharedPreferences.getInstance();
+    Get.toNamed('/logout');
     print(prefs.getBool('show'));
     prefs.setBool('show', true);
-    Get.toNamed('/logout');
   }
 
   static Future<bool> getSession() async {

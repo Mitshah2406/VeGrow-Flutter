@@ -18,6 +18,8 @@ class HomeController extends GetxController{
     try {
       isLoading(true);
       var userData = await SessionManager().get('user');
+      print("User data");
+      print(userData);
       Future.delayed(const Duration(seconds: 1), () async {
         var farmers = await HomeServices.getFarmerData(userData['id'], userData['token']);
         print("NULLLLLLLLLLLLLLLLLLLLL");

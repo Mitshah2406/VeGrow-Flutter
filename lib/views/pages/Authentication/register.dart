@@ -234,25 +234,8 @@ class _RegisterState extends State<Register> {
                                               int.parse(registerController.tag
                                                   .toString()));
 
-                                      // if (result == "false") {
-                                      //   Fluttertoast.showToast(
-                                      //     msg: "Technical Error",
-                                      //     fontSize: 18,
-                                      //     textColor: Colors.white,
-                                      //     gravity: ToastGravity.BOTTOM,
-                                      //     backgroundColor: Colors.red
-                                      //   );
-                                      // } else if(result == "invalid email address") {
-                                      //   Fluttertoast.showToast(
-                                      //     msg: "Invalid Email Address",
-                                      //     fontSize: 18,
-                                      //     textColor: Colors.white,
-                                      //     gravity: ToastGravity.BOTTOM,
-                                      //     backgroundColor: Colors.red
-                                      //   );
-                                      // }else{
-                                      //   Get.offNamed("/dashboard");
-                                      // }
+                                      print("Resultttt");
+                                      print(result);
 
                                       if (result) {
                                         Get.offNamed("/dashboard");

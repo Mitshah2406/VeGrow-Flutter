@@ -115,6 +115,7 @@ class _optionsCardState extends State<optionsCard> {
         ListTile(
             onTap: (){
                AuthServices.deleteSession();
+               Get.offNamed('/logout');
             },
             leading: Icon(
               CupertinoIcons.trash,
