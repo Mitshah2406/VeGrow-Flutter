@@ -9,8 +9,7 @@ class Welcome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return popPage(
-        page: Scaffold(
+    return  Scaffold(
       backgroundColor: AppConstant.bgColorAuth,
       body: SafeArea(
           child: Padding(
@@ -73,7 +72,7 @@ class Welcome extends StatelessWidget {
           // ),
         ]),
       )),
-    ));
+    );
   }
 }
 

@@ -59,6 +59,7 @@ dependencies:
   circular_profile_avatar: ^2.0.5
   flutter_slidable: ^2.0.0
   proste_bezier_curve: ^2.0.2
+  percent_indicator: ^4.2.3
   translator: ^0.1.7
   google_fonts: ^4.0.3
   smooth_page_indicator: ^1.0.1

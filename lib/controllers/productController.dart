@@ -29,12 +29,14 @@ class ProductController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchProduct();
+    // fetchProduct();
   }
 
   void fetchProduct() async {
     try {
       isloading(true);
+      Future.delayed(Duration(seconds: 1), () async{
+
       var products = await productServices.getAllProducts();
       print("products");
       print(products);
@@ -42,6 +44,7 @@ class ProductController extends GetxController {
         productList.value = products;
         print(productList);
       }
+      });
     } finally {
       isloading(false);
     }

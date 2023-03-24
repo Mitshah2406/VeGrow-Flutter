@@ -21,7 +21,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final IdController idController = Get.put(IdController());
-final ProductController productController = Get.put(ProductController());
   runApp(Home());
 }
 
