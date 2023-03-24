@@ -9,7 +9,7 @@ import 'package:vegrow/views/pages/MainBody/Vendors/tabs/Home/homePage.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/tabPage2.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/tabPage3.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/tabPage4.dart';
-import 'package:vegrow/views/pages/MainBody/Vendors/vendorDashboard.dart';
+import 'package:vegrow/views/widgets/vendorDashboard.dart';
 import 'package:vegrow/views/pages/Starter/introductionPage.dart';
 import 'package:vegrow/views/pages/Starter/welcome.dart';
 import 'package:vegrow/views/pages/Starter/splashScreenPage.dart';
