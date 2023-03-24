@@ -98,26 +98,26 @@ class productServices {
     }
   }
 
-  static Future<List?> getAllListedProducts() async {
-    try {
-      var sessionData = await AuthServices.getCurrentSession();
-      print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-      var response = await http.post(
-          Uri.parse(
-            "${AppConstant.IP}/authentication/getMyListedProductList/",
-          ),
-          body: jsonEncode({"farmerId": sessionData['id']}),
-          headers: {"Authorization": 'Bearer ${sessionData["token"]}'});
+  // static Future<List?> getAllListedProducts() async {
+  //   try {
+  //     var sessionData = await AuthServices.getCurrentSession();
+  //     print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+  //     var response = await http.post(
+  //         Uri.parse(
+  //           "${AppConstant.IP}/authentication/getMyListedProductList/",
+  //         ),
+  //         body: jsonEncode({"farmerId": sessionData['id']}),
+  //         headers: {"Authorization": 'Bearer ${sessionData["token"]}'});
 
-      var resData = jsonDecode(response.body);
-      print(resData.runtimeType);
+  //     var resData = jsonDecode(response.body);
+  //     print(resData.runtimeType);
 
-      return resData;
-      // return [];/
-    } catch (e) {
-      print(e.toString());
-    }
-  }
+  //     return resData;
+  //     // return [];/
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 
   static Future<List<Product>?> getTopFiveProducts() async {
     try {
@@ -135,9 +135,67 @@ class productServices {
       print("Hello");
       // return jsonDecode(response.body);
 
-      // return productFromJson(response.body);
+      return productFromJson(response.body);
     } catch (e) {
       print(e);
     }
+  }
+  static Future<List<Product>?> fetchProductsBySearchQuery(query, params) async {
+    try {
+      var sessionData = await AuthServices.getCurrentSession();
+      print("Session");
+      print(sessionData['token']);
+      print(jsonEncode({
+              "productName": query,
+              "vendorId": sessionData['id'],
+              'filter': params
+              
+            }));
+      var response = await http.post(
+        Uri.parse(
+            "${AppConstant.IP}/authentication/searchProductsForVendorFilter/",
+            ),
+            body: jsonEncode({
+              "productName": query,
+              "vendorId": sessionData['id'],
+              'filter': params
+              
+            }),
+        headers: {"Authorization": 'Bearer ${sessionData["token"]}'},
+      );
+
+      print(response);
+      print(jsonDecode(response.body));
+      print("Hello");
+      // return jsonDecode(response.body);
+
+      // return productFromJson(response.body);
+      return productFromJson(response.body);
+
+    } catch (e) {
+      print(e);
+    }
+  }
+  static Future<List<String>?> fetchProductsForSearchList() async {
+
+      var sessionData = await AuthServices.getCurrentSession();
+      print("Session");
+      print(sessionData['token']);
+      var response = await http.post(
+        Uri.parse(
+            "${AppConstant.IP}/authentication/inventoryProductListForVendor/",
+            ),
+          
+        headers: {"Authorization": 'Bearer ${sessionData["token"]}'},
+      );
+
+      print(response);
+      print(response.body);
+      print("searchControoller");
+      // return jsonDecode(response.body);
+      List<String> categoriesList = List<String>.from(jsonDecode(response.body)['list'] as List);
+return categoriesList;
+      // return productFromJson(response.body);
+   
   }
 }

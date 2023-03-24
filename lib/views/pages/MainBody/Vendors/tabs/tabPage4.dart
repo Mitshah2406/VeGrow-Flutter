@@ -18,7 +18,7 @@ class _tabPage4State extends State<tabPage4> {
     return SafeArea(
       child: Scaffold(
         body: ElevatedButton(
-          onPressed: (){
+          onPressed: () async{
             AuthServices.deleteSession();
             Get.offNamed("/logout");
           },

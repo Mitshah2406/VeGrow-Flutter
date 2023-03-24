@@ -98,13 +98,13 @@ class _ListProducePageState extends State<ListProducePage> {
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(13),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: Theme.of(context).primaryColor,
-                                        blurRadius: 10,
-                                        spreadRadius: 3,
-                                        offset: Offset(3, 4))
-                                  ],
+                                  // boxShadow: [
+                                  //   BoxShadow(
+                                  //       color: Theme.of(context).primaryColor,
+                                  //       blurRadius: 10,
+                                  //       spreadRadius: 3,
+                                  //       offset: Offset(3, 4))
+                                  // ],
                                 ),
                                 child: Hero(
                                   tag: productController.productList

@@ -32,12 +32,8 @@ class _optionsCardState extends State<optionsCard> {
             ),
             title: Text(
               "Outstanding Transactions".tr,
-<<<<<<< HEAD
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-=======
               style:
                   TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
->>>>>>> 9928a39 (prducePage)
             ),
             trailing: IconButton(
               icon: Icon(Icons.keyboard_arrow_right),
@@ -51,8 +47,6 @@ class _optionsCardState extends State<optionsCard> {
             endIndent: 10,
           ),
           ListTile(
-<<<<<<< HEAD
-=======
             leading: Icon(
               Icons.monetization_on,
               color: Theme.of(context).primaryColor,
@@ -127,100 +121,11 @@ class _optionsCardState extends State<optionsCard> {
               AuthServices.deleteSession();
               Get.offNamed('/logout');
             },
->>>>>>> 9928a39 (prducePage)
             leading: Icon(
               Icons.monetization_on,
               color: Theme.of(context).primaryColor,
             ),
             title: Text(
-<<<<<<< HEAD
-              "My Reviews".tr,
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-            ),
-            trailing: IconButton(
-              icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: () {},
-            ),
-          ),
-          Divider(
-            color: Theme.of(context).dividerColor,
-            thickness: 2,
-            indent: 10,
-            endIndent: 10,
-          ),
-          ListTile(
-            leading: Icon(
-              Icons.monetization_on,
-              color: Theme.of(context).primaryColor,
-            ),
-            title: Text(
-              "My Reviews".tr,
-              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-            ),
-            trailing: IconButton(
-              icon: Icon(Icons.keyboard_arrow_right),
-              onPressed: () async {
-                var d = await AppConstant.translate(string: "mit dada");
-                print(d);
-              },
-            ),
-          ),
-          Divider(
-            color: Theme.of(context).dividerColor,
-            thickness: 2,
-            indent: 10,
-            endIndent: 10,
-          ),
-          ListTile(
-              leading: Icon(
-                CupertinoIcons.globe,
-                color: Theme.of(context).primaryColor,
-              ),
-              title: Text(
-                "Languages".tr,
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-              ),
-              subtitle: Text("English"),
-              trailing: langDropdownMenu()
-      
-              // trailing: IconButton(
-              //   icon: Icon(Icons.keyboard_arrow_right),
-              //   onPressed: () async{ var data=await AppConstant.translate(string: "Sai");
-              //   print(data);},
-              // ),
-              ),
-          Divider(
-            color: Theme.of(context).dividerColor,
-            thickness: 2,
-            indent: 10,
-            endIndent: 10,
-          ),
-          ListTile(
-              onTap: (){
-                 AuthServices.deleteSession();
-                 Get.offNamed('/logout');
-              },
-              leading: Icon(
-                CupertinoIcons.trash,
-                color: Theme.of(context).primaryColor,
-              ),
-              title: Text(
-                "Logout".tr,
-                style:
-                    const TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
-              ),
-              // subtitle: Text("Logout"),
-              // trailing: langDropdownMenu()
-              // trailing: IconButton(
-              //   icon: const Icon(Icons.keyboard_arrow_right),
-              //   onPressed: () {
-              //     AuthServices.deleteSession();
-              //     Get.toNamed('/logout');
-              //   },
-              // ),
-              ),
-=======
               "Logout".tr,
               style: const TextStyle(
                   color: Colors.red, fontWeight: FontWeight.w600),
@@ -235,7 +140,6 @@ class _optionsCardState extends State<optionsCard> {
             //   },
             // ),
           ),
->>>>>>> 9928a39 (prducePage)
         ]),
       ),
     );
