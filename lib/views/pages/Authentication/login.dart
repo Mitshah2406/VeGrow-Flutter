@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/auth/loginController.dart';
+import 'package:vegrow/controllers/locationController.dart';
+import 'package:vegrow/views/pages/Starter/popPage.dart';
 
 class Login extends StatefulWidget {
 
@@ -22,7 +24,8 @@ class _LoginState extends State<Login> {
 //obs
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return popPage(
+      page: Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppConstant.bgColorAuth,
       body: SafeArea(
@@ -30,18 +33,18 @@ class _LoginState extends State<Login> {
         padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
         child: SingleChildScrollView(
           child: Column(children: [
-            Align(
-                alignment: Alignment.topLeft,
-                child: GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: Colors.black54,
-                    size: 32,
-                  ),
-                )),
+            // Align(
+            //     alignment: Alignment.topLeft,
+            //     child: GestureDetector(
+            //       onTap: () {
+            //         Get.back();
+            //       },
+            //       child: Icon(
+            //         Icons.arrow_back,
+            //         color: Colors.black54,
+            //         size: 32,
+            //       ),
+            //     )),
             SizedBox(
               height: 10,
             ),
@@ -123,7 +126,7 @@ class _LoginState extends State<Login> {
                 ],
               ),
             ),
-                  SizedBox(
+                  const SizedBox(
                     height: 22,
                   ),
             SizedBox(
@@ -142,6 +145,7 @@ class _LoginState extends State<Login> {
                         Get.offNamed('/sendOtp/${verificationId}');
                       },
                       codeAutoRetrievalTimeout: (String verificationId) {},
+
                     );
                   }: null,
                       style: ElevatedButton.styleFrom(
@@ -159,6 +163,7 @@ class _LoginState extends State<Login> {
           ]),
         ),
       )),
+    )
     );
   }
 }

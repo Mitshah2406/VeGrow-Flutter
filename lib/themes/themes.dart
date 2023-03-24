@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Themes {
-  static final lightTheme = ThemeData(
-    colorScheme: const ColorScheme.light(),
+class ThemeManager {
+  static final lightTheme = ThemeData(primarySwatch: Colors.green,
+    appBarTheme: AppBarTheme(backgroundColor: Colors.green),
+    primaryColor: Colors.green,
+    dividerColor: Color.fromARGB(255, 65, 209, 70)
   );
   static final darkTheme = ThemeData(
-    colorScheme: const ColorScheme.dark(),
+
+    dividerColor: Color.fromARGB(255, 255, 255, 255)  
   );
 }

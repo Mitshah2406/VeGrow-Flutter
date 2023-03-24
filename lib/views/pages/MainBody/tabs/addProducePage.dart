@@ -1,130 +1,44 @@
-// import 'package:animated_custom_dropdown/custom_dropdown.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:vegrow/views/widgets/addProductTextField.dart';
-
-// class CategoriesPage extends StatefulWidget {
-//   @override
-//   CategoriesPageState createState() => CategoriesPageState();
-// }
-
-// class CategoriesPageState extends State<CategoriesPage> {
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           actions: [],
-//           title: Text("List Your Product"),
-//         ),
-//         body: SafeArea(
-//           child: Padding(
-//               padding: const EdgeInsets.all(16.0),
-//               child: Form(
-//                   key: _formKey,
-//                   child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         CustomDropdown.searchRequest(
-//                           futureRequest: getFakeRequestData,
-//                           hintText: 'Search For Product To Add',
-//                           controller: productNameController,
-//                         ),
-//                         SizedBox(height: 16.0),
-//                         AddProductTxtField(
-//                             // myIcon: ,
-//                             myIcon: Icons.description_outlined,
-//                             type: TextInputType.multiline,
-//                             action: TextInputAction.newline,
-//                             min: 2,
-//                             max: 5,
-//                             padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 5.0),
-//                             myController: _productDesController,
-//                             fieldName: "Product Description",
-//                             prefixIconColor: Colors.green.shade300),
-
-//                         SizedBox(height: 16.0),
-//
-
-//                         SizedBox(height: 16.0),
-//                         TextFormField(
-//                           decoration:
-//                               InputDecoration(labelText: 'Product Quantity'),
-//                           // keyboardType: TextInputType.multiline,
-//                           onChanged: (value) {
-//                             setState(() {
-//                               // _productQuantity = int.tryParse(value) ?? 0;
-//                             });
-//                           },
-//                           validator: (value) {
-//                             if (value!.isEmpty) {
-//                               return 'Please enter a product quantity';
-//                             }
-//                             if (int.tryParse(value) == null) {
-//                               return 'Please enter a valid product quantity';
-//                             }
-//                             return null;
-//                           },
-//                         ),
-//                         SizedBox(height: 16.0),
-//                         DropdownButtonFormField(
-//                           // value: _productUnit,
-//                           decoration:
-//                               InputDecoration(labelText: 'Product Unit'),
-//                           items: _productUnits
-//                               .map((productUnit) => DropdownMenuItem(
-//                                     value: productUnit,
-//                                     child: Text(productUnit),
-//                                   ))
-//                               .toList(),
-//                           onChanged: (value) {
-//                             setState(() {
-//                               // _productUnit = value.toString();
-//                             });
-//                           },
-//                           validator: (value) {
-//                             if (value == null) {
-//                               return 'Please select a product unit';
-//                             }
-//                           },
-//                         )
-//                       ]))),
-//         ));
-//   }
-// }
-
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:vegrow/controllers/inventoryController.dart';
 import 'package:vegrow/controllers/productController.dart';
+import 'package:vegrow/models/Inventory.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
 import 'package:vegrow/views/widgets/addProductTextField.dart';
 
-class CategoriesPage extends StatefulWidget {
-  const CategoriesPage({Key? key}) : super(key: key);
+class AddProducePage extends StatefulWidget {
+  const AddProducePage({Key? key}) : super(key: key);
 
   @override
-  State<CategoriesPage> createState() => _CategoriesPageState();
+  State<AddProducePage> createState() => _AddProducePageState();
 }
 
-class _CategoriesPageState extends State<CategoriesPage> {
+class _AddProducePageState extends State<AddProducePage> {
   final ProductController product = Get.find();
+  final InventoryController inventoryController = Get.put(InventoryController());
   TextEditingController _productDesController = TextEditingController();
   TextEditingController intialBidPriceController = TextEditingController();
+  TextEditingController quantityController = TextEditingController();
   TextEditingController unitController = TextEditingController();
   TextEditingController expiryDateController = TextEditingController();
 
   final productNameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  
   Future<List<String>> getFakeRequestData(String query) async {
-    List<String> data = ['Onion', 'Tomato', 'BeetRoot', 'Potato'];
+    // var data = inventoryController.inventoryList;
+List data = (inventoryController.inventoryList).map((product) => [product.productName,product.id]).toList();
 
+List<String> stringList =
+        data.map((item) => item.toString()).toList();
     return await Future.delayed(const Duration(seconds: 1), () {
-      return data.where((e) {
-        return e.toLowerCase().contains(query.toLowerCase());
+      return stringList.where((e) {
+        return e.contains(query.toLowerCase());
       }).toList();
-    });
+  });
   }
 
   int currentStep = 0;
@@ -138,14 +52,17 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
       if (formKey.currentState!.validate()) {
         var result = await product.addProduct(
-            productNameController.text,
+            productNameController.text.split(',')[0].substring(1),
+             productNameController.text.split(',')[1].substring(0, productNameController.text.split(',')[1].length - 1),
             _productDesController.text,
+            quantityController.text,
             intialBidPriceController.text,
             unitController.text,
             expiryDateController.text);
         if (result == 200) {
           print("Done");
-          Get.back();
+          // Get.offNamed('/dashboard');
+        // Navigator.pushNamed(context, HomePage() as String);
         }
       } else {
         print("Failed");
@@ -175,7 +92,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
       currentStep = value;
     });
   }
-
+@override
+  void initState() {
+    // TODO: implement initState
+    
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -267,7 +189,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                         child: AddProductTxtField(
                           fieldName: "Quantity",
                           type: TextInputType.number,
-                          myController: intialBidPriceController,
+                          myController: quantityController,
                           myIcon: Icons.production_quantity_limits_outlined,
                           prefixIconColor: Colors.green.shade300,
                         ),
@@ -336,8 +258,19 @@ class _CategoriesPageState extends State<CategoriesPage> {
                           ),
                         ),
                         SizedBox(
-                          height: 16,
-                        )
+                          height: 20,
+                        ),
+                        SizedBox(
+                          width: (MediaQuery.of(context).size.width) * .55,
+                          child: AddProductTxtField(
+                            fieldName: "Initial Bid Price",
+                            type: TextInputType.number,
+                            myController: intialBidPriceController,
+                            myIcon: Icons.currency_rupee_outlined,
+                            prefixIconColor: Colors.green.shade300,
+                          ),
+                        ),
+                        SizedBox(height: 16.0),
                       ]),
                   isActive: currentStep >= 2,
                   state: currentStep >= 2

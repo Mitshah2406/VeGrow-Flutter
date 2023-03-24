@@ -1,13 +1,25 @@
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 // import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:vegrow/controllers/productController.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/src/routes/default_transitions.dart';
+// import 'package:get/get.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:vegrow/consts/appConstant.dart';
+import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/main.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/cartPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/categoriesPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
+import 'package:vegrow/views/pages/MainBody/tabs/Orders/OrderPage.dart';
 import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/listProducePage.dart';
+import 'package:bottom_navigation_bar/bottom_navigation_bar.dart';
+import 'package:animations/animations.dart';
+import 'package:vegrow/views/pages/Starter/popPage.dart';
 
 class DashboardPage extends StatefulWidget {
   DashboardPage({super.key});
@@ -17,83 +29,131 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  int index1 = 0;
-  List tabs = [
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+final ProductController productController = Get.put(ProductController());
+
+  }
+  int _currentIndex = 0;
+  int _previousIndex = 0;
+  List<Widget> tabs = [
     HomePage(),
     ListProducePage(),
-    CategoriesPage(),
-    CartPage(),
+    OrderPage(),
     AccountPage()
   ];
+
+  final List<GlobalKey<NavigatorState>> _navigatorKeys = [
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: tabs[index1],
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 20),
-            child: GNav(
-              iconSize: 28,
-              textSize: 24,
+  final List<Widget> _pages = [
+    Navigator(
+      key: _navigatorKeys[0],
+      onGenerateRoute: (settings) =>
+          MaterialPageRoute(builder: (context) => HomePage()),
+    ),
+    Navigator(
+      key: _navigatorKeys[1],
+      onGenerateRoute: (settings) =>
+          MaterialPageRoute(builder: (context) => ListProducePage()),
+    ),
+    Navigator(
+      key: _navigatorKeys[2],
+      onGenerateRoute: (settings) =>
+          MaterialPageRoute(builder: (context) =>OrderPage()),
+    ),
+    Navigator(
+      key: _navigatorKeys[3],
+      onGenerateRoute: (settings) =>
+          MaterialPageRoute(builder: (context) =>AccountPage()),
+    ),
+  ];
+
+  
+
+    return WillPopScope(
+          onWillPop: () async {
+          final currentState = _navigatorKeys[_currentIndex].currentState;
+          final canPop = currentState?.canPop() ?? false;
+
+          if (canPop) {
+            // if there are pages on the stack, pop them
+            currentState?.pop();
+            return false;
+          } else {
+            // if not on the first page of the current tab,
+            // then select the previous tab and show its last page
+            if (_currentIndex != 0) {
+              setState(() {
+                _previousIndex = _currentIndex;
+                _currentIndex = 0;
+              });
+              return false;
+            } else {
+              // if on the first page of the first tab, exit the app
+              return true;
+            }
+          }
+        },
+        child: Scaffold(
+          // body: PageTransitionSwitcher(
+          //   duration: const Duration(seconds: 1),
+          //   transitionBuilder: (child, primaryAnimation, secondaryAnimation){
+          //     return FadeThroughTransition(
+          //       animation: primaryAnimation,
+          //       secondaryAnimation: secondaryAnimation,
+          //       child: child,
+          //     );
+          //   },
+          //   child: tabs[_currentIndex],
+          // ),
+          body: IndexedStack(
+            index: _currentIndex,
+            children: _pages,
+          ),
+          bottomNavigationBar: Container(
+            color: Colors.white,
+            child: BottomNavigationBar(
+              selectedItemColor: Colors.green.shade500,
+              unselectedItemColor: Colors.black,
+              showSelectedLabels: true,
+              showUnselectedLabels: false,
               backgroundColor: Colors.white,
-              color: Colors.black,
-              activeColor: Colors.white,
-              gap: 8,
-              tabBackgroundColor: Colors.green.shade500,
-              padding: const EdgeInsets.all(16),
-              onTabChange: (index) => {
-                setState(()=>{
-                  index1 = index,
+              onTap: (index) => {
+                setState(() => {
+                    _currentIndex = index,
                 })
               },
-              tabs: const [
-                GButton(
-                  icon: Icons.home,
-                  text: "Home",
-                  textStyle: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white
-                  ),
+              currentIndex: _currentIndex,
+              items: [
+                BottomNavigationBarItem(
+                    label: "Home", icon: Icon(Icons.home), tooltip: "Home"),
+                BottomNavigationBarItem(
+                    label: "List Produce",
+                    icon: Icon(Icons.list_alt),
+                    tooltip: "List Produce"),
+                BottomNavigationBarItem(
+                    label: "Add Produce",
+                    icon: Icon(Icons.add),
+                    tooltip: "Add Produce"
                 ),
-                GButton(
-                  icon: Icons.list_alt,
-                  text: "List Produce",
-                  textStyle: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white
-                  ),
-                ),
-                GButton(
-                  icon: Icons.add,
-                  text: "Add",
-                  textStyle: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white
-                  ),
-                ),
-                GButton(
-                  icon: Icons.settings,
-                  text: "Cart",
-                  textStyle: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white
-                  ),
-                ),
-                GButton(
-                  icon: Icons.account_circle,
-                  text: "Account",
-                  textStyle: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white
-                  ),
-                ),
-              ]
+                BottomNavigationBarItem(
+                    label: "Account",
+                    icon: Icon(Icons.account_circle),
+                    tooltip: "Account"),
+              ],
             ),
           ),
-        ),
-      ),
+        )
+      // })
     );
   }
 }
