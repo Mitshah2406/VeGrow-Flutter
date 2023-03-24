@@ -527,9 +527,12 @@ class _OtpScreenState extends State<OtpScreen> {
                           await auth.signInWithCredential(credential);
                           var result = await AuthServices.checkIfUserExists(
                               loginController.phoneController.text);
-                          if (result == true) {
-                            Get.offNamed('/dashboard');
-                          } else {
+                              
+                          if (result == 1) {
+                            Get.offNamed('/farmerDashboard');
+                          }else if(result == 2){
+                            Get.offNamed('/vendorDashboard');
+                          }else {
                             Get.offNamed('/register/${loginController.phoneController.text}');
                           }
                

@@ -21,16 +21,27 @@ class HomeController extends GetxController{
       print("User data");
       print(userData);
       Future.delayed(const Duration(seconds: 1), () async {
-        var farmers = await HomeServices.getFarmerData(userData['id'], userData['token']);
-        print("NULLLLLLLLLLLLLLLLLLLLL");
-        print(farmers);
-        print(farmers.runtimeType);
-        if(farmers != null){      
-          farmerList.add(farmers);
-        }  
+        if(userData['role'] == "farmer"){
+          var farmers = await HomeServices.getFarmerData(userData['id'], userData['token']);
+          print("NULLLLLLLLLLLLLLLLLLLLL");
+          print(farmers);
+          print(farmers.runtimeType);
+          if(farmers != null){      
+            farmerList.add(farmers);
+          }  
+        }else{
+          var farmers = await HomeServices.getVendorData(userData['id'], userData['token']);
+          print("NULLLLLLLLLLLLLLLLLLLLL");
+          print(farmers);
+          print(farmers.runtimeType);
+          if(farmers != null){      
+            farmerList.add(farmers);
+          }  
+        }
       isLoading(false);
       });
-    } finally{
+    }catch(e){
+      print(e);
     }    
   }
 }

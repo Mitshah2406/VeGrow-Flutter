@@ -13,28 +13,26 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/main.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/accountPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/Orders/OrderPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/listProducePage.dart';
+import 'package:vegrow/views/pages/MainBody/Farmers/tabs/Orders/orderPage.dart';
+import 'package:vegrow/views/pages/MainBody/Farmers/tabs/accountPage.dart';
+import 'package:vegrow/views/pages/MainBody/Farmers/tabs/home/homePage.dart';
+import 'package:vegrow/views/pages/MainBody/Farmers/tabs/ProducePage/listProducePage.dart';
 import 'package:bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:animations/animations.dart';
 import 'package:vegrow/views/pages/Starter/popPage.dart';
 
-class DashboardPage extends StatefulWidget {
-  DashboardPage({super.key});
+class farmerDashboardPage extends StatefulWidget {
+  farmerDashboardPage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<farmerDashboardPage> createState() => _farmerDashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _farmerDashboardPageState extends State<farmerDashboardPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-final ProductController productController = Get.put(ProductController());
-
+    final ProductController productController = Get.put(ProductController());
   }
   int _currentIndex = 0;
   int _previousIndex = 0;

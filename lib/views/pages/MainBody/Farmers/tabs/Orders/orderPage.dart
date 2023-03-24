@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/Orders/singleOrderPage.dart';
+import 'package:vegrow/views/pages/MainBody/Farmers/tabs/Orders/singleOrderPage.dart';
 import 'package:vegrow/views/widgets/myList.dart';
 
 class OrderPage extends StatefulWidget {

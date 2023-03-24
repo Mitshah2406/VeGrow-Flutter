@@ -32,4 +32,29 @@ class HomeServices{
       return {"error": e};
     }
   }
+
+    static Future<Map> getVendorData(vendorId, token) async {
+    print(vendorId);
+    print(token);
+    print("Hello");
+    try {
+      var response = await http.post(
+        Uri.parse("${AppConstant.IP}/authentication/specificVendorData/"),
+        headers: {"Authorization":"Bearer ${token}"},
+        body: jsonEncode(
+          {
+          "id": vendorId
+        })
+      );
+      print(response.body);
+      var decoded = jsonDecode(response.body);
+      print("Hellllllllooooooooo");
+
+      return decoded;
+    } catch (e) {
+      print(e);
+      return {"error": e};
+    }
+  }
+  
 }

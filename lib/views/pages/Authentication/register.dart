@@ -223,7 +223,7 @@ class _RegisterState extends State<Register> {
                               child: ElevatedButton(
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
-                                      bool result =
+                                      int result =
                                           await AuthServices.registerUser(
                                               idController.inputData(),
                                               registerController
@@ -237,8 +237,10 @@ class _RegisterState extends State<Register> {
                                       print("Resultttt");
                                       print(result);
 
-                                      if (result) {
-                                        Get.offNamed("/dashboard");
+                                      if (result == 1) {
+                                        Get.offNamed("/farmerDashboard");
+                                      }else if(result == 2){
+                                        Get.offNamed("/vendorDashboard");
                                       } else {
                                         Fluttertoast.showToast(
                                             msg: "Technical Error",

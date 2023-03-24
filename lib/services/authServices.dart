@@ -7,15 +7,15 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/locationController.dart';
-import 'package:vegrow/models/Session/Token.dart';
-import 'package:vegrow/models/auth/Farmer.dart';
+// import 'package:vegrow/models/Session/Token.dart';
+// import 'package:vegrow/models/auth/Farmer.dart';
 import 'package:vegrow/models/auth/MyUser.dart';
-import 'package:vegrow/models/auth/Vendor.dart';
-import 'package:vegrow/services/locationServices.dart';
+// import 'package:vegrow/models/auth/Vendor.dart';
+// import 'package:vegrow/services/locationServices.dart';
 
 class AuthServices {
-  static Future<bool> registerUser(id, name, email, number, role) async {
-    try {
+  static Future<int> registerUser(id, name, email, number, role) async {
+    try{
       String url = role == 0
           ? "${AppConstant.IP}/authentication/farmerSignUp/"
           : "${AppConstant.IP}/authentication/vendorSignUp/";
@@ -35,7 +35,7 @@ class AuthServices {
       var recvdToken = jsonDecode(response.body)['exist'];
       var decodedResponse = jsonDecode(response.body);
       if (recvdToken == false) {
-        return false;
+        return 0;
       } else {
         MyUser farmer = MyUser(
             token: decodedResponse['token'],
@@ -48,17 +48,24 @@ class AuthServices {
           );
         await SessionManager().set('user', farmer);
         MyUser u = MyUser.fromJson(await SessionManager().get("user"));
-        print(getCurrentSession());
+        dynamic data = await SessionManager().get("user");
+        // print(data['token']);
         var result = await LocationController.promptLocation();
         print(result);
-        return true;
+        var role = data['role'];
+
+        if(role == "vendor"){
+          return 2;
+        }else{
+          return 1;
+        }
       }
     } catch (e) {
-      return false;
+      return 0;
     }
   }
 
-  static Future<bool> checkIfUserExists(phone) async {
+  static Future<int> checkIfUserExists(phone) async {
     print(phone);
     var response = await http.post(
         Uri.parse(
@@ -69,7 +76,7 @@ class AuthServices {
     var recvdToken = jsonDecode(response.body)['exist'];
     var decodedResponse = jsonDecode(response.body);
     if (recvdToken == false) {
-      return false;
+      return 0;
     } else {
       MyUser farmer = MyUser(
           exist: decodedResponse['exist'],
@@ -82,7 +89,17 @@ class AuthServices {
           phone: decodedResponse['phone']);
       await SessionManager().set('user', farmer);
       MyUser u = MyUser.fromJson(await SessionManager().get("user"));
-      return true;
+       dynamic data = await SessionManager().get("user");
+        // print(data['token']);
+        var result = await LocationController.promptLocation();
+        print(result);
+        var role = data['role'];
+
+        if(role == "vendor"){
+          return 2;
+        }else{
+          return 1;
+        }
     }
     // Token token = Token(token: recvdToken);
 
@@ -95,16 +112,15 @@ class AuthServices {
   static void deleteSession() async {
     await SessionManager().destroy();
     var prefs = await SharedPreferences.getInstance();
-    Get.toNamed('/logout');
+    Get.offNamed('/logout');
     print(prefs.getBool('show'));
     prefs.setBool('show', true);
   }
 
   static Future<bool> getSession() async {
     bool session = await SessionManager().containsKey("user");
-    bool token = await SessionManager().containsKey("token");
 
-    if (session || token) {
+    if (session) {
       return true;
     } else {
       return false;

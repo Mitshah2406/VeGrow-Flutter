@@ -8,6 +8,11 @@ class AppConstant {
 
   // Sizes
   static const double PADDING_SIZE = 16.0;
+  // Colors that we use in our app
+static final kPrimaryColor = Color(0xFF0C9869);
+static final kTextColor = Color(0xFF3C4046);
+static final kBackgroundColor = Color(0xFFF9F8FD);
+static final double kDefaultPadding = 20.0;
 
   // Colors
   static final bgColor = Colors.grey[300];
