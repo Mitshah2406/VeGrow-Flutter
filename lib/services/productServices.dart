@@ -66,7 +66,7 @@ class productServices{
 
   static Future<int?> addProduct(productName,id, productDesc, productQuantity,
       initialBidPrice, productUnit, productExpiryDate) async {
-    try {
+      try {
      dynamic data = await SessionManager().get("user");
       print(data['token']);
       print(id);
@@ -106,6 +106,29 @@ class productServices{
     } catch (e) {
       print(e);
       return 404;
+    }
+  }
+
+  static Future<List<Product>?> getTopFiveProducts() async {
+    try {
+      var sessionData = await AuthServices.getCurrentSession();
+      print("Session");
+      print(sessionData['token']);
+      var response = await http.post(
+        Uri.parse("${AppConstant.IP}/authentication/topfiveProductFromInventory/"),
+        headers: {
+          "Authorization": 'Bearer ${sessionData["token"]}'
+        },
+      );
+
+      print(response);
+      print(response.body);
+      print("Hello");
+      // return jsonDecode(response.body);
+
+      // return productFromJson(response.body);
+    } catch (e) {
+      print(e);
     }
   }
 }
