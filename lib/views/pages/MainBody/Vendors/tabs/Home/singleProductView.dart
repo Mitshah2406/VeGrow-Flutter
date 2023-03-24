@@ -1,15 +1,28 @@
 
+import 'dart:ffi';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class SingleProductView extends StatefulWidget {
-  const SingleProductView({super.key});
+  SingleProductView({super.key});
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController bidController = new TextEditingController();
+
 
   @override
   State<SingleProductView> createState() => _SingleProductViewState();
 }
 
 class _SingleProductViewState extends State<SingleProductView> {
+  final int initialBidAmount = 2000;
+  final int productQuantity = 20;
+  double actualPrice = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -113,7 +126,147 @@ class _SingleProductViewState extends State<SingleProductView> {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: (){}, 
+                          onPressed: (){
+                            showModalBottomSheet(
+                              useSafeArea: true,
+                              context: context, 
+                              builder: (BuildContext context){
+                                return Container(
+                                  height: 500,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        // mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text("Product Title to be placed", style: TextStyle(
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.black
+                                              ),),
+                                              Spacer(),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.green,
+                                                  borderRadius: BorderRadius.circular(5)
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    "${initialBidAmount.toString()} Rs",
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+                                            child: Divider(
+                                              color: Colors.grey.shade300,
+                                              height: 5,
+                                              thickness: .5,
+                                            ),
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                width: 1,
+                                                color: Colors.grey.shade300
+                                              ),
+                                              borderRadius: BorderRadius.circular(5)
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                "Price Per kg: ${initialBidAmount/productQuantity}",
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold
+                                                ),
+                                              ),
+                                            )
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+                                            child: Form(
+                                              key: widget._formKey,
+                                              child: Column(
+                                                children: [
+                                                  TextFormField(
+                                                    
+                                                    validator: (value){
+                                                      if(value == 0){
+                                                        return "It cannot be zero";
+                                                      }
+                                                    },
+                                                    // onChanged: (value){
+                                                    //   setState(() {
+                                                    //     print(widget.bidController.text);
+                                                    //     actualPrice = (initialBidAmount/productQuantity) * int.parse(value);
+                                                    //   });
+                                                    // },
+                                                    keyboardType: TextInputType.number,
+                                                    controller: widget.bidController,
+                                                    decoration: InputDecoration(
+                                                      suffixIcon: TextButton(
+                                                        onPressed: (){
+                                                          actualPrice = (initialBidAmount/productQuantity) * int.parse(widget.bidController.text);
+                                                          print(actualPrice);
+                                                        },
+                                                        child: Text("Calculate")
+                                                      ),
+                                                      label: const Text("How much do you want to buy?"),
+                                                      border: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(10),
+                                                        borderSide: BorderSide(
+                                                          color: Colors.green.shade500
+                                                        )
+                                                      ),
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(10),
+                                                        borderSide: BorderSide(
+                                                          color: Colors.green.shade500
+                                                        )
+                                                      ),
+                                                      errorBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(10),
+                                                        borderSide: BorderSide(
+                                                          color: Colors.red.shade500
+                                                        )
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  TextFormField(
+                                                    // initialValue: "${actualPrice}",
+                                                    controller: widget.bidController,
+                                                    // initialValue: ,
+                                                  )
+                                                 
+                                                  // ElevatedButton(
+                                                  //   onPressed: onPressed,
+                                                  //   child: Text(data)
+                                                  // )
+                                                ],
+                                              )
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                            );
+
+                          }, 
                           child: const Text(
                             "Place Bid",
                           )
