@@ -91,7 +91,7 @@
 //                     controller: loginController.otpController,
 //                     androidSmsAutofillMethod: AndroidSmsAutofillMethod.none,
 //                     // controller: pinController,
-      
+
 //                     length: 6,
 //                     toolbarEnabled: false,
 //                     // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
@@ -139,7 +139,7 @@
 
 //                           //       Get.offNamed('/dashboard');
 //                           //     }
-//                           // } 
+//                           // }
 //                           // else {
 //                           //   Get.offNamed('/register/${loginController.phoneController.text}');
 //                           // }
@@ -441,6 +441,7 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final LoginController loginController = Get.find();
   final IdController idController = Get.find();
+  bool isLoading = false;
   FocusNode noteFocus = FocusNode();
   final FirebaseAuth auth = FirebaseAuth.instance;
   TextEditingController pinController = TextEditingController();
@@ -450,7 +451,7 @@ class _OtpScreenState extends State<OtpScreen> {
     print("loginController.otpController.text");
     print(loginController.otpController.text);
     return popPage(
-      page: Scaffold(
+        page: Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppConstant.bgColorAuth,
       body: SingleChildScrollView(
@@ -458,18 +459,15 @@ class _OtpScreenState extends State<OtpScreen> {
             child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
           child: Column(children: [
-              SizedBox(
+            SizedBox(
               height: 10,
             ),
             Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade50, shape: BoxShape.circle),
-              child: SvgPicture.asset(
-                  AppConstant.illustration3
-              )
-            ),
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade50, shape: BoxShape.circle),
+                child: SvgPicture.asset(AppConstant.illustration3)),
             SizedBox(
               height: 20.0,
             ),
@@ -504,7 +502,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     controller: loginController.otpController,
                     androidSmsAutofillMethod: AndroidSmsAutofillMethod.none,
                     // controller: pinController,
-      
+
                     length: 6,
                     toolbarEnabled: false,
                     // androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
@@ -517,63 +515,77 @@ class _OtpScreenState extends State<OtpScreen> {
                     width: double.infinity,
                     child: ElevatedButton(
                         onPressed: () async {
+                          setState(() {
+                          isLoading = true;
+                            
+                          });
                           PhoneAuthCredential credential =
                               PhoneAuthProvider.credential(
-                                  verificationId:
-                                      Get.parameters['verificationId'].toString(),
+                                  verificationId: Get
+                                      .parameters['verificationId']
+                                      .toString(),
                                   smsCode: loginController.otpController.text);
-                                  print(loginController.otpController.text);
-                                  print(credential.token);
+                          print(loginController.otpController.text);
+                          print(credential.token);
 
                           await auth.signInWithCredential(credential);
+
                           var result = await AuthServices.checkIfUserExists(
                               loginController.phoneController.text);
-                              
+                          print('rrrrrrrrrrrrrrrrrrrrrrrrrr');
+                          setState(() {
+                            isLoading = false;
+                          });
                           if (result == 1) {
                             Get.offNamed('/farmerDashboard');
                           }else if(result == 2){
                             var result = await LocationController.promptLocation();
+                          } else if (result == 2) {
                             Get.offNamed('/vendorDashboard');
-                          }else {
-                            Get.offNamed('/register/${loginController.phoneController.text}');
+                          } else {
+                            Get.offNamed(
+                                '/register/${loginController.phoneController.text}');
                           }
-               
                         },
-                           style: ElevatedButton.styleFrom(
+                        style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50)),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            "Verify",
-                            style: TextStyle(fontSize: 16),
-                          ),
+                          child: isLoading==false
+                              ? Text(
+                                  "Verify",
+                                  style: TextStyle(fontSize: 16),
+                                )
+                              : Text(
+                                  "Loading.....",
+                                  style: TextStyle(fontSize: 16),
+                                ),
                         )),
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  Text("Didnt Revieve The Code? ",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.black26)),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text("Resend Code",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16 , color: Colors.green))
+                  // Text("Didnt Revieve The Code? ",
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //         fontSize: 16,
+                  //         color: Colors.black26)),
+                  // SizedBox(
+                  //   height: 15,
+                  // ),
+                  // Text("Resend Code",
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //         fontSize: 16 , color: Colors.green))
                 ],
               ),
             ),
           ]),
         )),
       ),
-    )
-    );
+    ));
   }
 
   // Widget _textFieldOTP({bool ?first, last}) {
@@ -801,7 +813,3 @@ class _OtpScreenState extends State<OtpScreen> {
 //     );
 //   }
 // }
-
-
-
-

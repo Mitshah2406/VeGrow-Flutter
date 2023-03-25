@@ -112,6 +112,7 @@ class AuthServices {
 
   static void deleteSession() async {
     await SessionManager().destroy();
+    await SessionManager().remove("user");
      dynamic data = await SessionManager().get("user");
     print("Session Dleted");
     print(data);

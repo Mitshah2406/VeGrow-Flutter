@@ -113,7 +113,7 @@ class ProductController extends GetxController {
           print(productListForSearchQuery.length);
         }
       });
-      isloading(false);
+      // isloading(false);
     } catch (e) {
       print(e);
     }
