@@ -24,7 +24,7 @@ import '../views/pages/MainBody/Farmers/tabs/home/locationPage.dart';
 
 class AppRoutes {
   static List<GetPage> generateRoutes = [
-    GetPage(name: "/", page: () => SingleProductView()),
+    GetPage(name: "/", page: () => SplashScreen()),
     GetPage(name: "/introduction", page: () => const IntroScreenPage()),
     GetPage(name: "/welcome", page: () =>  Welcome(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
     GetPage(name: "/login", page: () =>  Login()),
@@ -54,7 +54,7 @@ class AppRoutes {
     // GetPage(name: "/vendorDashboard", page: () => vendorDashboardPage(), transition: Transition.rightToLeftWithFade, transitionDuration: const Duration(milliseconds: 400)),
     GetPage(name: "/vendorHomePage", page: () => vendorHomePage(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
     GetPage(name: "/tabPage2", page: () => const tabPage2(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
-    GetPage(name: "/tabPage3", page: () => const tabPage3(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
+    GetPage(name: "/tabPage3", page: () =>  SingleProductView(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
     GetPage(name: "/tabPage4", page: () => const tabPage4(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
     GetPage(name: "/singleProductView", page: () => SingleProductView(), transition: Transition.rightToLeftWithFade, transitionDuration: const Duration(milliseconds: 500))
     
