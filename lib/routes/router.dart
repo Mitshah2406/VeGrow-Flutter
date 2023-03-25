@@ -1,11 +1,14 @@
 import 'package:get/route_manager.dart';
+import 'package:search_page/search_page.dart';
 import 'package:vegrow/main.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
 import 'package:vegrow/views/pages/MainBody/Farmers/tabs/accountPage.dart';
 import 'package:vegrow/views/pages/MainBody/Farmers/dashboardPage.dart';
 import 'package:vegrow/views/pages/Authentication/register.dart';
+import 'package:vegrow/views/pages/MainBody/Vendors/tabs/Home/searchPage.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/Home/singleProductView.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/Home/homePage.dart';
+import 'package:vegrow/views/pages/MainBody/Vendors/tabs/Home/timeLine.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/tabPage2.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/tabPage3.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/tabPage4.dart';
@@ -42,11 +45,7 @@ class AppRoutes {
         transitionDuration: const Duration(milliseconds: 500)),
 
     // Farmer Dashboard
-    GetPage(
-        name: "/farmerDashboard",
-        page: () => farmerDashboardPage(),
-        transition: Transition.rightToLeftWithFade,
-        transitionDuration: const Duration(milliseconds: 500)),
+    GetPage(name: "/farmerDashboard", page: () => farmerDashboardPage()),
     GetPage(name: "/home", page: () => HomePage()),
     GetPage(name: "/likes", page: () => ListProducePage()),
     GetPage(name: "/logout", page: () => Welcome()),

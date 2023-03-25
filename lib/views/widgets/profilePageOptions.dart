@@ -32,9 +32,25 @@ class _optionsCardState extends State<optionsCard> {
             ),
             title: Text(
               "Outstanding Transactions".tr,
-              style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+              style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
             ),
+            trailing: IconButton(
+              icon: Icon(Icons.keyboard_arrow_right),
+              onPressed: () {},
+            ),
+          ),
+          Divider(
+            color: Theme.of(context).dividerColor,
+            thickness: 2,
+            indent: 10,
+            endIndent: 10,
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.monetization_on,
+              color: Theme.of(context).primaryColor,
+            ),
+              title: Text("My Reviews".tr, style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),),
             trailing: IconButton(
               icon: Icon(Icons.keyboard_arrow_right),
               onPressed: () {},
@@ -125,10 +141,9 @@ class _optionsCardState extends State<optionsCard> {
               Icons.monetization_on,
               color: Theme.of(context).primaryColor,
             ),
-            title: Text(
-              "Logout".tr,
-              style: const TextStyle(
-                  color: Colors.red, fontWeight: FontWeight.w600),
+            title: Text("Logout".tr, style: const TextStyle(
+                  color: Colors.red, fontWeight: FontWeight.w600)),
+              
             ),
             // subtitle: Text("Logout"),
             // trailing: langDropdownMenu()
@@ -139,7 +154,7 @@ class _optionsCardState extends State<optionsCard> {
             //     Get.toNamed('/logout');
             //   },
             // ),
-          ),
+          // ),
         ]),
       ),
     );
