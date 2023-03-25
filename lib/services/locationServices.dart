@@ -18,7 +18,7 @@ class LocationServices{
           "id": farmerId,
           "location": {
             "lat": lat,
-            "long": long,
+            "lon": long,
             "pinCode": pinCode,
             "locality": locality,
             "sublocality": sublocality

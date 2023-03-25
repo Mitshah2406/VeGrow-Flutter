@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final product = productFromJson(jsonString);
-
 import 'dart:convert';
 
 List<Product> productFromJson(String str) =>
@@ -44,42 +40,6 @@ class Product {
   int? productId;
   String? farmerId;
   double? distanceFromVendor;
-
-  Product copyWith({
-    String? inventoryId,
-    String? productName,
-    String? productDescription,
-    DateTime? productListedDate,
-    DateTime? productExpiryDate,
-    String? productImages,
-    String? productUnit,
-    int? productQuantity,
-    String? initialBidPrice,
-    int? productQuantityLeftInInventory,
-    String? status,
-    String? currentBidPrice,
-    int? productId,
-    String? farmerId,
-    double? distanceFromVendor,
-  }) =>
-      Product(
-        inventoryId: inventoryId ?? this.inventoryId,
-        productName: productName ?? this.productName,
-        productDescription: productDescription ?? this.productDescription,
-        productListedDate: productListedDate ?? this.productListedDate,
-        productExpiryDate: productExpiryDate ?? this.productExpiryDate,
-        productImages: productImages ?? this.productImages,
-        productUnit: productUnit ?? this.productUnit,
-        productQuantity: productQuantity ?? this.productQuantity,
-        initialBidPrice: initialBidPrice ?? this.initialBidPrice,
-        productQuantityLeftInInventory: productQuantityLeftInInventory ??
-            this.productQuantityLeftInInventory,
-        status: status ?? this.status,
-        currentBidPrice: currentBidPrice ?? this.currentBidPrice,
-        productId: productId ?? this.productId,
-        farmerId: farmerId ?? this.farmerId,
-        distanceFromVendor: distanceFromVendor ?? this.distanceFromVendor,
-      );
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         inventoryId: json["inventoryId"],
