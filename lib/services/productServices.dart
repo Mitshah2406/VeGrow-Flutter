@@ -7,6 +7,8 @@ import 'package:vegrow/models/Inventory.dart';
 import 'package:vegrow/models/Product.dart';
 import 'package:vegrow/services/authServices.dart';
 
+import '../models/bid.dart';
+
 class productServices {
   static Future<List<Product>?> getAllProducts({data}) async {
     try {
@@ -197,5 +199,18 @@ class productServices {
 return categoriesList;
       // return productFromJson(response.body);
    
+  }
+  static Future<List<Bid>?> getListOfBidsForSpecificProduct({tokenId,filter})async{
+      var sessionData = await AuthServices.getCurrentSession();
+      print("Session");
+      print(sessionData['token']);
+      var response = await http.post(
+        Uri.parse(
+            "${AppConstant.IP}/authentication/productBidList/",
+            ),body: jsonEncode({"inventoryId":tokenId,"filter":filter}),
+          
+        headers: {"Authorization": 'Bearer ${sessionData["token"]}'},
+      );
+      return bidFromJson(jsonDecode(response.body));
   }
 }

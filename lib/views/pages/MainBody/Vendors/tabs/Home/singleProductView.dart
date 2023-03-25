@@ -2,13 +2,17 @@
 import 'dart:ffi';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vegrow/controllers/bidController.dart';
+import 'package:vegrow/controllers/productController.dart';
+import 'package:vegrow/views/widgets/DropDownBidVendor.dart';
 
 class SingleProductView extends StatefulWidget {
   SingleProductView({super.key});
   final _formKey = GlobalKey<FormState>();
   final TextEditingController bidController = new TextEditingController();
 
-
+  final ProductController productController = Get.find();
   @override
   State<SingleProductView> createState() => _SingleProductViewState();
 }
@@ -17,7 +21,7 @@ class _SingleProductViewState extends State<SingleProductView> {
   final int initialBidAmount = 2000;
   final int productQuantity = 20;
   double actualPrice = 0.0;
-
+  BidController bidController =  Get.put(BidController());
   @override
   void initState() {
     super.initState();
@@ -33,7 +37,7 @@ class _SingleProductViewState extends State<SingleProductView> {
               width: double.infinity,
               child: Image.asset("assets/images/two.jpg"),
             ),
-            buttonArrow(),
+            // buttonArrow(),
             scroll()
           ],
         ),
@@ -75,9 +79,9 @@ class _SingleProductViewState extends State<SingleProductView> {
 
   scroll(){
     return DraggableScrollableSheet(
-      initialChildSize: 0.6,
+      initialChildSize: 0.75,
       maxChildSize: 1.0,
-      minChildSize: 0.6,
+      minChildSize: 0.75,
       builder: (context, scrollController){
         return Container(
           clipBehavior: Clip.hardEdge,
@@ -92,7 +96,7 @@ class _SingleProductViewState extends State<SingleProductView> {
           child: SingleChildScrollView(
             controller: scrollController,
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(5), 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -111,168 +115,20 @@ class _SingleProductViewState extends State<SingleProductView> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 300,
-                          child: Text(
-                            "Product Title Comes here",
-                            style: TextStyle(
-                              color: Colors.blue.shade500,
-                              fontSize: 28,
-                              fontWeight: FontWeight.w600
-                            ),
-                          ),
+                    child: Container(
+                      width: 300,
+                      child: Text(
+                        "Kanda(Mumbai)", 
+                        style: TextStyle(
+                          color: Colors.blue.shade500,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w600
                         ),
-                        ElevatedButton(
-                          onPressed: (){
-                            showModalBottomSheet(
-                              useSafeArea: true,
-                              context: context, 
-                              builder: (BuildContext context){
-                                return Container(
-                                  height: 500,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        // mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text("Product Title to be placed", style: TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.black
-                                              ),),
-                                              Spacer(),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.green,
-                                                  borderRadius: BorderRadius.circular(5)
-                                                ),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    "${initialBidAmount.toString()} Rs",
-                                                    style: TextStyle(
-                                                      fontSize: 20,
-                                                      color: Colors.white,
-                                                      fontWeight: FontWeight.bold
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-                                            child: Divider(
-                                              color: Colors.grey.shade300,
-                                              height: 5,
-                                              thickness: .5,
-                                            ),
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                width: 1,
-                                                color: Colors.grey.shade300
-                                              ),
-                                              borderRadius: BorderRadius.circular(5)
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Text(
-                                                "Price Per kg: ${initialBidAmount/productQuantity}",
-                                                style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold
-                                                ),
-                                              ),
-                                            )
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-                                            child: Form(
-                                              key: widget._formKey,
-                                              child: Column(
-                                                children: [
-                                                  TextFormField(
-                                                    
-                                                    validator: (value){
-                                                      if(value == 0){
-                                                        return "It cannot be zero";
-                                                      }
-                                                    },
-                                                    // onChanged: (value){
-                                                    //   setState(() {
-                                                    //     print(widget.bidController.text);
-                                                    //     actualPrice = (initialBidAmount/productQuantity) * int.parse(value);
-                                                    //   });
-                                                    // },
-                                                    keyboardType: TextInputType.number,
-                                                    controller: widget.bidController,
-                                                    decoration: InputDecoration(
-                                                      suffixIcon: TextButton(
-                                                        onPressed: (){
-                                                          actualPrice = (initialBidAmount/productQuantity) * int.parse(widget.bidController.text);
-                                                          print(actualPrice);
-                                                        },
-                                                        child: Text("Calculate")
-                                                      ),
-                                                      label: const Text("How much do you want to buy?"),
-                                                      border: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(10),
-                                                        borderSide: BorderSide(
-                                                          color: Colors.green.shade500
-                                                        )
-                                                      ),
-                                                      enabledBorder: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(10),
-                                                        borderSide: BorderSide(
-                                                          color: Colors.green.shade500
-                                                        )
-                                                      ),
-                                                      errorBorder: OutlineInputBorder(
-                                                        borderRadius: BorderRadius.circular(10),
-                                                        borderSide: BorderSide(
-                                                          color: Colors.red.shade500
-                                                        )
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  TextFormField(
-                                                    // initialValue: "${actualPrice}",
-                                                    controller: widget.bidController,
-                                                    // initialValue: ,
-                                                  )
-                                                 
-                                                  // ElevatedButton(
-                                                  //   onPressed: onPressed,
-                                                  //   child: Text(data)
-                                                  // )
-                                                ],
-                                              )
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                            );
-
-                          }, 
-                          child: const Text(
-                            "Place Bid",
-                          )
-                        )
-                      ],
+                      ),
                     ),
+                  ),Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12  ),
+                    child: Text("Expiry Date: 2023-12-01"),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -301,17 +157,34 @@ class _SingleProductViewState extends State<SingleProductView> {
                             borderRadius: BorderRadius.circular(5),
                           ),
                           padding: EdgeInsets.all(6),
-                          child: Text(
-                            "Price - 2000 Rs",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white
-                            ),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Price - "+"2000"+"/Kg ",   
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white 
+                                ),
+                              ),Icon(Icons.currency_rupee,size: 15 ,color: Colors.white) 
+                            ],
                           ),
-                        )
+                        ),
                       ],
                     ),
+                  ),Padding(padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Container(width: 200  ,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade500,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: EdgeInsets.all(6),
+                            child: Row(
+                              children: [Icon(Icons.location_pin,color: Colors.redAccent,),  
+                                Text(" Distance: "+"600"+" km" ,style: TextStyle(color: Colors.white),),
+                              ],
+                            ),  
+                          ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -324,18 +197,22 @@ class _SingleProductViewState extends State<SingleProductView> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: Text("Description", style: TextStyle(
-                      fontSize: 26,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold
                     ),),
                   ),
                   const SizedBox(height: 10),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: Text("The Description you need to add", style: TextStyle(
-                      color: Colors.grey.shade500,
-                      fontSize: 20
-                    ),),
-                  ),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5), 
+                    child: ConstrainedBox(constraints: BoxConstraints(maxHeight: 60,minHeight: 50),  
+                      child: SingleChildScrollView(
+                        child: Text("This isis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodis goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is goodhis is good", style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontSize: 14
+                           ),),
+                      ),
+                    ),
+                  ), 
                   const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -346,17 +223,57 @@ class _SingleProductViewState extends State<SingleProductView> {
                   ),
                   const SizedBox(height: 10),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: Text("Your Bids", style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold
-                    ),),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                    child: Column(
+                      children: [
+                        Text("Your Bids", style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold
+                        ),),
+                        Container(
+                      margin: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
+                      height: 50,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          'Latest',
+                          'Highest Qty',
+                          'Highest Price',
+                        ]
+                            .map((e) => Container(
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 8.0, horizontal: 8.0),
+                                  child: OutlinedButton(
+                                    onPressed: () async {
+                                      if (e == "Latest") {
+                                        bidController.getListOfBidsForSpecificProduct(
+                                            tokenId: bidController.productTokenId,filter: "latest");
+                                      } else if (e == "Highest Qty") {
+                                   bidController.getListOfBidsForSpecificProduct(
+                                            tokenId: bidController.productTokenId,filter: "highestQuantity");
+                                      } else if (e == "Highest Price") {
+                                      bidController.getListOfBidsForSpecificProduct(
+                                            tokenId: bidController.productTokenId,filter: "highestPrice");
+                                      }
+                                    },
+                                    style: ButtonStyle(
+                                        // border: RoundedRectangleBorder(
+                                        //     borderRadius: BorderRadius.circular(30)),
+                                        ),
+                                    child: Text(e),
+                                  ),
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 10),
+                
                   ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 100,
+                    itemCount: 10,
                     itemBuilder: (context, index){
                       return bidlist();
                     }
@@ -373,24 +290,8 @@ class _SingleProductViewState extends State<SingleProductView> {
 
   bidlist(){
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 20,
-            backgroundColor: Color(0xFFE3FFF8),
-            child: Icon(Icons.done, size: 25,),
-          ),
-          SizedBox(width: 10),
-          Text(
-            "Bids will be shown here...",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18
-            ),
-          ),
-        ],
-      ),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+      child: BidDropDown(),
     );
   }
 }
