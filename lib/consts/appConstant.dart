@@ -4,7 +4,7 @@ import 'package:translator/translator.dart';
 
 class AppConstant {
   static final translator = GoogleTranslator();
-  static final String IP = "http://192.168.0.106:9090";
+  static final String IP = "http://192.168.137.202:9091";
 
   // Sizes
   static const double PADDING_SIZE = 16.0;
