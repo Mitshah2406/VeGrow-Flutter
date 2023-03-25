@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/controllers/productController.dart';
-import 'package:vegrow/views/widgets/myCard.dart';
 import 'package:vegrow/views/widgets/myList.dart';
 
 class Body extends StatelessWidget {
@@ -134,8 +133,8 @@ class Body extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                    height: 200,
+                // Container(
+                //     height: 200,
                     // child: CustomScrollView(
                     //   scrollDirection: Axis.horizontal,
                     //   controller: scrollController,
@@ -143,13 +142,13 @@ class Body extends StatelessWidget {
                     //     Text("Hello")
                     //   ],
                     // )
-                    child: PageView.builder(
-                        // controller: scrollController,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          return myCard();
-                        })),
+                    // child: PageView.builder(
+                    //     // controller: scrollController,
+                    //     scrollDirection: Axis.horizontal,
+                    //     itemCount: 5,
+                    //     itemBuilder: (context, index) {
+                    //       return myCard();
+                    //     })),
 
                 const SizedBox(
                   height: 20,

@@ -22,44 +22,63 @@ class _myListState extends State<myList> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(16)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text("Produc Name"),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Text("Hello 1"),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(
-                    width: 110,
-                    height: 100,
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade400),
-                        color: Colors.grey.shade100,
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Image.asset("assets/images/illustration-1.png"),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "D0ata",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 24),
-                      ),
-                      const SizedBox(height: 8),
-                      Text("Data",
-                          style: TextStyle(
-                              fontSize: 18, color: Colors.grey.shade600))
-                    ],
-                  ),
+                  Text("Hello 1"),
+                  SizedBox(width: 5,),
+                  Text("Hello 1"),
                 ],
-              ),
-              IconButton(
-                  onPressed: onPressed,
-                  icon: const Icon(Icons.arrow_forward_ios))
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Hello 1"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text("Hello 1"),
+                  SizedBox(width: 5,),
+                  Text("Hello 1"),
+                ],
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Hello 1"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text("Hello 1"),
+                  SizedBox(width: 5,),
+                  Text("Hello 1"),
+                ],
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Hello 1"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text("Hello 1"),
+                  SizedBox(width: 5,),
+                  Text("Hello 1"),
+                ],
+              )
             ],
           )
         ],
