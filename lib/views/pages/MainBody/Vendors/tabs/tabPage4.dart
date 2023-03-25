@@ -37,7 +37,7 @@ class _tabPage4State extends State<tabPage4> {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      bottomNavigationBar: BottomNavVendor(index: 3),
+      // bottomNavigationBar: BottomNavVendor(index: 3),
       body: Container(
           height: MediaQuery.of(context).size.height,
           // color: Colors.amber,

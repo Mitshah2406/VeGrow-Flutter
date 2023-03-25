@@ -13,15 +13,16 @@ class LocationServices{
         headers: {
           "Authorization": "Bearer ${token}"
         },
+        
         body: jsonEncode(
           {
           "id": farmerId,
           "location": {
-            "lat": lat,
-            "lon": long,
-            "pinCode": pinCode,
-            "locality": locality,
-            "sublocality": sublocality
+            "lat": 19.050161,
+            "lon": 72.8784562,
+            "pinCode": 400022,
+            "locality": "Mumbai",
+            "sublocality": "Chembur"
           }
         }
         )

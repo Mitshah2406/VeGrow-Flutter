@@ -39,7 +39,7 @@ class _tabPage2State extends State<tabPage2> {
     productController.productListForSearchQuery.clear();
     super.initState();
   }
-
+TextEditingController searchBoxController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,11 +81,9 @@ class _tabPage2State extends State<tabPage2> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          'All',
-                          'Pending',
-                          'Bidded',
-                          'Confirmed',
-                          'Satisfied',
+                         'Highest Qty',
+                         'Lowest Price',
+                         'Distance',
                         ]
                             .map((e) => Container(
                             
@@ -94,22 +92,19 @@ class _tabPage2State extends State<tabPage2> {
                                       vertical: 8.0, horizontal: 8.0),
                                   child: OutlinedButton(
                                     onPressed: () async {
-                                      if (e == "All") {productController.confirmedFilterFalse();
+                                      if (e == "Highest Qty") {
+                                        productController.fetchProductsBySearchQuery(
+                                             searchBoxController.text, params: 'highestQuantity');
+                                      } else if (e == "Lowest Price") {
+                                          
+                                        productController
+                                          .fetchProductsBySearchQuery(
+                                              searchBoxController.text,
+                                              params: 'lowestPrice');
+                                      
+                                      } else if (e == "Distance") {
                                         productController.fetchProduct(
-                                            data: "All");
-                                      } else if (e == "Pending") {
-                                            productController
-                                                .confirmedFilterFalse();
-                                        productController.fetchProduct(
-                                            data: "pending");
-                                      } else if (e == "Bidded") {
-                                            productController
-                                                .confirmedFilterFalse();
-                                        productController.fetchProduct(
-                                            data: "bidded");
-                                      } else if (e == "Confirmed") {productController.confirmedFilterTrue();
-                                        productController.fetchProduct(
-                                            data: "confrimed");
+                                            data: "distance");
                                       }
                                     },
                                     style: const ButtonStyle(

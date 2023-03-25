@@ -119,7 +119,7 @@ class _optionsCardState extends State<optionsCard> {
           ListTile(
             onTap: () {
               AuthServices.deleteSession();
-              Get.offNamed('/logout');
+              // Get.offNamed('/logout');
             },
             leading: Icon(
               Icons.monetization_on,

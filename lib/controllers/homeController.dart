@@ -28,6 +28,8 @@ class HomeController extends GetxController{
           print(farmers.runtimeType);
           if(farmers != null){      
             farmerList.add(farmers);
+            print("farmerrrrrrrrrrrr000");
+            print(farmerList);
           }  
         }else{
           var farmers = await HomeServices.getVendorData(userData['id'], userData['token']);
