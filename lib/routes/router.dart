@@ -24,7 +24,7 @@ import '../views/pages/MainBody/Farmers/tabs/home/locationPage.dart';
 
 class AppRoutes {
   static List<GetPage> generateRoutes = [
-    GetPage(name: "/", page: () => SingleProductView()),
+    GetPage(name: "/", page: () => SplashScreen()),
     GetPage(name: "/introduction", page: () => const IntroScreenPage()),
     GetPage(name: "/welcome", page: () =>  Welcome(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
     GetPage(name: "/login", page: () =>  Login()),

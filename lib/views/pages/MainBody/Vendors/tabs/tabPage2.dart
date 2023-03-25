@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/controllers/preferences/searchController.dart';
@@ -21,25 +22,25 @@ class _tabPage2State extends State<tabPage2> {
       productController.productListForSearchQuery.clear();
     super.initState();
   }
-
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => productController.productListForSearchQuery.isNotEmpty
-      &&
-        productController.isloading==false?
-        Text(productController.productListForSearchQuery[0].productName.toString())
-        :Text("Search Product")) ,
+        title: Obx(() => productController
+                    .productListForSearchQuery.isNotEmpty &&
+                productController.isloading == false
+            ? Text(productController.productListForSearchQuery[0].productName
+                .toString())
+            : Text("Search Product")),
         actions: [
           IconButton(
             onPressed: () {
               // method to show the search bar
-             productController.productListForSearchQuery.clear();
+              productController.productListForSearchQuery.clear();
               showSearch(
                   context: context,
                   // delegate to customize the search bar
-                  
+
                   delegate: searchBox());
             },
             icon: const Icon(Icons.search),

@@ -4,7 +4,7 @@ import 'package:translator/translator.dart';
 
 class AppConstant {
   static final translator = GoogleTranslator();
-  static final String IP = "http://192.168.0.106:9090";
+  static final String IP = "http://192.168.137.202:9091";
 
   // Sizes
   static const double PADDING_SIZE = 16.0;
@@ -26,6 +26,7 @@ static final double kDefaultPadding = 20.0;
   static const String illustration3 = "assets/images/otp.svg";
   static const String register = "assets/images/register.svg";
   static const String addProduct = "assets/images/farmer.png";
+  static const String vendor = "assets/images/vendor.png";
   static late SharedPreferences prefs;
   static Future<String> translate({required string}) async {
     var trans = await translator.translate(string,
