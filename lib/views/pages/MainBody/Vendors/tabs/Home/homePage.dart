@@ -7,7 +7,7 @@ import 'package:vegrow/views/widgets/bottomNav.dart';
 import 'package:vegrow/views/pages/MainBody/Vendors/tabs/Home/homeBody.dart';
 
 
-class vendorHomePage extends StatelessWidget {
+class vendorHomePagee extends StatelessWidget {
   final HomeController homeController = Get.put(HomeController());
 
   @override

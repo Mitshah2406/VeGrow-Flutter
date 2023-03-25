@@ -19,72 +19,86 @@ class BottomNavVendor extends StatefulWidget {
 
 class _BottomNavVendorState extends State<BottomNavVendor> {
   @override
-  int indexx=1;
+  int indexx = 1;
   Widget build(BuildContext context) {
-    return  Container(
-        child: Container(
-          padding: EdgeInsets.only(
-            left: AppConstant.kDefaultPadding * 2,
-            right: AppConstant.kDefaultPadding * 2,
-            // bottom: AppConstant.kDefaultPadding,
-          ),
-          height: 80,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            // boxShadow: [
-            //   BoxShadow(
-            //     offset: Offset(0, -10),
-            //     blurRadius: 35,
-            //     color: AppConstant.kPrimaryColor.withOpacity(0.38),
-            //   ),
-            // ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                icon: SvgPicture.asset("assets/icons/flower.svg" ,
-                color: {widget.index}==0 ? AppConstant.kPrimaryColor: Colors.black54),
-                onPressed: () {
-                  Get.toNamed('/vendorHomePage');
-                },
-              ),
-              IconButton(
-                icon: SvgPicture.asset(
-                  "assets/icons/heart-icon.svg",
-                   color: {widget.index} == 1
-                      ? AppConstant.kPrimaryColor
-                      : Colors.black54
-                ),
-                onPressed: () {
-                  Get.toNamed('/tabPage2');
-                },
-              ),
-              IconButton(
-                icon: SvgPicture.asset("assets/icons/user-icon.svg", 
-                 color: {widget.index} == 2
-                      ? AppConstant.kPrimaryColor
-                      : Colors.black54
-                ),
-
-                onPressed: () {
-                  Get.toNamed('/tabPage3');
-                },
-              ),
-              IconButton(
-                icon: SvgPicture.asset("assets/icons/circle-user.svg",
-                 color: {widget.index} == 2
-                      ? AppConstant.kPrimaryColor
-                      : Colors.black54
-                ),
-                onPressed: () {
-                  Get.toNamed('/tabPage4');
-                },
-              )
-            ],
-          ),
+    return Container(
+      child: Container(
+        padding: EdgeInsets.only(
+          left: AppConstant.kDefaultPadding * 2,
+          right: AppConstant.kDefaultPadding * 2,
+          // bottom: AppConstant.kDefaultPadding,
         ),
-      );
-    
+        height: 80,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          // boxShadow: [
+          //   BoxShadow(
+          //     offset: Offset(0, -10),
+          //     blurRadius: 35,
+          //     color: AppConstant.kPrimaryColor.withOpacity(0.38),
+          //   ),
+          // ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              icon: SvgPicture.asset("assets/icons/flower.svg",
+                  color: {widget.index} == 0
+                      ? AppConstant.kPrimaryColor
+                      : Colors.black54),
+              onPressed: () {
+                Get.toNamed('/vendorHomePage');
+              },
+            ),
+            IconButton(
+              icon: SvgPicture.asset("assets/icons/search3.svg",
+                  color: {widget.index} == 1
+                      ? AppConstant.kPrimaryColor
+                      : Colors.black54),
+              onPressed: () {
+                Get.toNamed('/tabPage2');
+              },
+            ),
+            // IconButton(
+            //   icon: SvgPicture.asset("assets/icons/myBids.svg",
+            //       color: {widget.index} == 1
+            //           ? AppConstant.kPrimaryColor
+            //           : Colors.black54),
+            //   onPressed: () {
+            //     Get.toNamed('/tabPage2');
+            //   },
+            // ),
+            // IconButton(
+            //   icon: SvgPicture.asset("assets/icons/orders.svg",
+            //       color: {widget.index} == 1
+            //           ? AppConstant.kPrimaryColor
+            //           : Colors.black54),
+            //   onPressed: () {
+            //     Get.toNamed('/tabPage2');
+            //   },
+            // ),
+            IconButton(
+              icon: SvgPicture.asset("assets/icons/user-icon.svg",
+                  color: {widget.index} == 2
+                      ? AppConstant.kPrimaryColor
+                      : Colors.black54),
+              onPressed: () {
+                Get.toNamed('/tabPage3');
+              },
+            ),
+            IconButton(
+              icon: SvgPicture.asset("assets/icons/circle-user.svg",
+                  color: {widget.index} == 2
+                      ? AppConstant.kPrimaryColor
+                      : Colors.black54),
+              onPressed: () {
+                Get.toNamed('/tabPage4');
+              },
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

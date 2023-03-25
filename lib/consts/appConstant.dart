@@ -26,6 +26,7 @@ static final double kDefaultPadding = 20.0;
   static const String illustration3 = "assets/images/otp.svg";
   static const String register = "assets/images/register.svg";
   static const String addProduct = "assets/images/farmer.png";
+  static const String vendor = "assets/images/vendor.png";
   static late SharedPreferences prefs;
   static Future<String> translate({required string}) async {
     var trans = await translator.translate(string,

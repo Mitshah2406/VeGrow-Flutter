@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:search_page/search_page.dart';
 import 'package:vegrow/controllers/productController.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
@@ -20,30 +21,29 @@ import 'package:vegrow/views/pages/MainBody/Farmers/tabs/home/homePage.dart';
 import 'package:vegrow/views/pages/MainBody/Farmers/tabs/ProducePage/listProducePage.dart';
 import 'package:bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:animations/animations.dart';
+import 'package:vegrow/views/pages/MainBody/Vendors/tabs/Home/homeBody.dart';
+import 'package:vegrow/views/pages/MainBody/Vendors/tabs/tabPage3.dart';
+import 'package:vegrow/views/pages/MainBody/Vendors/tabs/tabPage2.dart';
+import 'package:vegrow/views/pages/MainBody/Vendors/tabs/tabPage4.dart';
 import 'package:vegrow/views/pages/Starter/popPage.dart';
 
-class farmerDashboardPage extends StatefulWidget {
-  farmerDashboardPage({super.key});
+class vendorHomePage extends StatefulWidget {
+  vendorHomePage({super.key});
 
   @override
-  State<farmerDashboardPage> createState() => _farmerDashboardPageState();
+  State<vendorHomePage> createState() => _vendorHomePageState();
 }
 
-class _farmerDashboardPageState extends State<farmerDashboardPage> {
+class _vendorHomePageState extends State<vendorHomePage> {
   @override
   void initState() {
     super.initState();
     final ProductController productController = Get.put(ProductController());
   }
+
   int _currentIndex = 0;
   int _previousIndex = 0;
-  List<Widget> tabs = [
-
-    HomePage(),
-    ListProducePage(),
-    AddProducePage(),
-    AccountPage()
-  ];
+  List<Widget> tabs = [Body(), tabPage2(), tabPage3(), tabPage4()];
 
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
     GlobalKey<NavigatorState>(),
@@ -54,33 +54,31 @@ class _farmerDashboardPageState extends State<farmerDashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-  final List<Widget> _pages = [
-    Navigator(
-      key: _navigatorKeys[0],
-      onGenerateRoute: (settings) =>
-          MaterialPageRoute(builder: (context) => HomePage()),
-    ),
-    Navigator(
-      key: _navigatorKeys[1],
-      onGenerateRoute: (settings) =>
-          MaterialPageRoute(builder: (context) => ListProducePage()),
-    ),
-    Navigator(
-      key: _navigatorKeys[2],
-      onGenerateRoute: (settings) =>
-          MaterialPageRoute(builder: (context) => AddProducePage()),
-    ),
-    Navigator(
-      key: _navigatorKeys[3],
-      onGenerateRoute: (settings) =>
-          MaterialPageRoute(builder: (context) =>AccountPage()),
-    ),
-  ];
-
-  
+    final List<Widget> _pages = [
+      Navigator(
+        key: _navigatorKeys[0],
+        onGenerateRoute: (settings) =>
+            MaterialPageRoute(builder: (context) => Body()),
+      ),
+      Navigator(
+        key: _navigatorKeys[1],
+        onGenerateRoute: (settings) =>
+            MaterialPageRoute(builder: (context) => tabPage2()),
+      ),
+      Navigator(
+        key: _navigatorKeys[2],
+        onGenerateRoute: (settings) =>
+            MaterialPageRoute(builder: (context) => tabPage3()),
+      ),
+      Navigator(
+        key: _navigatorKeys[3],
+        onGenerateRoute: (settings) =>
+            MaterialPageRoute(builder: (context) => tabPage4()),
+      ),
+    ];
 
     return WillPopScope(
-          onWillPop: () async {
+        onWillPop: () async {
           final currentState = _navigatorKeys[_currentIndex].currentState;
           final canPop = currentState?.canPop() ?? false;
 
@@ -129,8 +127,8 @@ class _farmerDashboardPageState extends State<farmerDashboardPage> {
               backgroundColor: Colors.white,
               onTap: (index) => {
                 setState(() => {
-                    _currentIndex = index,
-                })
+                      _currentIndex = index,
+                    })
               },
               currentIndex: _currentIndex,
               items: [
@@ -143,8 +141,7 @@ class _farmerDashboardPageState extends State<farmerDashboardPage> {
                 BottomNavigationBarItem(
                     label: "Add Produce",
                     icon: Icon(Icons.add),
-                    tooltip: "Add Produce"
-                ),
+                    tooltip: "Add Produce"),
                 BottomNavigationBarItem(
                     label: "Account",
                     icon: Icon(Icons.account_circle),
@@ -153,7 +150,7 @@ class _farmerDashboardPageState extends State<farmerDashboardPage> {
             ),
           ),
         )
-      // })
-    );
+        // })
+        );
   }
 }

@@ -1,7 +1,3 @@
-// // To parse this JSON data, do
-// //
-// //     final product = productFromJson(jsonString);
-
 // To parse this JSON data, do
 //
 //     final product = productFromJson(jsonString);
@@ -27,10 +23,10 @@ class Product {
     this.initialBidPrice,
     this.productQuantityLeftInInventory,
     this.status,
-    this.farmerLocation,
     this.currentBidPrice,
     this.productId,
     this.farmerId,
+    this.distanceFromVendor,
   });
 
   String? inventoryId;
@@ -44,10 +40,46 @@ class Product {
   String? initialBidPrice;
   int? productQuantityLeftInInventory;
   String? status;
-  FarmerLocation? farmerLocation;
   String? currentBidPrice;
   int? productId;
   String? farmerId;
+  double? distanceFromVendor;
+
+  Product copyWith({
+    String? inventoryId,
+    String? productName,
+    String? productDescription,
+    DateTime? productListedDate,
+    DateTime? productExpiryDate,
+    String? productImages,
+    String? productUnit,
+    int? productQuantity,
+    String? initialBidPrice,
+    int? productQuantityLeftInInventory,
+    String? status,
+    String? currentBidPrice,
+    int? productId,
+    String? farmerId,
+    double? distanceFromVendor,
+  }) =>
+      Product(
+        inventoryId: inventoryId ?? this.inventoryId,
+        productName: productName ?? this.productName,
+        productDescription: productDescription ?? this.productDescription,
+        productListedDate: productListedDate ?? this.productListedDate,
+        productExpiryDate: productExpiryDate ?? this.productExpiryDate,
+        productImages: productImages ?? this.productImages,
+        productUnit: productUnit ?? this.productUnit,
+        productQuantity: productQuantity ?? this.productQuantity,
+        initialBidPrice: initialBidPrice ?? this.initialBidPrice,
+        productQuantityLeftInInventory: productQuantityLeftInInventory ??
+            this.productQuantityLeftInInventory,
+        status: status ?? this.status,
+        currentBidPrice: currentBidPrice ?? this.currentBidPrice,
+        productId: productId ?? this.productId,
+        farmerId: farmerId ?? this.farmerId,
+        distanceFromVendor: distanceFromVendor ?? this.distanceFromVendor,
+      );
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         inventoryId: json["inventoryId"],
@@ -65,12 +97,10 @@ class Product {
         initialBidPrice: json["initialBidPrice"],
         productQuantityLeftInInventory: json["productQuantityLeftInInventory"],
         status: json["status"],
-        farmerLocation: json["farmerLocation"] == null
-            ? null
-            : FarmerLocation.fromJson(json["farmerLocation"]),
         currentBidPrice: json["currentBidPrice"],
         productId: json["productId"],
         farmerId: json["farmerId"],
+        distanceFromVendor: json["distanceFromVendor"]?.toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -87,41 +117,9 @@ class Product {
         "initialBidPrice": initialBidPrice,
         "productQuantityLeftInInventory": productQuantityLeftInInventory,
         "status": status,
-        "farmerLocation": farmerLocation?.toJson(),
         "currentBidPrice": currentBidPrice,
         "productId": productId,
         "farmerId": farmerId,
-      };
-}
-
-class FarmerLocation {
-  FarmerLocation({
-    this.lat,
-    this.long,
-    this.pinCode,
-    this.locality,
-    this.sublocality,
-  });
-
-  double? lat;
-  double? long;
-  String? pinCode;
-  String? locality;
-  String? sublocality;
-
-  factory FarmerLocation.fromJson(Map<String, dynamic> json) => FarmerLocation(
-        lat: json["lat"]?.toDouble(),
-        long: json["long"]?.toDouble(),
-        pinCode: json["pinCode"],
-        locality: json["locality"],
-        sublocality: json["sublocality"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "lat": lat,
-        "long": long,
-        "pinCode": pinCode,
-        "locality": locality,
-        "sublocality": sublocality,
+        "distanceFromVendor": distanceFromVendor,
       };
 }

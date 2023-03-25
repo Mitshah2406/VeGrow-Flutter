@@ -9,6 +9,9 @@ import 'package:vegrow/models/Product.dart';
 class ProductController extends GetxController {
   var isloading = true.obs;
   var productList = <Product>[].obs;
+  var conFirmedFilter = false.obs;
+  var productListIsEmpty = false.obs;
+  var productListForSearchQuery = <Product>[].obs;
 
   late List<Product> AllList;
   var product = Product().obs;
@@ -19,6 +22,16 @@ class ProductController extends GetxController {
 
     super.onInit();
     // fetchProduct();
+  }
+
+  void confirmedFilterFalse() {
+    productListIsEmpty(false);
+    conFirmedFilter(false);
+  }
+
+  void confirmedFilterTrue() {
+    productListIsEmpty(false);
+    conFirmedFilter(true);
   }
 
   void fetchProduct({data}) async {
@@ -32,7 +45,11 @@ class ProductController extends GetxController {
         print(products);
         if (products != null) {
           productList.value = products;
+          if (productList.isEmpty) {
+            productListIsEmpty(true);
+          }
           isloading(false);
+
           print(productList);
         }
       });
@@ -75,6 +92,25 @@ class ProductController extends GetxController {
           print("product list");
           print(productList);
           print(productList);
+        }
+      });
+      isloading(false);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<List<Product>?> fetchProductsBySearchQuery(query,
+      {params = 'distance'}) async {
+    try {
+      isloading(true);
+      Future.delayed(Duration(seconds: 1), () async {
+        var result =
+            await productServices.fetchProductsBySearchQuery(query, params);
+        if (result != null) {
+          productListForSearchQuery.value = result;
+          print("product list");
+          print(productListForSearchQuery.length);
         }
       });
       isloading(false);

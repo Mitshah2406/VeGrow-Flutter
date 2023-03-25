@@ -62,6 +62,27 @@ class _optionsCardState extends State<optionsCard> {
             indent: 10,
             endIndent: 10,
           ),
+          // ListTile(
+          //   leading: Icon(
+          //     Icons.monetization_on,
+          //     color: Theme.of(context).primaryColor,
+          //   ),
+          //   title: Text(
+          //     "My Reviews".tr,
+          //     style:
+          //         TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+          //   ),
+          //   trailing: IconButton(
+          //     icon: Icon(Icons.keyboard_arrow_right),
+          //     onPressed: () {},
+          //   ),
+          // ),
+          // Divider(
+          //   color: Theme.of(context).dividerColor,
+          //   thickness: 2,
+          //   indent: 10,
+          //   endIndent: 10,
+          // ),
           ListTile(
             leading: Icon(
               Icons.monetization_on,
