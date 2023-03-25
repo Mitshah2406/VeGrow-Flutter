@@ -22,109 +22,113 @@ class _optionsCardState extends State<optionsCard> {
       margin: EdgeInsets.fromLTRB(20, 500, 20, 0),
       elevation: 4.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      child: Column(children: [
-        SizedBox(height: 15),
-        ListTile(
-          leading: Icon(
-            Icons.monetization_on,
-            color: Theme.of(context).primaryColor,
-          ),
-          title: Text(
-            "Outstanding Transactions".tr,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-          ),
-          trailing: IconButton(
-            icon: Icon(Icons.keyboard_arrow_right),
-            onPressed: () {},
-          ),
-        ),
-        Divider(
-          color: Theme.of(context).dividerColor,
-          thickness: 2,
-          indent: 10,
-          endIndent: 10,
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.monetization_on,
-            color: Theme.of(context).primaryColor,
-          ),
-          title: Text(
-            "My Reviews".tr,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-          ),
-          trailing: IconButton(
-            icon: Icon(Icons.keyboard_arrow_right),
-            onPressed: () {},
-          ),
-        ),
-        Divider(
-          color: Theme.of(context).dividerColor,
-          thickness: 2,
-          indent: 10,
-          endIndent: 10,
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.monetization_on,
-            color: Theme.of(context).primaryColor,
-          ),
-          title: Text(
-            "My Reviews".tr,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-          ),
-          trailing: IconButton(
-            icon: Icon(Icons.keyboard_arrow_right),
-            onPressed: () async {
-              var d = await AppConstant.translate(string: "mit dada");
-              print(d);
-            },
-          ),
-        ),
-        Divider(
-          color: Theme.of(context).dividerColor,
-          thickness: 2,
-          indent: 10,
-          endIndent: 10,
-        ),
-        ListTile(
+      child: SingleChildScrollView(
+        child: Column(children: [
+          SizedBox(height: 15),
+          ListTile(
             leading: Icon(
-              CupertinoIcons.globe,
+              Icons.monetization_on,
               color: Theme.of(context).primaryColor,
             ),
             title: Text(
-              "Languages".tr,
+              "Outstanding Transactions".tr,
               style:
                   TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
             ),
-            subtitle: Text("English"),
-            trailing: langDropdownMenu()
-
-            // trailing: IconButton(
-            //   icon: Icon(Icons.keyboard_arrow_right),
-            //   onPressed: () async{ var data=await AppConstant.translate(string: "Sai");
-            //   print(data);},
-            // ),
+            trailing: IconButton(
+              icon: Icon(Icons.keyboard_arrow_right),
+              onPressed: () {},
             ),
-        Divider(
-          color: Theme.of(context).dividerColor,
-          thickness: 2,
-          indent: 10,
-          endIndent: 10,
-        ),
-        ListTile(
-            onTap: (){
-               AuthServices.deleteSession();
-               Get.offNamed('/logout');
+          ),
+          Divider(
+            color: Theme.of(context).dividerColor,
+            thickness: 2,
+            indent: 10,
+            endIndent: 10,
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.monetization_on,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text(
+              "My Reviews".tr,
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.keyboard_arrow_right),
+              onPressed: () {},
+            ),
+          ),
+          Divider(
+            color: Theme.of(context).dividerColor,
+            thickness: 2,
+            indent: 10,
+            endIndent: 10,
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.monetization_on,
+              color: Theme.of(context).primaryColor,
+            ),
+            title: Text(
+              "My Reviews".tr,
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.keyboard_arrow_right),
+              onPressed: () async {
+                var d = await AppConstant.translate(string: "mit dada");
+                print(d);
+              },
+            ),
+          ),
+          Divider(
+            color: Theme.of(context).dividerColor,
+            thickness: 2,
+            indent: 10,
+            endIndent: 10,
+          ),
+          ListTile(
+              leading: Icon(
+                CupertinoIcons.globe,
+                color: Theme.of(context).primaryColor,
+              ),
+              title: Text(
+                "Languages".tr,
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+              ),
+              subtitle: Text("English"),
+              trailing: langDropdownMenu()
+
+              // trailing: IconButton(
+              //   icon: Icon(Icons.keyboard_arrow_right),
+              //   onPressed: () async{ var data=await AppConstant.translate(string: "Sai");
+              //   print(data);},
+              // ),
+              ),
+          Divider(
+            color: Theme.of(context).dividerColor,
+            thickness: 2,
+            indent: 10,
+            endIndent: 10,
+          ),
+          ListTile(
+            onTap: () {
+              AuthServices.deleteSession();
+              Get.offNamed('/logout');
             },
             leading: Icon(
-              CupertinoIcons.trash,
+              Icons.monetization_on,
               color: Theme.of(context).primaryColor,
             ),
             title: Text(
               "Logout".tr,
-              style:
-                  const TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+              style: const TextStyle(
+                  color: Colors.red, fontWeight: FontWeight.w600),
             ),
             // subtitle: Text("Logout"),
             // trailing: langDropdownMenu()
@@ -135,8 +139,9 @@ class _optionsCardState extends State<optionsCard> {
             //     Get.toNamed('/logout');
             //   },
             // ),
-            ),
-      ]),
+          ),
+        ]),
+      ),
     );
   }
 }

@@ -5,10 +5,12 @@ import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/themes/themes.dart';
-import '../../../widgets/buttonRow.dart';
-import '../../../widgets/profilePageOptions.dart';
-import '../../../widgets/waveCliper.dart';
+import 'package:vegrow/views/widgets/profilePageOptions.dart';
 import 'dart:math';
+
+import 'package:vegrow/views/widgets/waveCliper.dart';
+
+import '../../../../widgets/buttonRow.dart';
 
 class AccountPage extends StatefulWidget {
   AccountPage({super.key});

@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:vegrow/controllers/inventoryController.dart';
 import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/models/Inventory.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/home/homePage.dart';
+import 'package:vegrow/views/pages/MainBody/Farmers/tabs/home/homePage.dart';
 import 'package:vegrow/views/widgets/addProductTextField.dart';
 
 class AddProducePage extends StatefulWidget {

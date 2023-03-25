@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vegrow/consts/appConstant.dart';
@@ -31,9 +32,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
       // Session Data
       var sessionData = await AuthServices.getSession();
+      var result = await SessionManager().get('user');
 
       if (sessionData) {
-        Get.offNamed('/dashboard');
+        if(result['role'] == "farmer"){
+         Get.offNamed('/farmerDashboard');
+        }else{
+         Get.offNamed('/vendorHomePage');
+        }
       } else if (data == true) {
         Get.offNamed('/welcome');
       } else {

@@ -1,77 +1,19 @@
-import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/controllers/productController.dart';
-import 'package:vegrow/controllers/themesController.dart';
-import 'package:vegrow/themes/themes.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/Orders/orderPage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/ProducePage/singleProducePage.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/home/FarmerProduceTile.dart';
-import 'package:vegrow/views/pages/MainBody/tabs/home/listTile.dart';
 import 'package:vegrow/views/widgets/myCard.dart';
 import 'package:vegrow/views/widgets/myList.dart';
-import 'package:vegrow/views/pages/Starter/popPage.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final HomeController homeController = Get.put(HomeController());
-  final ThemeController theme = Get.find();
-
-  // ScrollController
-  // ScrollController scrollController = ScrollController();
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((timestamp) {
-  //     if (scrollController.hasClients) {
-  //       double minScrollEvent = scrollController.position.minScrollExtent;
-  //       double maxScrollEvent = scrollController.position.maxScrollExtent;
-  //       animateToMaxMin(maxScrollEvent, minScrollEvent, maxScrollEvent, 10,
-  //           scrollController);
-  //     }
-  //   });
-  // }
-
-  // animateToMaxMin(double max, double min, double direction, int seconds,
-  //     ScrollController scrollController) {
-  //   if (scrollController.hasClients) {
-  //     scrollController
-  //         .animateTo(direction,
-  //             duration: Duration(seconds: seconds), curve: Curves.linear)
-  //         .then((value) {
-  //       direction = direction == max ? min : max;
-  //       animateToMaxMin(max, min, direction, seconds, scrollController);
-  //     });
-  //   }
-  // }
-
-  String greetFarmer() {
-    final hour = TimeOfDay.now().hour;
-
-    if (hour <= 12) {
-      return "Morning";
-    } else if (hour <= 17) {
-      return "Afternoon";
-    } else if (hour > 17 && hour < 19) {
-      return "Evening";
-    }
-    return "Night";
-  }
+class Body extends StatelessWidget {
+  HomeController homeController = Get.find();
+  ProductController productController = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {
+    print(productController.productList.length);
+    Size size = MediaQuery.of(context).size;
     return Obx(() {
       if (homeController.isLoading.value) {
         return const Center(
@@ -81,7 +23,7 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
           backgroundColor: Colors.grey.shade100,
           appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: AppConstant.kPrimaryColor,
             brightness: Brightness.light,
             elevation: 0,
             leadingWidth: 200,
@@ -139,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
+                      color: AppConstant.kPrimaryColor,
                       borderRadius:
                           BorderRadius.vertical(bottom: Radius.circular(40))),
                   padding: const EdgeInsets.all(20.0),
@@ -147,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Good ${greetFarmer()}, ",
+                        "Hello, ",
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -174,23 +116,6 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(
                         height: 5,
                       ),
-                      // Container(
-                      //   padding: const EdgeInsets.all(5),
-                      //   decoration: BoxDecoration(
-                      //       color: Color.fromRGBO(244, 243, 243, 1),
-                      //       borderRadius: BorderRadius.circular(15)),
-                      //   child: const TextField(
-                      //     decoration: InputDecoration(
-                      //         border: InputBorder.none,
-                      //         prefixIcon: Icon(
-                      //           Icons.search,
-                      //           color: Colors.black87,
-                      //         ),
-                      //         hintText: "Search for the produce",
-                      //         hintStyle:
-                      //             TextStyle(color: Colors.grey, fontSize: 15)),
-                      //   ),
-                      // ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -209,21 +134,6 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                //   child: Container(
-                //     height: 140,
-                //     child: ListView.builder(
-                //         scrollDirection: Axis.horizontal,
-                //         itemCount: 5,
-                //         itemBuilder: (context, index) {
-                //           return const FarmerProduceTile(
-                //               imagePath: "assets/images/farmer.png",
-                //               produceTitle: "Farmer One",
-                //               produceDescription: "This is Awesome");
-                //         }),
-                //   ),
-                // ),
                 Container(
                     height: 200,
                     // child: CustomScrollView(
@@ -262,9 +172,7 @@ class _HomePageState extends State<HomePage> {
                           margin: const EdgeInsets.only(top: 10),
                           child: myList(
                                   onPressed: (){
-                                    Navigator.push(context, CupertinoPageRoute(builder: (context){
-                                      return SingleProducePage();
-                                    }));  
+                                    Get.toNamed('/singleProducePage'); 
                                   },
                                 ),
                         );
@@ -279,28 +187,5 @@ class _HomePageState extends State<HomePage> {
       }
     });
   }
-
-  Widget promoCard(image) {
-    return AspectRatio(
-      aspectRatio: 2.62 / 3,
-      child: Container(
-        margin: const EdgeInsets.only(right: 15.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(fit: BoxFit.cover, image: AssetImage(image)),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(begin: Alignment.bottomRight, stops: [
-                0.1,
-                0.9
-              ], colors: [
-                Colors.black.withOpacity(.8),
-                Colors.black.withOpacity(.1)
-              ])),
-        ),
-      ),
-    );
-  }
 }
+
