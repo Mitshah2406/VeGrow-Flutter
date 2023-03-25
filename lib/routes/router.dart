@@ -21,6 +21,7 @@ import '../views/pages/MainBody/Farmers/tabs/ProducePage/singleProducePage.dart'
 import '../views/pages/MainBody/Farmers/tabs/addProducePage.dart';
 import '../views/pages/MainBody/Farmers/tabs/home/homePage.dart';
 import '../views/pages/MainBody/Farmers/tabs/home/locationPage.dart';
+import '../views/pages/MainBody/Vendors/tabs/Home/vendorDashboard.dart';
 
 class AppRoutes {
   static List<GetPage> generateRoutes = [
@@ -75,11 +76,25 @@ class AppRoutes {
 
     // Vendor Dashboard
     // GetPage(name: "/vendorDashboard", page: () => vendorDashboardPage(), transition: Transition.rightToLeftWithFade, transitionDuration: const Duration(milliseconds: 400)),
-    GetPage(name: "/vendorHomePage", page: () => vendorHomePage(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
-    GetPage(name: "/tabPage2", page: () => const tabPage2(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
-    GetPage(name: "/tabPage3", page: () =>  SingleProductView(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
-    GetPage(name: "/tabPage4", page: () => const tabPage4(), transition: Transition.fadeIn, transitionDuration: const Duration(milliseconds: 500)),
-    GetPage(name: "/singleProductView", page: () => SingleProductView(), transition: Transition.rightToLeftWithFade, transitionDuration: const Duration(milliseconds: 500))
-    
+    GetPage(
+        name: "/vendorHomePage",
+        page: () => vendorHomePage(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(milliseconds: 500)),
+    GetPage(
+        name: "/tabPage3",
+        page: () => SingleProductView(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(milliseconds: 500)),
+    GetPage(
+        name: "/tabPage4",
+        page: () => const tabPage4(),
+        transition: Transition.fadeIn,
+        transitionDuration: const Duration(milliseconds: 500)),
+    GetPage(
+        name: "/singleProductView",
+        page: () => SingleProductView(),
+        transition: Transition.rightToLeftWithFade,
+        transitionDuration: const Duration(milliseconds: 500))
   ];
 }
