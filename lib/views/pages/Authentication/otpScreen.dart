@@ -426,6 +426,7 @@ import 'package:pinput/pinput.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/auth/idController.dart';
 import 'package:vegrow/controllers/auth/loginController.dart';
+import 'package:vegrow/controllers/locationController.dart';
 import 'package:vegrow/services/authServices.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
 import 'package:vegrow/views/pages/Starter/popPage.dart';
@@ -531,6 +532,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           if (result == 1) {
                             Get.offNamed('/farmerDashboard');
                           }else if(result == 2){
+                            var result = await LocationController.promptLocation();
                             Get.offNamed('/vendorDashboard');
                           }else {
                             Get.offNamed('/register/${loginController.phoneController.text}');

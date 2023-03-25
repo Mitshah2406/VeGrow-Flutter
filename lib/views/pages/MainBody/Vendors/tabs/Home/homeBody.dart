@@ -14,11 +14,11 @@ class Body extends StatelessWidget {
     print(productController.productList.length);
     Size size = MediaQuery.of(context).size;
     return Obx(() {
-      if (homeController.isLoading.value) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      } else {
+      // if (homeController.isLoading.value) {
+      //   return const Center(
+      //     child: CircularProgressIndicator(),
+      //   );
+      // } else {
         return Scaffold(
           backgroundColor: Colors.grey.shade100,
           appBar: AppBar(
@@ -184,7 +184,8 @@ class Body extends StatelessWidget {
           ),
         );
       }
-    });
+    // }
+    );
   }
 }
 

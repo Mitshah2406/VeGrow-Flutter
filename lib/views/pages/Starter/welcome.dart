@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:get/get.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/views/pages/Starter/popPage.dart';
 
-class Welcome extends StatelessWidget {
+class Welcome extends StatefulWidget {
   Welcome({Key? key}) : super(key: key);
 
+  @override
+  State<Welcome> createState() => _WelcomeState();
+}
+
+class _WelcomeState extends State<Welcome> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    callApi();
+    super.initState();
+  }
+
+  callApi() async {
+    dynamic data = await SessionManager().get("user");
+    print("Session Dleted");
+    print(data);
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(

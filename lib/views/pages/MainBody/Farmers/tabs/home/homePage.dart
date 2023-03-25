@@ -60,11 +60,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if (homeController.isLoading.value) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      } else {
+      // if (homeController.isLoading.value) {
+      //   return const Center(
+      //     child: CircularProgressIndicator(),
+      //   );
+      // } else {
         return Scaffold(
           backgroundColor: Colors.grey.shade300,
           appBar: PreferredSize(
@@ -861,7 +861,8 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       }
-    });
+    // }
+    );
   }
 
   Widget promoCard(image) {

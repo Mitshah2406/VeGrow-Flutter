@@ -184,7 +184,7 @@ Widget getStaggeredGridView(BuildContext context) {
     padding: EdgeInsets.symmetric(
       vertical: 10,
     ),
-    child: StaggeredGrid.count(
+    child: StaggeredGridView.count(
       crossAxisCount: 2,
       children: categoryItemsDemo.asMap().entries.map<Widget>((e) {
         int index = e.key;
