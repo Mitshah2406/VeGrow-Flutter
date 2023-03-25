@@ -9,6 +9,8 @@ import 'package:vegrow/models/Product.dart';
 class ProductController extends GetxController {
   var isloading = true.obs;
   var productList = <Product>[].obs;
+  var conFirmedFilter = false.obs;
+  var productListIsEmpty = false.obs;
   var productListForSearchQuery = <Product>[].obs;
 
   late List<Product> AllList;
@@ -22,6 +24,16 @@ class ProductController extends GetxController {
     // fetchProduct();
   }
 
+  void confirmedFilterFalse() {
+    productListIsEmpty(false);
+    conFirmedFilter(false);
+  }
+
+  void confirmedFilterTrue() {
+    productListIsEmpty(false);
+    conFirmedFilter(true);
+  }
+
   void fetchProduct({data}) async {
     try {
       productList.value = [];
@@ -33,7 +45,11 @@ class ProductController extends GetxController {
         print(products);
         if (products != null) {
           productList.value = products;
+          if (productList.isEmpty) {
+            productListIsEmpty(true);
+          }
           isloading(false);
+
           print(productList);
         }
       });
@@ -84,11 +100,13 @@ class ProductController extends GetxController {
     }
   }
 
-  Future<List<Product>?> fetchProductsBySearchQuery(query , {params='distance'}) async {
+  Future<List<Product>?> fetchProductsBySearchQuery(query,
+      {params = 'distance'}) async {
     try {
       isloading(true);
       Future.delayed(Duration(seconds: 1), () async {
-        var result = await productServices.fetchProductsBySearchQuery(query, params);
+        var result =
+            await productServices.fetchProductsBySearchQuery(query, params);
         if (result != null) {
           productListForSearchQuery.value = result;
           print("product list");

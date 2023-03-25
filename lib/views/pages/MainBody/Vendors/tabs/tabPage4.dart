@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 import 'package:vegrow/consts/appConstant.dart';
+import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/services/authServices.dart';
 import 'package:vegrow/themes/themes.dart';
 import 'package:vegrow/views/widgets/bottomNav.dart';
@@ -23,18 +24,14 @@ class tabPage4 extends StatefulWidget {
 
 class _tabPage4State extends State<tabPage4> {
   dynamic data ='';
+  HomeController homeController = Get.find();
   @override
   void initState() {
     // TODO: implement initState
-    callSession();
+   
     super.initState();
   }
-  void callSession() async{
-   data =await AuthServices.getCurrentSession();
-   print("data");
-   print(data);
 
-  }
    @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -97,7 +94,7 @@ class _tabPage4State extends State<tabPage4> {
                 child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      data['fName'],
+                     (homeController.farmerList[0]['fName']).toString(),
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ))),
@@ -106,7 +103,7 @@ class _tabPage4State extends State<tabPage4> {
                 child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      data['email'],
+                     (homeController.farmerList[0]['email']).toString(),
                       style: TextStyle(color: Colors.blueGrey, fontSize: 15),
                     ))),
             Positioned.fill(

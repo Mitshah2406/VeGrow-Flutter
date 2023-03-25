@@ -112,7 +112,7 @@ class AuthServices {
   static void deleteSession() async {
     await SessionManager().destroy();
      dynamic data = await SessionManager().get("user");
-    // print(data['token']);
+    print("Session Dleted");
     print(data);
     var prefs = await SharedPreferences.getInstance();
     Get.offNamed('/logout');
