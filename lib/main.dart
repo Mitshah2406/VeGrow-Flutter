@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/consts/localeString.dart';
 // import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -27,6 +28,7 @@ void main() async {
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
   final ThemeController themeC = Get.put(ThemeController());
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {

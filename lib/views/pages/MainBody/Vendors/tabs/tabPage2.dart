@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/preferences/searchController.dart';
 import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/models/category_item.dart';
@@ -22,7 +23,7 @@ List<Color> gridColors = [
 ];
 
 class tabPage2 extends StatefulWidget {
-  const tabPage2({Key? key}) : super(key: key);
+  tabPage2({Key? key}) : super(key: key);
 
   @override
   State<tabPage2> createState() => _tabPage2State();
@@ -38,7 +39,8 @@ class _tabPage2State extends State<tabPage2> {
     productController.productListForSearchQuery.clear();
     super.initState();
   }
-@override
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -224,8 +226,6 @@ class _tabPage2State extends State<tabPage2> {
                 ],
               ),
       ),
-
-      // bottomNavigationBar:  BottomNavVendor,
     );
   }
 }

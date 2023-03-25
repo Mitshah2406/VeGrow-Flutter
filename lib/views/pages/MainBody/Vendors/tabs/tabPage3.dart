@@ -14,6 +14,8 @@ class tabPage3 extends StatefulWidget {
 class _tabPage3State extends State<tabPage3> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Text("hi"), bottomNavigationBar: BottomNavVendor(index:2));
+    return Scaffold(
+      body: Text("hi"),
+    );
   }
 }
