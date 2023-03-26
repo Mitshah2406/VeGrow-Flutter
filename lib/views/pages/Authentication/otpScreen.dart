@@ -426,6 +426,7 @@ import 'package:pinput/pinput.dart';
 import 'package:vegrow/consts/appConstant.dart';
 import 'package:vegrow/controllers/auth/idController.dart';
 import 'package:vegrow/controllers/auth/loginController.dart';
+import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/services/authServices.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
 import 'package:vegrow/views/pages/Starter/popPage.dart';
@@ -440,6 +441,7 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final LoginController loginController = Get.find();
   final IdController idController = Get.find();
+  final HomeController homeController = Get.find();
   bool isLoading = false;
   FocusNode noteFocus = FocusNode();
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -536,9 +538,11 @@ class _OtpScreenState extends State<OtpScreen> {
                             isLoading = false;
                           });
                           if (result == 1) {
+                            homeController.fetchFarmers();
                             Get.offNamed('/farmerDashboard');
                           } else if (result == 2) {
-                            Get.offNamed('/vendorDashboard');
+                            homeController.fetchFarmers();
+                            Get.offNamed('/vendorHomePage');
                           } else {
                             Get.offNamed(
                                 '/register/${loginController.phoneController.text}');

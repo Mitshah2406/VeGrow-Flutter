@@ -10,7 +10,6 @@ class HomeController extends GetxController{
 
   @override
   void onInit() {
-    fetchFarmers();
     super.onInit();
   }
 
@@ -30,6 +29,7 @@ class HomeController extends GetxController{
             farmerList.add(farmers);
             print("farmerrrrrrrrrrrr000");
             print(farmerList);
+            isLoading(false);
           }  
         }else{
           var farmers = await HomeServices.getVendorData(userData['id'], userData['token']);
@@ -38,9 +38,9 @@ class HomeController extends GetxController{
           print(farmers.runtimeType);
           if(farmers != null){      
             farmerList.add(farmers);
+      isLoading(false);
           }  
         }
-      isLoading(false);
       });
     }catch(e){
       print(e);

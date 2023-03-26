@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 import 'package:vegrow/consts/appConstant.dart';
+import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/themes/themes.dart';
 import 'package:vegrow/views/widgets/profilePageOptions.dart';
 import 'dart:math';
@@ -23,6 +24,7 @@ class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    HomeController homeController = Get.find();
 
     return Scaffold(
       body: Container(
@@ -81,7 +83,8 @@ class _AccountPageState extends State<AccountPage> {
                 child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "Mit Shah",
+                      homeController.farmerList.isNotEmpty?
+                      homeController.farmerList[0]['fName'].toString(): "",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ))),
@@ -90,7 +93,9 @@ class _AccountPageState extends State<AccountPage> {
                 child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      "farmer@124",
+                    homeController.farmerList.isNotEmpty
+                          ? homeController.farmerList[0]['email'].toString()
+                          : "",
                       style: TextStyle(color: Colors.blueGrey, fontSize: 15),
                     ))),
             Positioned.fill(

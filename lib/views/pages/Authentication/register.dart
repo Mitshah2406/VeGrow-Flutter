@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:vegrow/controllers/auth/idController.dart';
 import 'package:vegrow/controllers/auth/loginController.dart';
 import 'package:vegrow/controllers/auth/registerController.dart';
+import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/controllers/locationController.dart';
 import 'package:vegrow/services/authServices.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,6 +28,7 @@ class _RegisterState extends State<Register> {
 
   final RegisterController registerController = Get.put(RegisterController());
   final LocationController locationController = Get.put(LocationController());
+  final HomeController homeController = Get.find();
   final IdController idController = Get.find();
 
   final _formKey = GlobalKey<FormState>();
@@ -238,9 +240,12 @@ class _RegisterState extends State<Register> {
                                       print(result);
 
                                       if (result == 1) {
+                                        homeController.fetchFarmers();
+                                        
                                         Get.offNamed("/farmerDashboard");
                                       }else if(result == 2){
-                                        Get.offNamed("/vendorDashboard");
+                                        homeController.fetchFarmers();
+                                        Get.offNamed("/vendorHomePage");
                                       } else {
                                         Fluttertoast.showToast(
                                             msg: "Technical Error",

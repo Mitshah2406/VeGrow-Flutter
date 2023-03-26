@@ -61,10 +61,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (homeController.isLoading.value) {
+        print("homeController.isLoading.value");
+        print(homeController.isLoading.value);
         return const Center(
           child: CircularProgressIndicator(),
         );
       } else {
+             print("homeController.isLoading.value");
+        print(homeController.isLoading.value);
         return Scaffold(
           backgroundColor: Colors.grey.shade300,
           appBar: PreferredSize(
@@ -242,198 +246,200 @@ class _HomePageState extends State<HomePage> {
                           color: Color(0xffE4D0D0),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Platinum",
-                                style: TextStyle(
-                                  fontFamily: "Bono Nova",
-                                  fontSize: 27,
-                                  letterSpacing: 1,
-                                  color: Color(0xFFDF7857),
-                                  fontWeight: FontWeight.bold
-                                ),
-                              ),
-                              Divider(
-                                color: Colors.white,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text('Benefits',
+                        child: SingleChildScrollView(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Platinum",
                                   style: TextStyle(
-                                      color: Color(0xFFA86464),
-                                      fontFamily: 'Bono Nova',
-                                      letterSpacing: 1, 
-                                      fontSize: 22
-                                    )),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color(0xFFE3FFF8),
-                                        child: Icon(Icons.done, size: 16,),
-                                      ),
-                                      // SizedBox(width: 10),
-                                      Text(
-                                        "Buy Our Premium Services",
-                                        style: TextStyle(
-                                          fontFamily: 'Bono Nova',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16
-                                        ),
-                                      ),
-                                      // SizedBox(width: 30),
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color.fromARGB(255, 239, 245, 243),
-                                        child: Icon(Icons.monetization_on_outlined, size: 16,),
-                                      ),
-                                    ],
+                                    fontFamily: "Bono Nova",
+                                    fontSize: 27,
+                                    letterSpacing: 1,
+                                    color: Color(0xFFDF7857),
+                                    fontWeight: FontWeight.bold
                                   ),
-                                  SizedBox(height: 10),
-                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color(0xFFE3FFF8),
-                                        child: Icon(Icons.done, size: 16,),
-                                      ),
-                                      // SizedBox(width: 10),
-                                      Text(
-                                        "Buy Our Premium Services",
-                                        style: TextStyle(
-                                          fontFamily: 'Bono Nova',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16
+                                ),
+                                Divider(
+                                  color: Colors.white,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                const Text('Benefits',
+                                    style: TextStyle(
+                                        color: Color(0xFFA86464),
+                                        fontFamily: 'Bono Nova',
+                                        letterSpacing: 1, 
+                                        fontSize: 22
+                                      )),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color(0xFFE3FFF8),
+                                          child: Icon(Icons.done, size: 16,),
                                         ),
-                                      ),
-                                      // SizedBox(width: 30),
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color.fromARGB(255, 239, 245, 243),
-                                        child: Icon(Icons.monetization_on_outlined, size: 16,),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color(0xFFE3FFF8),
-                                        child: Icon(Icons.done, size: 16,),
-                                      ),
-                                      // SizedBox(width: 10),
-                                      Text(
-                                        "Buy Our Premium Services",
-                                        style: TextStyle(
-                                          fontFamily: 'Bono Nova',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16
+                                        // SizedBox(width: 10),
+                                        Text(
+                                          "Buy Our Premium Services",
+                                          style: TextStyle(
+                                            fontFamily: 'Bono Nova',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16
+                                          ),
                                         ),
-                                      ),
-                                      // SizedBox(width: 30),
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color.fromARGB(255, 239, 245, 243),
-                                        child: Icon(Icons.monetization_on_outlined, size: 16,),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color(0xFFE3FFF8),
-                                        child: Icon(Icons.done, size: 16,),
-                                      ),
-                                      // SizedBox(width: 10),
-                                      Text(
-                                        "Buy Our Premium Services",
-                                        style: TextStyle(
-                                          fontFamily: 'Bono Nova',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16
+                                        // SizedBox(width: 30),
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color.fromARGB(255, 239, 245, 243),
+                                          child: Icon(Icons.monetization_on_outlined, size: 16,),
                                         ),
-                                      ),
-                                      // SizedBox(width: 30),
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color.fromARGB(255, 239, 245, 243),
-                                        child: Icon(Icons.monetization_on_outlined, size: 16,),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color(0xFFE3FFF8),
-                                        child: Icon(Icons.done, size: 16,),
-                                      ),
-                                      // SizedBox(width: 10),
-                                      Text(
-                                        "Buy Our Premium Services",
-                                        style: TextStyle(
-                                          fontFamily: 'Bono Nova',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color(0xFFE3FFF8),
+                                          child: Icon(Icons.done, size: 16,),
                                         ),
-                                      ),
-                                      // SizedBox(width: 30),
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color.fromARGB(255, 239, 245, 243),
-                                        child: Icon(Icons.monetization_on_outlined, size: 16,),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10),
-                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color(0xFFE3FFF8),
-                                        child: Icon(Icons.done, size: 16,),
-                                      ),
-                                      // SizedBox(width: 10),
-                                      Text(
-                                        "Buy Our Premium Services",
-                                        style: TextStyle(
-                                          fontFamily: 'Bono Nova',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16
+                                        // SizedBox(width: 10),
+                                        Text(
+                                          "Buy Our Premium Services",
+                                          style: TextStyle(
+                                            fontFamily: 'Bono Nova',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16
+                                          ),
                                         ),
-                                      ),
-                                      // SizedBox(width: 30),
-                                      CircleAvatar(
-                                        radius: 10,
-                                        backgroundColor: Color.fromARGB(255, 239, 245, 243),
-                                        child: Icon(Icons.monetization_on_outlined, size: 16,),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              )
-                            ]
-                          ),
+                                        // SizedBox(width: 30),
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color.fromARGB(255, 239, 245, 243),
+                                          child: Icon(Icons.monetization_on_outlined, size: 16,),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color(0xFFE3FFF8),
+                                          child: Icon(Icons.done, size: 16,),
+                                        ),
+                                        // SizedBox(width: 10),
+                                        Text(
+                                          "Buy Our Premium Services",
+                                          style: TextStyle(
+                                            fontFamily: 'Bono Nova',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16
+                                          ),
+                                        ),
+                                        // SizedBox(width: 30),
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color.fromARGB(255, 239, 245, 243),
+                                          child: Icon(Icons.monetization_on_outlined, size: 16,),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color(0xFFE3FFF8),
+                                          child: Icon(Icons.done, size: 16,),
+                                        ),
+                                        // SizedBox(width: 10),
+                                        Text(
+                                          "Buy Our Premium Services",
+                                          style: TextStyle(
+                                            fontFamily: 'Bono Nova',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16
+                                          ),
+                                        ),
+                                        // SizedBox(width: 30),
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color.fromARGB(255, 239, 245, 243),
+                                          child: Icon(Icons.monetization_on_outlined, size: 16,),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color(0xFFE3FFF8),
+                                          child: Icon(Icons.done, size: 16,),
+                                        ),
+                                        // SizedBox(width: 10),
+                                        Text(
+                                          "Buy Our Premium Services",
+                                          style: TextStyle(
+                                            fontFamily: 'Bono Nova',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16
+                                          ),
+                                        ),
+                                        // SizedBox(width: 30),
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color.fromARGB(255, 239, 245, 243),
+                                          child: Icon(Icons.monetization_on_outlined, size: 16,),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10),
+                                     Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color(0xFFE3FFF8),
+                                          child: Icon(Icons.done, size: 16,),
+                                        ),
+                                        // SizedBox(width: 10),
+                                        Text(
+                                          "Buy Our Premium Services",
+                                          style: TextStyle(
+                                            fontFamily: 'Bono Nova',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16
+                                          ),
+                                        ),
+                                        // SizedBox(width: 30),
+                                        CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: Color.fromARGB(255, 239, 245, 243),
+                                          child: Icon(Icons.monetization_on_outlined, size: 16,),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ]
+                            ),
+                        ),
                       ),
                     ),
                     Padding(

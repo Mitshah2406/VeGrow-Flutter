@@ -56,8 +56,7 @@ class _ListProducePageState extends State<ListProducePage> {
                           'Satisfied',
                         ]
                             .map((e) => Container(
-                             color: e=="Confirmed"
-                             ? bgColor: Colors.white,
+                             
                              
                                   margin: const EdgeInsets.symmetric(
                                       vertical: 8.0, horizontal: 8.0),
@@ -86,11 +85,7 @@ class _ListProducePageState extends State<ListProducePage> {
                                         //     borderRadius: BorderRadius.circular(30)),
                                         ),
                                     child: Text(e, style: TextStyle(
-                                         color: productController.conFirmedFilter ==
-                                                      true &&
-                                                  e == "Confirmed"
-                                              ? fgColor
-                                              : Colors.green),),
+                                         color:  Colors.green),),
                                   ),
                                 ))
                             .toList(),

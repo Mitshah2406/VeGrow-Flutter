@@ -161,6 +161,7 @@ TextEditingController searchBoxController = new TextEditingController();
                                   tag: productController.productList
                                       .map((element) => element.productId),
                                   child: ListTile(
+                                    
                                     contentPadding: const EdgeInsets.all(8),
                                     leading: ClipOval(
                                       child: Image.network(
@@ -217,7 +218,7 @@ TextEditingController searchBoxController = new TextEditingController();
                 )
             : Column(
                 children: [
-                  getStaggeredGridView(context),
+                 Text("heeloo")
                 ],
               ),
       ),
@@ -323,7 +324,7 @@ Widget getStaggeredGridView(BuildContext context) {
     padding: EdgeInsets.symmetric(
       vertical: 10,
     ),
-    child: StaggeredGrid.count(
+    child: StaggeredGridView.count(
       crossAxisCount: 2,
       children: categoryItemsDemo.asMap().entries.map<Widget>((e) {
         int index = e.key;

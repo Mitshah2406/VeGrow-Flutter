@@ -15,10 +15,14 @@ class Body extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Obx(() {
       if (homeController.isLoading.value) {
+        print(homeController.isLoading.value);
+        print("homeController.isLoading.value");
         return const Center(
           child: CircularProgressIndicator(),
         );
       } else {
+           print(homeController.isLoading.value);
+        print("homeController.isLoading.value");
         return Scaffold(
           backgroundColor: Colors.grey.shade100,
           appBar: AppBar(

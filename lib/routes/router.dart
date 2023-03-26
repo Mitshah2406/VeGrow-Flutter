@@ -47,7 +47,7 @@ class AppRoutes {
     // Farmer Dashboard
     GetPage(name: "/farmerDashboard", page: () => farmerDashboardPage()),
     GetPage(name: "/home", page: () => HomePage()),
-    GetPage(name: "/likes", page: () => ListProducePage()),
+    GetPage(name: "/likes", page: () => SingleProducePage()),
     GetPage(name: "/logout", page: () => Welcome()),
     GetPage(name: "/categories", page: () => AddProducePage()),
     // GetPage(name: "/cart", page: () => CartPage()),
