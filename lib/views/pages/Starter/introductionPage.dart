@@ -28,10 +28,7 @@ class IntroScreenPage extends StatelessWidget {
             body: IntroductionScreen(
       // For Done Button
       showDoneButton: true,
-      done: const Text(
-        "Done",
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-      ),
+      done:  Icon(Icons.arrow_forward_ios),
       onDone: () async {
         skipIntro();
         Get.offNamed('/login');
@@ -57,7 +54,8 @@ class IntroScreenPage extends StatelessWidget {
       // globalBackgroundColor: Colors.amber,
       pages: [
         PageViewModel(
-            title: "Page 1",
+            title: "Welcome",
+            
             decoration: PageDecoration(
                 // contentMargin: EdgeInsets.all(10),
                 imageAlignment: Alignment.center,
@@ -65,46 +63,55 @@ class IntroScreenPage extends StatelessWidget {
                 imageFlex: 2,
                 // imagePadding: EdgeInsets.only(top: 400),
                 titleTextStyle:
-                    const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, fontFamily: 'Bono Nova'),
                 bodyTextStyle: TextStyle(
                   decorationStyle: TextDecorationStyle.dotted,
                   color: Colors.grey.shade500,
+                  fontFamily: "Oxygen",
+                  letterSpacing: 0.3,
                   fontSize: 20,
                 )),
-            body: "Write down the Description You needed",
+            body: "VeGrow provides a ecosystem between farmer & vendors",
+           
             image: Image.asset(
               AppConstant.introPageImg,
               height: 500,
             )),
         PageViewModel(
-            title: "Page 2",
-            body: "",
+            image: Image.asset(
+              AppConstant.introPageImg,
+              height: 500,
+            ),
+            title: "Farmers",
+            body: "Farmers can list their produce to sell and also reach out to multiple vendors",
             decoration: PageDecoration(
                 imageAlignment: Alignment.center,
                 imagePadding: const EdgeInsets.only(top: 200),
                 imageFlex: 2,
                 titleTextStyle:
-                    const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, fontFamily: 'Bono Nova'),
                 bodyTextStyle: TextStyle(
                   decorationStyle: TextDecorationStyle.dotted,
                   color: Colors.grey.shade500,
                   fontSize: 20,
+                  fontFamily: 'Oxygen'
                 )),
         ),
         PageViewModel(
-          title: "Page 3",
+          title: "Vendors",
           decoration: PageDecoration(
               imageAlignment: Alignment.center,
-              imageFlex: 3,
+              imageFlex: 2,
               imagePadding: const EdgeInsets.only(top: 200),
               titleTextStyle:
-                  const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  const TextStyle(fontSize: 40, fontWeight: FontWeight.bold, fontFamily: "Bono Nova"),
               bodyTextStyle: TextStyle(
                 decorationStyle: TextDecorationStyle.dotted,
                 color: Colors.grey.shade500,
+                fontFamily: 'Oxygen',
                 fontSize: 20,
               )),
-          body: "Write down the Description You needed",
+          body: "Vendors can bid and buy adequate amount of products at a fair price",
           image: Image.asset(
             AppConstant.introPageImg,
             height: 500,

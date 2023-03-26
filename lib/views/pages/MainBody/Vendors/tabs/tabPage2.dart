@@ -217,7 +217,7 @@ TextEditingController searchBoxController = new TextEditingController();
                 )
             : Column(
                 children: [
-                  getStaggeredGridView(context),
+                  // getStaggeredGridView(context),
                 ],
               ),
       ),

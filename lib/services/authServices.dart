@@ -119,7 +119,7 @@ class AuthServices {
     var prefs = await SharedPreferences.getInstance();
     Get.offNamed('/logout');
     print(prefs.getBool('show'));
-    prefs.setBool('show', true);
+    // prefs.setBool('show', true);
   }
 
   static Future<bool> getSession() async {

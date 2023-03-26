@@ -8,10 +8,10 @@ import 'package:vegrow/controllers/productController.dart';
 import 'package:vegrow/views/widgets/DropDownBidVendor.dart';
 
 class SingleProductView extends StatefulWidget {
-  SingleProductView({super.key});
+   SingleProductView({super.key});
   final _formKey = GlobalKey<FormState>();
   final TextEditingController bidController = new TextEditingController();
-
+  
   final ProductController productController = Get.find();
   @override
   State<SingleProductView> createState() => _SingleProductViewState();
