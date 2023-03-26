@@ -10,6 +10,20 @@ import 'package:vegrow/services/authServices.dart';
 import '../models/bid.dart';
 
 class productServices {
+
+static Future<Map>getSpecificProductDetails(data)async{
+  var sessionData = await AuthServices.getCurrentSession();
+
+   var response = await http.post(
+          Uri.parse("${AppConstant.IP}/authentication/specificProductDetailsForVendor/"),
+          headers: <String, String>{
+            'Authorization': 'Bearer ${sessionData["token"]}'
+          },
+          body: jsonEncode({"productId": data ,"vendorId":sessionData['id']}));print("dddddd");
+print(response.body);
+          return jsonDecode(response.body);
+}
+
   static Future<List<Product>?> getAllProducts({data}) async {
     try {
       var sessionData = await AuthServices.getCurrentSession();
@@ -203,6 +217,8 @@ return categoriesList;
   static Future<List<Bid>?> getListOfBidsForSpecificProduct({tokenId,filter})async{
       var sessionData = await AuthServices.getCurrentSession();
       print("Session");
+      print(filter);
+      print(tokenId);
       print(sessionData['token']);
       var response = await http.post(
         Uri.parse(
@@ -210,7 +226,35 @@ return categoriesList;
             ),body: jsonEncode({"inventoryId":tokenId,"filter":filter}),
           
         headers: {"Authorization": 'Bearer ${sessionData["token"]}'},
-      );
-      return bidFromJson(jsonDecode(response.body));
-  }
+        
+      );print(tokenId);
+      print("PPPPPPPPPPPPPPPPPPPPP");    
+      print(response.body);
+
+      // List<String> data =jsonDecode(response.body).map((item) => item.toString()).toList();
+      return bidFromJson(response.body);
+}
+
+
+static bidOnProduct({bidQunatity,bidAmount,inventoryId})async{
+ var sessionData = await AuthServices.getCurrentSession();
+      print("Session");
+   
+      print(sessionData['token']);
+      var response = await http.post(
+        Uri.parse(
+            "${AppConstant.IP}/authentication/productBidList/",
+            ),body: jsonEncode({
+  
+  "bidQuantity":bidQunatity,
+  "bidAmount":bidAmount,
+  "vendorId":sessionData['id'],
+  "inventoryId":inventoryId
+  
+}),
+          
+        headers: {"Authorization": 'Bearer ${sessionData["token"]}'},
+        
+      );return jsonDecode(response.body);
+}
 }

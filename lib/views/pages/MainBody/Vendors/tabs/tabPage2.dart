@@ -39,7 +39,8 @@ class _tabPage2State extends State<tabPage2> {
     productController.productListForSearchQuery.clear();
     super.initState();
   }
-TextEditingController searchBoxController = new TextEditingController();
+
+  TextEditingController searchBoxController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,69 +73,74 @@ TextEditingController searchBoxController = new TextEditingController();
           // child: Text('hey there ! you are here! in the search tab page'),
           //     ? Center(child: Text("HEllo"))
           Obx(
-        () => productController.productListForSearchQuery.isNotEmpty
-            ?ListView(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-                      height: 50,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                         'Highest Qty',
-                         'Lowest Price',
-                         'Distance',
-                        ]
-                            .map((e) => Container(
-                            
-                             
-                                  margin: const EdgeInsets.symmetric(
-                                      vertical: 8.0, horizontal: 8.0),
-                                  child: OutlinedButton(
-                                    onPressed: () async {
-                                      if (e == "Highest Qty") {
-                                        productController.fetchProductsBySearchQuery(
-                                             searchBoxController.text, params: 'highestQuantity');
-                                      } else if (e == "Lowest Price") {
-                                          
-                                        productController
-                                          .fetchProductsBySearchQuery(
-                                              searchBoxController.text,
-                                              params: 'lowestPrice');
-                                      
-                                      } else if (e == "Distance") {
-                                        productController.fetchProduct(
-                                            data: "distance");
-                                      }
-                                    },
-                                    style: const ButtonStyle(
-                                        // border: RoundedRectangleBorder(
-                                        //     borderRadius: BorderRadius.circular(30)),
-                                        ),
-                                    child: Text(e),
-                                  ),
-                                ))
-                            .toList(),
+        () => productController.isloading == true
+          ? Center(child: CircularProgressIndicator())
+            : productController.productListForSearchQuery.isNotEmpty ?
+                ListView(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 10),
+                        height: 50,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            'Highest Qty',
+                            'Lowest Price',
+                            'Distance',
+                          ]
+                              .map((e) => Container(
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 8.0),
+                                    child: OutlinedButton(
+                                      onPressed: () async {
+                                        if (e == "Highest Qty") {
+                                          productController
+                                              .fetchProductsBySearchQuery(
+                                                  productController.search,
+                                                  params: 'highestQuantity');
+                                        } else if (e == "Lowest Price") {
+                                          productController
+                                              .fetchProductsBySearchQuery(
+                                                  productController.search,
+                                                  params: 'lowestPrice');
+                                        } else if (e == "Distance") {
+                                          print(productController.search);
+                                          productController
+                                              .fetchProductsBySearchQuery(
+                                                  productController.search,
+                                                  params: 'distance');
+                                        }
+                                      },
+                                      style: const ButtonStyle(
+                                          // border: RoundedRectangleBorder(
+                                          //     borderRadius: BorderRadius.circular(30)),
+                                          ),
+                                      child: Text(e),
+                                    ),
+                                  ))
+                              .toList(),
+                        ),
                       ),
-                    ),
-                    productController.productListIsEmpty == true
-                        ? Center(
-                            child: Column(children: [
-                            const SizedBox(
-                              height: 90,
-                            ),
-                          ClipOval(child: Image.asset('assets/images/empty.png')),
-                            const SizedBox(
-                              height: 60,
-                            ),
-                            ElevatedButton(
-                                onPressed: () {}, child: const Text("Add Produce"))
-                          ]))
-                        :
-                    productController.conFirmedFilter == true   
-                        ? const Text("mitsCards")
-                        :
-                    Column(
+                      productController.productListIsEmpty == true
+                          ? Center(
+                              child: Column(children: [
+                              const SizedBox(
+                                height: 90,
+                              ),
+                              ClipOval(
+                                  child:
+                                      Image.asset('assets/images/empty.png')),
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {},
+                                  child: const Text("Add Produce"))
+                            ]))
+                         
+                             
+                              : Column(
                       children: productController.productList
                           .map(
                             (e) => GestureDetector(
@@ -165,7 +171,7 @@ TextEditingController searchBoxController = new TextEditingController();
                                     contentPadding: const EdgeInsets.all(8),
                                     leading: ClipOval(
                                       child: Image.network(
-                                        'https://static.vecteezy.com/system/resources/thumbnails/001/992/951/small/fresh-onion-healthy-vegetable-icon-free-vector.jpg',
+                                        e.productImages.toString(),
                                         fit: BoxFit.cover,
                                         width: 70,
                                         height: 70,
@@ -181,29 +187,12 @@ TextEditingController searchBoxController = new TextEditingController();
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text("\$ " +
-                                            e.productDescription.toString()),
+                                        Text("\ " + 
+                                            e.distanceFromVendor.toString()),
                                         const SizedBox(height: 10),
                                         Container(
                                           height: 40,
-                                          child: Stack(
-                                            children: <Widget>[
-                                              Positioned(
-                                                  left: 20,
-                                                  bottom: 0,
-                                                  child: CircleAvatar(
-                                                      backgroundColor:
-                                                          Colors.green,
-                                                      child: Image.network(
-                                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRxHTyqjCdnZsEM-EkMvn3FDBkDADcaEZ3GN1YEdWFToAJm83nX&usqp=CAU'))),
-                                              const Positioned(
-                                                left: 0,
-                                                bottom: 0,
-                                                child: CircleAvatar(
-                                                    child: Text('a')),
-                                              )
-                                            ],
-                                          ),
+                                         
                                         )
                                       ],
                                     ),
@@ -230,9 +219,9 @@ class searchBox extends SearchDelegate {
   ProductController productController = Get.find();
   SearchController searchController = Get.put(SearchController());
   List<String> list = [];
-  // void callApi() async {
-  //   list = await productServices.fetchProductsForSearchList();
-  // }
+//   void callApi() async {
+//     list = await productServices.fetchProductsForSearchList();
+//   }
 
 // first overwrite to
 // clear the search text
@@ -265,7 +254,7 @@ class searchBox extends SearchDelegate {
   }
 
 // third overwrite to show query result
-
+   
   @override
   Widget buildResults(BuildContext context) {
     List<String> matchQuery = [];
@@ -281,6 +270,8 @@ class searchBox extends SearchDelegate {
         return ListTile(
           title: Text(result),
           onTap: () async {
+            productController.search=result;
+            print(productController.search);
             productController.fetchProductsBySearchQuery(result);
             // productController.productListForSearchQuery
 
@@ -308,7 +299,9 @@ class searchBox extends SearchDelegate {
         var result = matchQuery[index];
         return ListTile(
           title: Text(result),
-          onTap: () async {
+          onTap: () async { 
+productController.search=result;
+            print(productController.search);
             print("object");
             productController.fetchProductsBySearchQuery(result);
             close(context, null);

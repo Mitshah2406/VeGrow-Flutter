@@ -2,15 +2,18 @@ import 'dart:convert';
 
 import 'package:get/state_manager.dart';
 import 'package:vegrow/services/homeServices.dart';
-// import 'package:get/get.dart';
+import 'package:get/get.dart';
 import 'package:vegrow/services/productServices.dart';
 import 'package:vegrow/models/Product.dart';
+
+import 'bidController.dart';
 
 class ProductController extends GetxController {
   var isloading = true.obs;
   var productList = <Product>[].obs;
   var conFirmedFilter = false.obs;
   var productListIsEmpty = false.obs;
+  var search="distance";
   var productListForSearchQuery = <Product>[].obs;
 
   late List<Product> AllList;
@@ -46,9 +49,10 @@ class ProductController extends GetxController {
         if (products != null) {
           productList.value = products;
           if (productList.isEmpty) {
-            productListIsEmpty(true);
+            productListIsEmpty(true);  isloading(false);
+            
           }
-          isloading(false);
+        
 
           print(productList);
         }
@@ -91,10 +95,10 @@ class ProductController extends GetxController {
           productList.value = result;
           print("product list");
           print(productList);
-          print(productList);
+          print(productList); isloading(false);
         }
       });
-      isloading(false);
+     
     } catch (e) {
       print(e);
     }
@@ -110,10 +114,9 @@ class ProductController extends GetxController {
         if (result != null) {
           productListForSearchQuery.value = result;
           print("product list");
-          print(productListForSearchQuery.length);
+          print(productListForSearchQuery.length);isloading(false);  
         }
       });
-      // isloading(false);
     } catch (e) {
       print(e);
     }
