@@ -53,6 +53,7 @@ class AuthServices {
         var result = await LocationController.promptLocation();
         print(result);
         var role = data['role'];
+        print(role);
 
         if(role == "vendor"){
           return 2;

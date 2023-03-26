@@ -867,7 +867,8 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       }
-    });
+    }
+    );
   }
 
   Widget promoCard(image) {

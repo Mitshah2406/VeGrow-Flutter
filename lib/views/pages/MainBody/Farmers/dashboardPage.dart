@@ -33,7 +33,7 @@ class _farmerDashboardPageState extends State<farmerDashboardPage> {
   @override
   void initState() {
     super.initState();
-    final ProductController productController = Get.put(ProductController());
+    // final ProductController productController = Get.put(ProductController());
   }
   int _currentIndex = 0;
   int _previousIndex = 0;

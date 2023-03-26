@@ -188,7 +188,8 @@ class Body extends StatelessWidget {
           ),
         );
       }
-    });
+    }
+    );
   }
 }
 

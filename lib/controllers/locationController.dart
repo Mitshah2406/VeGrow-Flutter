@@ -42,9 +42,10 @@ class LocationController extends GetxController {
       print(farmerId);
       print("Tokem");
       print(token);
+      print(myUser['role']);
 
       isloading(true);
-      var response = await LocationServices.sendLocation(token, lat, long, placemarks[0].postalCode, farmerId, placemarks[0].locality, placemarks[0].subLocality);
+      var response = await LocationServices.sendLocation(myUser['role'], token, lat, long, placemarks[0].postalCode, farmerId, placemarks[0].locality, placemarks[0].subLocality);
       return response;
     } catch (e) {
       print(e);

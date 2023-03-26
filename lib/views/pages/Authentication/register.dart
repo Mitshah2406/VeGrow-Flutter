@@ -40,54 +40,54 @@ class _RegisterState extends State<Register> {
         page: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: AppConstant.bgColorAuth,
-            body: SafeArea(
-                child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
-              child: SingleChildScrollView(
-                child: Column(children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                      width: 200,
-                      height: 200,
+            body: SingleChildScrollView(
+              child: SafeArea(
+                  child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 24.0, horizontal: 32.0),
+                child: SingleChildScrollView(
+                  child: Column(children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                        width: 200,
+                        height: 200,
+                        decoration: BoxDecoration(
+                            color: Colors.deepPurple.shade50,
+                            shape: BoxShape.circle),
+                        child: SvgPicture.asset(
+                          AppConstant.register,
+                          fit: BoxFit.cover,
+                          width: 100,
+                          height: 50,
+                        )),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text(
+                      "Registration Form",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Enter Your Basic Details..",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black38),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 38,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
-                          color: Colors.deepPurple.shade50,
-                          shape: BoxShape.circle),
-                      child: SvgPicture.asset(
-                        AppConstant.register,
-                        fit: BoxFit.cover,
-                        width: 100,
-                        height: 50,
-                      )),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Text(
-                    "Registration Form",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Enter Your Basic Details..",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black38),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 38,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12)),
-                    child: SingleChildScrollView(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12)),
                       child: Form(
                         key: _formKey,
                         child: Column(
@@ -235,10 +235,10 @@ class _RegisterState extends State<Register> {
                                               Get.parameters['number'],
                                               int.parse(registerController.tag
                                                   .toString()));
-
+            
                                       print("Resultttt");
                                       print(result);
-
+            
                                       if (result == 1) {
                                         homeController.fetchFarmers();
                                         
@@ -272,69 +272,11 @@ class _RegisterState extends State<Register> {
                           ],
                         ),
                       ),
-                      // Obx(() => ChipsChoice.single(
-                      //       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                      //       value: registerController.tag.toInt(),
-                      //       onChanged: ((val) {
-                      //         setState(() {
-                      //           registerController.tag =
-                      //               RxInt(int.parse(val.toString()));
-                      //         });
-                      //       }),
-                      //       choiceItems: C2Choice.listFrom(
-                      //           source: options,
-                      //           value: (i, v) => i,
-                      //           label: (i, v) => v.toString()),
-                      //       choiceActiveStyle: C2ChoiceStyle(
-                      //           color: Color.fromARGB(255, 155, 184, 209),
-                      //           borderColor: Colors.blue,
-                      //           borderRadius: BorderRadius.circular(5)),
-                      //       choiceStyle: C2ChoiceStyle(
-                      //           color: Colors.blue,
-                      //           borderRadius: BorderRadius.all(Radius.circular(5))),
-                      //     )),
-                      // SizedBox(
-                      //   width: double.infinity,
-                      //   child: ElevatedButton(
-                      //       onPressed: () async {
-                      //         bool result = await AuthServices.registerUser(
-                      //             idController.inputData(),
-                      //             registerController.nameController.text,
-                      //             registerController.emailController.text,
-                      //             Get.parameters['number'],
-                      //             int.parse(registerController.tag.toString()));
-
-                      //         if (result) {
-                      //           Get.offNamed("/dashboard");
-
-                      //         } else {
-                      //           //toast
-                      //         }
-                      //       },
-                      //       style: ButtonStyle(
-                      //           foregroundColor:
-                      //               MaterialStateProperty.all<Color>(Colors.white),
-                      //           backgroundColor: // setVisible?
-                      //               MaterialStateProperty.all<Color>(Colors
-                      //                   .purple), //: MaterialStateProperty.all<Color?>(Colors.purple[200]),
-                      //           shape:
-                      //               MaterialStateProperty.all<RoundedRectangleBorder>(
-                      //                   RoundedRectangleBorder(
-                      //                       borderRadius:
-                      //                           BorderRadius.circular(24)))),
-                      //       child: Padding(
-                      //         padding: const EdgeInsets.all(16.0),
-                      //         child: Text(
-                      //           "Next",
-                      //           style: TextStyle(fontSize: 16),
-                      //         ),
-                      //       )),
-                      // )
                     ),
-                  ),
-                ]),
-              ),
-            ))));
+                  ]),
+                ),
+              )),
+            )));
   }
   // )
 }
