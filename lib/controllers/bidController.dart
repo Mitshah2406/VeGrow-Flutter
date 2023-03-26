@@ -25,15 +25,20 @@ var bidListEmpty=false.obs;
     super.onInit();
     // fetchProduct();
   }
-   void getListOfBidsForSpecificProduct({tokenId,filter})async{
+   void getListOfBidsForSpecificProduct({tokenId,filter})async{print(tokenId);
+   print(filter);
+   isLoadng(true);
     var bid=await productServices.getListOfBidsForSpecificProduct(tokenId: tokenId,filter: filter);
     if(bid!=null){
-      bidList.value=bid;
+      bidList.value=bid;print("object");
+      print(bidList);
+        isLoadng(false);
       if (bidList.isEmpty){
         bidListEmpty(true);
       }else{
         bidListEmpty(false);
       }
+    
     }
 
 
