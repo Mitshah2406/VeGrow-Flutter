@@ -135,13 +135,13 @@ class _vendorHomePageState extends State<vendorHomePage> {
                 BottomNavigationBarItem(
                     label: "Home", icon: Icon(Icons.home), tooltip: "Home"),
                 BottomNavigationBarItem(
-                    label: "List Produce",
+                    label: "Search",
                     icon: Icon(Icons.list_alt),
-                    tooltip: "List Produce"),
+                    tooltip: "search"),
                 BottomNavigationBarItem(
-                    label: "Add Produce",
+                    label: "My Bids",
                     icon: Icon(Icons.add),
-                    tooltip: "Add Produce"),
+                    tooltip: "My Bids"),
                 BottomNavigationBarItem(
                     label: "Account",
                     icon: Icon(Icons.account_circle),

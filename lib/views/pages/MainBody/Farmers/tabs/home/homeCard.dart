@@ -62,7 +62,8 @@ class _HomeCardState extends State<HomeCard> {
                   children: [
                     Text("Good ${greetFarmer().toString()},"),
                     Text(
-                      '${homeController.farmerList[0]['fName'].toString()}',
+                      homeController.farmerList.isNotEmpty?
+                      homeController.farmerList[0]['fName'].toString(): "",
                       style: TextStyle(
                           
                           fontWeight: FontWeight.bold,

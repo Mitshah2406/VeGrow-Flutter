@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:vegrow/consts/appConstant.dart';
+import 'package:vegrow/controllers/homeController.dart';
 import 'package:vegrow/services/authServices.dart';
 
 import 'langDropdownMenu.dart';
@@ -16,6 +17,8 @@ class optionsCard extends StatefulWidget {
 }
 
 class _optionsCardState extends State<optionsCard> {
+  HomeController homeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -134,6 +137,8 @@ class _optionsCardState extends State<optionsCard> {
           ),
           ListTile(
             onTap: () {
+              homeController.farmerList.clear();       
+              Get.delete<HomeController>;
               AuthServices.deleteSession();
               // Get.offNamed('/logout');
             },
