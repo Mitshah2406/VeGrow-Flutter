@@ -2,6 +2,7 @@ import 'package:get/route_manager.dart';
 import 'package:search_page/search_page.dart';
 import 'package:vegrow/main.dart';
 import 'package:vegrow/views/pages/Authentication/login.dart';
+import 'package:vegrow/views/pages/MainBody/Farmers/tabs/ProducePage/farmerSingleProductView.dart';
 import 'package:vegrow/views/pages/MainBody/Farmers/tabs/accountPage.dart';
 import 'package:vegrow/views/pages/MainBody/Farmers/dashboardPage.dart';
 import 'package:vegrow/views/pages/Authentication/register.dart';
@@ -47,7 +48,7 @@ class AppRoutes {
     // Farmer Dashboard
     GetPage(name: "/farmerDashboard", page: () => farmerDashboardPage()),
     GetPage(name: "/home", page: () => HomePage()),
-    GetPage(name: "/likes", page: () => SingleProducePage()),
+    GetPage(name: "/farmerSingleProductView", page: () => FarmerSingleProductPage()),
     GetPage(name: "/logout", page: () => Welcome()),
     GetPage(name: "/categories", page: () => AddProducePage()),
     // GetPage(name: "/cart", page: () => CartPage()),

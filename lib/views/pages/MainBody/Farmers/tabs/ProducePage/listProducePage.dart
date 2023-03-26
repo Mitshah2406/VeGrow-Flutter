@@ -113,7 +113,7 @@ class _ListProducePageState extends State<ListProducePage> {
                           .map(
                             (e) => GestureDetector(
                               onTap: () => {
-                                Get.toNamed('/singleProducePage/', arguments: {
+                                Get.toNamed('/farmerSingleProductView/', arguments: {
                                   "id": e.inventoryId,
                                 })
                               },
